@@ -1,8 +1,8 @@
-PWD /Users/yunhai/Home/Projects/bookprojects/LinearAlgebraicGroups
+PWD /Users/yunhai/Home/Repositories/linalggrps
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/yunhai/Home/Projects/bookprojects/LinearAlgebraicGroups/linalggrps.tex
+INPUT /Users/yunhai/Home/Repositories/linalggrps/linalggrps.tex
 OUTPUT linalggrps.log
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsart.cls
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsart.cls

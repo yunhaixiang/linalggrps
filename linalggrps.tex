@@ -557,7 +557,7 @@ with the right hand side being thought of as having an \textit{infinitesimal thi
 
 \begin{definition}
 Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\rightarrow \mathbf{Aff}_R\qquad A\mapsto \mathrm{Spec}(A)\]
-    where for each homomorphism $\varphi:A\rightarrow B$ of $R$-algebras, there is the induced natural transformation \[\varphi^*:\mathrm{Spec}(B)\rightarrow\mathrm{Spec}(A)\] called the \textit{pullback} given by 
+    where for each morphism $\varphi:A\rightarrow B$ of $R$-algebras, there is the induced natural transformation \[\varphi^*:\mathrm{Spec}(B)\rightarrow\mathrm{Spec}(A)\] called the \textit{pullback} given by 
     \[\varphi^*_S:\mathrm{Spec}(B)(S)\rightarrow \mathrm{Spec}(A)(S)\qquad \psi\mapsto \psi\circ\varphi\]
     for each $R$-algebras $S$. 
 \end{definition}
@@ -593,12 +593,12 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     We define the base change and Weil restrictions for algebras in the exact same way, giving rise to functors $(-)\otimes_{R}S:\mathbf{Alg}_{R}\rightarrow \mathbf{Alg}_{S}$ and $\mathrm{Res}_{S/R}:\mathbf{Alg}_{S}\rightarrow \mathbf{Alg}_{R}$. 
 \end{definition}
 \begin{convention}
-    Let $S$ a $R$-algebra. If $M$ is a $R$-module, we also use the notation $M_S=M\otimes_R S$. If $M$ is an $S$-module, we sometimes abuse notation and write $M=\mathrm{Res}_{S/R} M$. 
+    Let $S$ a $R$-algebra. If $M$ is a $R$-module, we also use the notation $M_S=M\otimes_R S$. If $M$ is an $S$-module, we write $M_R=\mathrm{Res}_{S/R} M$. 
 \end{convention}
-\begin{convention}Let $M=(m_{i,j})_{1\le i,j\le n}$ be a $n$-by-$n$ matrix of indeterminants. For any ring $R$, let
-    \[R[M]:=R[m_{1,1},m_{1,2},\dots,m_{n,n}]\]
-    Abusing notation, identify $M=(m_{i,j})_{1\le i,j\le n}\in M_n(R[M])$. For any $A=(a_{i,j})_{1\le i,j\le n}\in M_n(R[M])$, denote $\det A:=\sum_{\sigma\in \mathrm S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n a_{i,\sigma(i)}\in R[M]$ and $\mathrm{tr}(A):=\sum_{i=1}^n a_{i,i}\in R[M]$. 
-    Moreover, we denote the ideal $(A):=(a_{1,1},a_{1,2},\dots,a_{n,n})\subseteq R[M]$. 
+\begin{convention}Let $X=(x_{i,j})_{1\le i,j\le n}$ be a $n$-by-$n$ matrix of indeterminants. For any ring $R$, let
+    \[R[X]:=R[x_{1,1},x_{1,2},\dots,x_{n,n}]\]
+    Abusing notation, identify $X=(x_{i,j})_{1\le i,j\le n}\in M_n(R[X])$. For any $F=(f_{i,j})_{1\le i,j\le n}\in M_n(R[X])$, denote $\det F:=\sum_{\sigma\in \mathrm S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n f_{i,\sigma(i)}\in R[X]$ and $\mathrm{tr}(A):=\sum_{i=1}^n f_{i,i}\in R[X]$. 
+    Moreover, we denote the ideal $(F):=(f_{1,1},f_{1,2},\dots,f_{n,n})\subseteq R[X]$. 
 \end{convention}
 \begin{example}\label{eg:alggroup}Here are some examples of algebraic groups over $R$,
 \begin{enumerate}
@@ -612,7 +612,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \[\mu_n:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \{a\in S^\times:a^n=1\}\]
     where $\widetilde{\mu_n}\cong \mathrm{Spec}(R[x]/(x^n-1))$,
     \item the \textit{general linear group} of a free module $V$ over $R$ of rank $n$,
-    \[\mathrm{GL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Aut}_{\mathbf{Mod}_S}(V\otimes_{R}S)\]
+    \[\mathrm{GL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Aut}_{\mathbf{Mod}_S}(V_S)=\mathrm{Aut}_{\mathbf{Mod}_S}(V\otimes_{R}S)\]
     where $\displaystyle\widetilde{\mathrm{GL}_V}\cong \mathrm{Spec}\left(\frac{R[M][y]}{(y\,\mathrm{det}(M)-1)}\right)$ where $M=(m_{i,j})_{1\le i,j\le n}$ is an indeterminant matrix,
     \item the \textit{special linear group} of a free module $V$ over $R$ of rank $n$,
     \[\mathrm{SL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Ker}\left(\mathrm{GL}_V(S)\xrightarrow{\mathrm{det}_S}S^\times\right)\]
