@@ -589,6 +589,19 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{convention}
     In this text, ``algebraic group'' always means affine algebraic group. However, it is important to keep in mind that there are things like abelian varieties which are considered algebraic groups in broader context but are by no means affine.
 \end{convention}
+\begin{example}Here are some examples of algebraic groups over $R$,
+    \begin{enumerate}
+        \item the \textit{additive group}
+        \[\mathbb G_a:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto (S,+)\]
+        where $\widetilde{\mathbb G_a}\cong \mathbb A^1_R$,
+        \item the \textit{multiplicative group}, also known as the \textit{$1$-torus},
+        \[\mathbb G_m:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto S^\times\]
+        where $\widetilde{\mathbb G_m}\cong \mathrm{Spec}(R[x,x^{-1}])$,
+        \item the \textit{multiplicative group of $n$-th roots of unity},
+        \[\mu_n:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \{a\in S^\times:a^n=1\}\]
+        where $\widetilde{\mu_n}\cong \mathrm{Spec}(R[x]/(x^n-1))$,
+    \end{enumerate}
+\end{example}
 \begin{definition}Let $S$ a $R$-algebra. If $M$ is an $R$-module, define the \textit{base change} (or \textit{extension of scalars}) of $M$ from $R$ to $S$ as the $S$-module $M\otimes_R S$. If $M$ is a $S$-module, define its \textit{Weil restriction} (or \textit{restriction of scalars}) from $S$ to $R$ as the $R$-module $\mathrm{Res}_{S/R} M$ with the same additive group as $M$ with scalar multiplication given by $rm=\varphi(r)m$ for $r\in R$ and $m\in M$ where $\varphi:R\rightarrow S$ is the structure map. These define functors $(-)\otimes_{R}S:\mathbf{Mod}_{R}\rightarrow \mathbf{Mod}_{S}$ and $\mathrm{Res}_{S/R}:\mathbf{Mod}_{S}\rightarrow \mathbf{Mod}_{R}$. 
     We define the base change and Weil restrictions for algebras in the exact same way, giving rise to functors $(-)\otimes_{R}S:\mathbf{Alg}_{R}\rightarrow \mathbf{Alg}_{S}$ and $\mathrm{Res}_{S/R}:\mathbf{Alg}_{S}\rightarrow \mathbf{Alg}_{R}$. 
 \end{definition}
@@ -600,17 +613,8 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     Abusing notation, identify $X=(x_{i,j})_{1\le i,j\le n}\in M_n(R[X])$. For any $F=(f_{i,j})_{1\le i,j\le n}\in M_n(R[X])$, denote $\det F:=\sum_{\sigma\in \mathrm S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n f_{i,\sigma(i)}\in R[X]$ and $\mathrm{tr}(A):=\sum_{i=1}^n f_{i,i}\in R[X]$. 
     Moreover, we denote the ideal $(F):=(f_{1,1},f_{1,2},\dots,f_{n,n})\subseteq R[X]$. 
 \end{convention}
-\begin{example}\label{eg:alggroup}Here are some examples of algebraic groups over $R$,
+\begin{example}\label{eg:alggroup}Here are some more examples of algebraic groups over $R$,
 \begin{enumerate}
-    \item the \textit{additive group}
-    \[\mathbb G_a:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto (S,+)\]
-    where $\widetilde{\mathbb G_a}\cong \mathbb A^1_R$,
-    \item the \textit{multiplicative group}, also known as the \textit{$1$-torus},
-    \[\mathbb G_m:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto S^\times\]
-    where $\widetilde{\mathbb G_m}\cong \mathrm{Spec}(R[x,x^{-1}])$,
-    \item the \textit{multiplicative group of $n$-th roots of unity},
-    \[\mu_n:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \{a\in S^\times:a^n=1\}\]
-    where $\widetilde{\mu_n}\cong \mathrm{Spec}(R[x]/(x^n-1))$,
     \item the \textit{general linear group} of a free module $V$ over $R$ of rank $n$,
     \[\mathrm{GL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Aut}_{\mathbf{Mod}_S}(V_S)=\mathrm{Aut}_{\mathbf{Mod}_S}(V\otimes_{R}S)\]
     where $\displaystyle\widetilde{\mathrm{GL}_V}\cong \mathrm{Spec}\left(\frac{R[M][y]}{(y\,\mathrm{det}(M)-1)}\right)$ where $M=(m_{i,j})_{1\le i,j\le n}$ is an indeterminant matrix,
