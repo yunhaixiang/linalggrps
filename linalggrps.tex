@@ -95,8 +95,8 @@ We start with a crash course in category theory. By a \textit{class} we mean a c
 
 \begin{definition}A \textit{category} $\EuScript C$ is the data of
 \begin{enumerate}
-	\item a class of \textit{objects}, also denoted as $\EuScript C$
-	\item for each pair of objects $X,Y\in \EuScript C$, a class $\mathrm{Hom}_{\EuScript C}(X,Y)$ of \textit{morphisms} from $X$ to $Y$, where we call $X$ the \textit{domain} (or \textit{source}) of $f$ and $Y$ the \textit{codomain} (or \textit{target}) of $f$
+	\item a class of \textit{objects}, also denoted as $\EuScript C$ by abuse of notation
+	\item for each pair of objects $X,Y\in \EuScript C$, a class $\mathrm{Hom}_{\EuScript C}(X,Y)$ of \textit{morphisms} from $X$ to $Y$, where by a morphism from $X$ to $Y$, denoted $f:X\rightarrow Y$, we mean a triple $(X,Y,f)$ where $X$ is called its \textit{domain}, $Y$ its \textit{codomain}, and $f$ its \textit{mapping}, abusing notation. 
 	\item for each triple of object $X,Y,Z\in\EuScript C$, a \textit{composition} function 
 	\[\begin{aligned}
         \mathrm{Hom}_{\EuScript C}(Y,Z)\times\mathrm{Hom}_{\EuScript C}(X,Y)&\rightarrow \mathrm{Hom}_{\EuScript C}(X,Z)\\
@@ -108,11 +108,8 @@ We start with a crash course in category theory. By a \textit{class} we mean a c
 		\item \textit{associativity axiom}: for each quadruple of objects $X,Y,Z,W\in \EuScript C$ and $f\in \mathrm{Hom}_{\EuScript C}(X,Y)$, $g\in \mathrm{Hom}_{\EuScript C}(Y,Z)$, and $h\in\mathrm{Hom}_{\EuScript C}(Z,W)$, we have \[(h\circ g)\circ f=h\circ (g\circ f)\]
 	\end{itemize}
 \end{enumerate}
+When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,Y)$ for $\mathrm{Hom}_{\EuScript C}(X,Y)$
 \end{definition}
-\begin{convention}We use the notation $f:X\rightarrow Y$ to mean $f\in \mathrm{Hom}_{\EuScript C}(X,Y)$.
-\end{convention}
-\begin{convention} When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,Y)$ for $\mathrm{Hom}_{\EuScript C}(X,Y)$.
-\end{convention}
 \begin{remark}It is an easy exercise to show the identity morphism for an object is unique.
 \end{remark}
 \iffalse
@@ -145,7 +142,8 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
 \end{convention}
 \begin{definition}A \textit{subcategory} of a category $\EuScript C$ is a category $\EuScript D$ such that its objects $\EuScript D\subseteq \EuScript C$ and its morphisms $\mathrm{Hom}_{\EuScript D}(X,Y)\subseteq \mathrm{Hom}_{\EuScript C}(X,Y)$ for any $X,Y\in\EuScript D$, with the same composition function. We say $\EuScript D$ is a \textit{full subcategory} if further that  $\mathrm{Hom}_{\EuScript D}(X,Y)= \mathrm{Hom}_{\EuScript C}(X,Y)$ for any $X,Y\in\EuScript D$. 
 \end{definition}
-\begin{definition}Suppose $\EuScript C,\EuScript D$ are categories, their product category $\EuScript C\times \EuScript D$ is the category where objects are pairs $(X,Y)$ where $X\in \EuScript C$ and $Y\in \EuScript D$, and morphisms \[\mathrm{Hom}((X_1,Y_1),(X_2,Y_2))=\mathrm{Hom}(X_1,X_2)\times \mathrm{Hom}(Y_1,Y_2)\]
+\begin{definition}Suppose $\EuScript C,\EuScript D$ are categories, their product category $\EuScript C\times \EuScript D$ is the category where objects are pairs $(X,Y)$ where $X\in \EuScript C$ and $Y\in \EuScript D$, and morphisms are 
+    \[\mathrm{Hom}((X_1,Y_1),(X_2,Y_2))=\mathrm{Hom}(X_1,X_2)\times \mathrm{Hom}(Y_1,Y_2)\]
     with element-wise composition. 
 \end{definition}
 
@@ -171,7 +169,7 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
 
 \begin{definition}
     Define the \textit{opposite category} $\EuScript C^{\mathrm{op}}$ of a category $\EuScript C$ to be the category with the same objects as $\EuScript C$ but with its morphisms $\mathrm{Hom}_{\EuScript C^{\mathrm{op}}}(X,Y)=\mathrm{Hom}_{\EuScript C}(Y,X)$ for $X,Y\in \EuScript C^{\mathrm{op}}$.
-    For each $f:X\rightarrow Y$ in $\EuScript C$, we denote by $f^{\mathrm{op}}:Y\rightarrow X$ the corresponding \textit{opposite morphism} in $\EuScript C^{\mathrm op}$
+    For each $f:X\rightarrow Y$ in $\EuScript C$, we denote by $f^{\mathrm{op}}:Y\rightarrow X$ the corresponding \textit{opposite morphism} in $\EuScript C^{\mathrm op}$, that is, it has the same mapping as $f$, but has its domain and codomain swapped. 
 \end{definition}
 \begin{definition}
     Let $\EuScript C, \EuScript D$ be categories, a \textit{covariant functor} (or just simply a \textit{functor}) from $\EuScript C$ to $\EuScript D$, denoted $\mathscr{F}:\EuScript C\rightarrow \EuScript D$, is the collection of the following data
@@ -187,8 +185,8 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
 \end{definition}
 \begin{definition}Suppose $\EuScript C, \EuScript D, \EuScript E$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ and $\mathscr G:\EuScript D\rightarrow \EuScript E$ are functors, we define their \textit{composite functor} $\mathscr G\circ \mathscr F:\EuScript C\rightarrow\EuScript E$ as the functor that maps $X\mapsto \mathscr G(\mathscr F(X))$ for objects and maps the morphisms by $(\mathscr G\circ \mathscr F)[f]=\mathscr G[\mathscr F[f]]$ for each $f:X\rightarrow Y$. 
 \end{definition}
-\begin{example}Let $\EuScript C$ be a category, then there is the \textit{identity functor} $\mathrm{id}_{\EuScript C}:\EuScript C\rightarrow \EuScript C$ for $\EuScript C$, which maps each object $X\in\EuScript C$ by $\mathrm{id}_{\EuScript C}(X)=X$ and each morphism $f:X\rightarrow Y$ by $\mathrm{id}_{\EuScript C}[f]=f$. 
-\end{example}
+\begin{definition}Let $\EuScript C$ be a category, then the \textit{identity functor} $\mathrm{id}_{\EuScript C}:\EuScript C\rightarrow \EuScript C$ for $\EuScript C$ is the functor that maps each object $X\in\EuScript C$ by $\mathrm{id}_{\EuScript C}(X)=X$ and each morphism $f:X\rightarrow Y$ by $\mathrm{id}_{\EuScript C}[f]=f$. 
+\end{definition}
 
 \begin{example}Here are some examples of functors in nature \label{eg:func}
     \begin{enumerate}
@@ -207,29 +205,42 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
     We say that the category $\EuScript C$ is \textit{locally small} if $\mathrm{Hom}(X,Y)$ is a set for all $X$ and $Y$, and \textit{small} if it is locally small and the class of objects of $\EuScript C$ is also a set. 
 \end{definition}
 
-\begin{definition}Suppose $\EuScript C$ is locally small and $X\in\EuScript C$. The \textit{hom-functor} of $X$ is the functor
-    \[\mathrm{Hom}(X,-):\EuScript C\rightarrow \mathbf{Set}\quad\quad
-        Y\mapsto \mathrm{Hom}(X,Y)\quad\quad
-        (f:Y\rightarrow Z)\mapsto (f\circ -)
+\begin{definition}
+    \label{def:hom-functors}
+    Suppose $\EuScript C$ is locally small and $X\in\EuScript C$. Define the \textit{(covariant) hom-functor} of $X$
+    \[\begin{aligned}
+    \mathrm{Hom}(X,-):\EuScript C&\rightarrow \mathbf{Set}\\
+        Y&\mapsto \mathrm{Hom}(X,Y)\\
+        (f:Y\rightarrow Z)&\mapsto (f\circ -)
+    \end{aligned}
     \] 
-    where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ maps $g\mapsto f\circ g$. There is also a contravariant version 
-    \[\mathrm{Hom}(-,X):\EuScript C^{\mathrm{op}}\rightarrow \mathbf{Set}\quad\quad
-        Y\mapsto \mathrm{Hom}(Y,X)\quad\quad
-        (f^{\mathrm{op}}:Z\rightarrow Y)\mapsto (-\circ f)
+    where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ maps $g\mapsto f\circ g$. The \textit{contravariant hom-functor} of $X$ is 
+    \[
+    \begin{aligned}
+    \mathrm{Hom}(-,X):\EuScript C^{\mathrm{op}}&\rightarrow \mathbf{Set}\\
+        Y&\mapsto \mathrm{Hom}(Y,X)\\
+        (f^{\mathrm{op}}:Z\rightarrow Y)&\mapsto (-\circ f)
+    \end{aligned}
     \] 
-    where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ maps $g\mapsto g\circ f$. We also define the functor 
-    \[\mathrm{Hom}(-,-):\EuScript C^{\mathrm{op}}\times \EuScript C\rightarrow \EuScript D\quad\quad (X,Y)\mapsto \mathrm{Hom}(X,Y)\]
-    and for a morphism $(f^{\mathrm{op}}:X_1\rightarrow X_2,g:Y_1\rightarrow Y_2):(X_1,Y_1)\rightarrow (X_2,Y_2)$, we map it to 
-    \[(g\circ -\circ f):\mathrm{Hom}(X_1,Y_1)\rightarrow \mathrm{Hom}(X_2,Y_2)\quad\quad h\mapsto g\circ h\circ f\]
+    where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ maps $g\mapsto g\circ f$. The \textit{bivariate hom-functor} of $X$ is 
+    \[\begin{aligned}
+        \mathrm{Hom}(-,-):\EuScript C^{\mathrm{op}}\times \EuScript C&\rightarrow \EuScript D\\
+         (X,Y)&\mapsto \mathrm{Hom}(X,Y)\\
+         (f^{\mathrm{op}},g):(X_1,Y_1)\rightarrow (X_2,Y_2)&\mapsto (g\circ -\circ f)
+    \end{aligned}\]
+    where 
+    $(g\circ -\circ f):\mathrm{Hom}(X_1,Y_1)\rightarrow \mathrm{Hom}(X_2,Y_2)$ maps $h\mapsto g\circ h\circ f$
 \end{definition}
 
 \begin{remark}Suppose $\EuScript C$ is locally small and $X\in\EuScript C$. We also use the notations
     \[\mathscr H^X:=\mathrm{Hom}(X,-)\qquad \mathscr H_X:=\mathrm{Hom}(-,X)\qquad \mathscr H:=\mathrm{Hom}(-,-)\]
-    for the covariant, contravariant, and bivariate hom functors. 
+    for the covariant, contravariant, and bivariate hom-functors. 
 \end{remark}
 
 \begin{definition}Let $\EuScript I,\EuScript C$ be categories, a \textit{diagram} indexed by $\EuScript I$ in $\EuScript C$ is simply a functor $\mathscr F:\EuScript I\rightarrow \EuScript C$. We say that the diagram $\mathscr F$ \textit{commutes} if for each $X,Y\in\EuScript I$, if $f,g\in\mathrm{Hom}(X,Y)$ then $\mathscr F[f]=\mathscr F[g]$. 
 \end{definition}
+
+
 \begin{example}We represent a diagram $\mathscr F:\EuScript I\rightarrow \EuScript C$ as a directed multigraph in the same shape as the index category $\EuScript I$, and label the vertices and edges with their images of $\mathscr F$ in $\EuScript C$. For example,
     \[\begin{tikzcd}[sep=large]
 	A & B \\
@@ -241,7 +252,9 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
 \end{tikzcd}\]
 and this square commutes if and only if $g\circ f=e\circ h$. 
 \end{example}
-
+\begin{remark}Functors preserve commutative diagrams. More precisely, let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow\EuScript D$ a functor. Let $\mathscr{D}:\EuScript I\rightarrow \EuScript C$ be a commutative diagram in $\EuScript C$, then $\mathscr F\circ \mathscr D:\EuScript I\rightarrow \EuScript D$ is a commutative diagram in $\EuScript D$. 
+    This is straightforward from the definition of commutative diagrams.
+\end{remark}
 \iffalse
 \begin{example}Assuming some parts of a diagram commute, we can often show that other parts or the entire diagram commutes by exploiting properties of that diagram. For example, consider
 \[
@@ -283,15 +296,14 @@ for all morphisms $f:X\rightarrow Y$ in $\EuScript C$. In other words, $\mathscr
 Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\varphi$ is a \textit{natural isomorphism}. 
 \end{definition}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and let $\mathscr E,\mathscr F,\mathscr G:\EuScript C\rightarrow\EuScript D$ be functors. Suppose $\varphi:\mathscr E\Rightarrow \mathscr F$ and $\psi:\mathscr F\Rightarrow \mathscr G$  are natural transformations. We define \textit{their (vertical) composition} $\psi\circ \varphi:\mathscr E\Rightarrow \mathscr G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\EuScript C$. 
-
+\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and let $\mathscr E,\mathscr F,\mathscr G:\EuScript C\rightarrow\EuScript D$ be functors. Suppose $\varphi:\mathscr E\Rightarrow \mathscr F$ and $\psi:\mathscr F\Rightarrow \mathscr G$  are natural transformations. We define \textit{their composition} $\psi\circ \varphi:\mathscr E\Rightarrow \mathscr G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\EuScript C$. 
 \end{definition}
-
+\iffalse
 \begin{definition}Let $\EuScript C,\EuScript D, \EuScript E$ be categories and $\mathscr F_1, G_1:\EuScript C\rightarrow \EuScript D$ and $\mathscr F_2, G_2:\EuScript D\rightarrow \EuScript E$ functors. Let $\varphi:\mathscr F_1\Rightarrow\mathscr G_1$ and $\psi:\mathscr F_2\Rightarrow\mathscr G_2$ be natural transformations, then define their \textit{horizontal composition} $\psi * \varphi:\mathscr F_2\circ \mathscr F_1\Rightarrow\mathscr G_2\circ\mathscr G_1$ as $(\psi *\varphi)_X=\psi_{G_1(X)}\circ \mathscr F_2[\varphi_X]$. 
 \end{definition}
-
-\begin{example}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ a functor, then there is a \textit{identity natural transformation} $\mathrm{id}_{\mathscr F}:\mathscr F\Rightarrow\mathscr F$ given by mapping $(\mathrm{id}_{\mathscr{F}})_X=\mathrm{id}_{\mathscr F(X)}$ for each $X\in\EuScript C$. 
-\end{example}
+\fi
+\begin{definition}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ a functor, then define the \textit{identity natural transformation} $\mathrm{id}_{\mathscr F}:\mathscr F\Rightarrow\mathscr F$ as  $(\mathrm{id}_{\mathscr{F}})_X=\mathrm{id}_{\mathscr F(X)}$ for each $X\in\EuScript C$. 
+\end{definition}
 
 \begin{example}Here are some examples of natural transformations
     \begin{enumerate}
@@ -302,7 +314,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     
 \end{example}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, the \textit{functor category} from $\EuScript C$ to $\EuScript D$, denoted $\mathrm{Fun}(\EuScript C,\EuScript D)$, is the category where objects are functors $\mathscr F:\EuScript C\rightarrow \EuScript D$, morphisms are natural transformations, and composition is given by vertical composition. 
+\begin{definition}Let $\EuScript C,\EuScript D$ be categories, the \textit{functor category} from $\EuScript C$ to $\EuScript D$, denoted $\mathrm{Fun}(\EuScript C,\EuScript D)$, is the category where objects are functors $\mathscr F:\EuScript C\rightarrow \EuScript D$, morphisms are natural transformations, and composition is given by composition of natural transformations. 
 \end{definition}
 
 \begin{remark}
@@ -317,10 +329,13 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 \begin{example}Here are some examples of equivalent categories
     \begin{enumerate}
         \item $\mathbf{Ab}\simeq \mathbf{Mod}_{\mathbb Z}$
-        \item $\mathbf{Gal}_{L/K}^{\mathrm{op}}\simeq \mathbf{SubGrp}_{\mathrm{Gal}(L/K)}$ where $\mathbf{Gal}_{L/K}$ is the category of intermediate extensions of a Galois extension $L/K$ with injections as morphisms, and $\mathbf{SubGrp}_{\mathrm{Gal}(L/K)}$ is the category of subgroups of $\mathrm{Gal}(L/K)$ with injective homomorphisms as morphisms. 
-        \item $\mathbf{Top}\simeq \mathbf{Kur}$ where $\mathbf{Kur}$ is the category where objects are sets $X$ with a Kuratowski closure operator $\mathrm{cl}:2^{X}\rightarrow 2^X$ and morphisms are maps preserving the closure.  
+        \item The category of complex representations of a finite group $G$ (whose morphisms are equivariant maps) is equivalent to the category of $\mathbb C[G]$-modules, and they are also equivalent to $\mathrm{Fun}(\mathrm BG,\mathbf{Vect}_{\mathbb C})$, where $\mathrm B G$, called the \textit{delooping groupoid} of $G$, is the category with a single object $\bullet$, with the endomorphisms of $\bullet$ being group elements, and with the group operation as its composition. 
+        \item The category of $G$-sets for a group $G$
+        \item The category of topological spaces
     \end{enumerate}
+    It is an easy exercise for the reader to spot what the equivalences in the cases above are.
 \end{example}
+
 \begin{definition}Suppose $\EuScript C, \EuScript D$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ is a functor. 
     For each $X,Y\in\EuScript C$, let
     \[\mathscr F_{X,Y}:\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(\mathscr F(X),\mathscr F(Y))\quad \mathrm{where}\quad f\mapsto \mathscr F[f]\]
@@ -338,22 +353,32 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \end{proof}
 \end{theorem}
 
-\begin{definition}Let $\EuScript C$ be a locally small category. Define $\widehat{\EuScript C}:=\mathrm{Fun}(\EuScript C^{\mathrm{op}},\mathbf{Set})$ and $\widecheck{\EuScript C}:=\mathrm{Fun}(\EuScript C,\mathbf{Set})$ as its \textit{categories of presheaves and copresheaves}.
+\begin{definition}Let $\EuScript C$ be a locally small category. Define 
+    \[\widehat{\EuScript C}:=\mathrm{Fun}(\EuScript C^{\mathrm{op}},\mathbf{Set})\qquad\widecheck{\EuScript C}:=\mathrm{Fun}(\EuScript C,\mathbf{Set})\] 
+    as its \textit{categories of presheaves and copresheaves} respectively.
     The \textit{Yoneda embedding} is the functor
-    \[\mathscr H_{\bullet}:\EuScript C\rightarrow \widehat{\EuScript C}\quad\quad X\mapsto \mathscr H_X=\mathrm{Hom}(-,X)\]
-    and for $f:Y\rightarrow Z$, define $(\mathscr H_{\bullet}[f])_X:\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ as $(f\circ -)$ for each $X\in \EuScript C$. 
-    Dually, the \textit{co-Yoneda embedding} is the contravariant functor 
-    \[\mathscr H^{\bullet}:\EuScript C^{\mathrm{op}}\rightarrow \widecheck{\EuScript C}\quad\quad X\mapsto \mathscr H^X=\mathrm{Hom}(X,-)\]
-    and for $f^{\mathrm{op}}:Z\rightarrow Y$, define $(\mathscr H_{\bullet}[f])_X:\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ as $(-\circ f)$ for each $X\in \EuScript C$. 
+    \[\begin{aligned}
+        \mathscr H_{\bullet}:\EuScript C&\rightarrow \widehat{\EuScript C}\\
+        X&\mapsto \mathscr H_X=\mathrm{Hom}(-,X)\\
+        (f:Y\rightarrow Z)&\mapsto \left[X\mapsto (f\circ -)\right]
+    \end{aligned}\]
+    where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ is the same as in \Cref{def:hom-functors}. Dually, the \textit{co-Yoneda embedding} is the contravariant functor 
+    \[\begin{aligned}
+        \mathscr H^{\bullet}:\EuScript C^{\mathrm{op}}&\rightarrow \widecheck{\EuScript C}\\
+        X&\mapsto \mathscr H^X=\mathrm{Hom}(X,-)\\
+        (f^{\mathrm{op}}:Z\rightarrow Y)&\mapsto \left[X\mapsto (-\circ f)\right]
+    \end{aligned}\]
+    where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ is the same as in \Cref{def:hom-functors}. 
     
 \end{definition}
 
 
+\iffalse
 \begin{definition}
-    Let $\EuScript C$ be a locally small category. Define the \textit{global sections functor} as
+    Let $\EuScript C$ be a locally small category. Define the \textit{evaluation functor} as
     \[\Gamma(\bullet,-):\EuScript C^{\mathrm{op}}\times \widehat{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
     and sending a morphism $(f^{\mathrm{op}}:Y\rightarrow X,\varphi:\mathscr F\Rightarrow\mathscr{G})$ to the morphism $\varphi_X\circ \mathscr F[f^{\mathrm{op}}]=\mathscr{G}[f^{\mathrm{op}}]\circ \varphi_Y$. Dually, 
-    we define the \textit{global sections cofunctor}, abusing notation, as
+    we define the \textit{coevaluation functor}, abusing notation, as
     \[\Gamma(\bullet,-):\EuScript C\times \widecheck{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
     and sending a morphism $(f:X\rightarrow Y,\varphi:\mathscr{F}\Rightarrow\mathscr G)$ to the morphism $\varphi_Y\circ \mathscr F[f]=\mathscr{G}[f]\circ \varphi_X$.
 \end{definition}
@@ -378,6 +403,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \[(\varphi\circ -\circ \mathscr H^{\bullet}[f^{\mathrm{op}}]):\mathrm{Hom}_{\widecheck{\EuScript C}}\left(\mathscr H^{X},\mathscr{F}\right)\rightarrow \mathrm{Hom}_{\widecheck{\EuScript C}}\left(\mathscr H^{Y},\mathscr{G}\right)\qquad \psi\mapsto \varphi\circ\psi\circ \mathscr H^\bullet [f^\mathrm{op}]\]
     One can view $\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},{-})$ as the composition of $\mathscr H_\bullet$ with the first factor of $\mathrm{Hom}_{\widehat{\EuScript C}}(-,-)$, and also view $\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-)$ similarly as the composition of $\mathscr H^\bullet$ with the first factor of $\mathrm{Hom}_{\widecheck{\EuScript C}}(-,-)$. 
 \end{definition}
+\fi
 \begin{lemma}[Yoneda]
     \label{thm:yoneda}
     Let $\EuScript C$ be a locally small category. There are natural isomorphisms
@@ -407,9 +433,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \end{proof}
 \end{lemma}
 
-\begin{remark} The preceding \Cref{thm:yoneda} is known as the \textit{fundamental theorem of category theory}. 
-\end{remark}
-
+\iffalse
 \begin{lemma}[co-Yoneda]
     \label{thm:coyoneda}
     Let $\EuScript C$ be a locally small category. There are natural isomorphisms
@@ -424,7 +448,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \begin{proof}Completely symmetric to \Cref{thm:yoneda}. 
     \end{proof}
 \end{lemma}
-
+\fi
 \begin{theorem}\label{thm:yff}Let $\EuScript C$ be a locally small category, then the Yoneda and co-Yoneda embeddings 
     \[\mathscr{H}_\bullet: \EuScript{C}\rightarrow \widehat{\EuScript C}\quad\mathrm{and}\quad \mathscr{H}^\bullet: \EuScript{C}^{\mathrm{op}}\rightarrow \widecheck{\EuScript C}\]
     are fully faithful. 
