@@ -335,13 +335,13 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 \end{example}
 
 \begin{definition}Suppose $\EuScript C, \EuScript D$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ is a functor. 
-    For each $X,Y\in\EuScript C$, let
-    \[\mathscr F_{X,Y}:\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(\mathscr F(X),\mathscr F(Y))\quad \mathrm{where}\quad f\mapsto \mathscr F[f]\]
-    then we say that $\mathscr F$ is 
+    For each $X,Y\in\EuScript C$, then
+    \[\mathrm{Hom}(X,Y)\xrightarrow{f\mapsto \mathscr{F}[f]} \mathrm{Hom}(\mathscr F(X),\mathscr F(Y))\]
+    is a map of sets. We say that $\mathscr F$ is 
     \begin{enumerate}
-        \item \textit{faithful} if $\mathscr F_{X,Y}$ is injective for all $X,Y\in\EuScript C$,
-        \item \textit{full} if $\mathscr F_{X,Y}$ is surjective for all $X,Y\in\EuScript C$,
-        \item \textit{fully faithful} if $\mathscr F_{X,Y}$ is bijective for all $X,Y\in\EuScript C$,
+        \item \textit{faithful} if the above map is injective for all $X,Y\in\EuScript C$,
+        \item \textit{full} if the above map is surjective for all $X,Y\in\EuScript C$,
+        \item \textit{fully faithful} if the above map is bijective for all $X,Y\in\EuScript C$,
     \end{enumerate}
     Moreover, call $\mathscr F$ \textit{essentially surjective} if for all $Y\in \EuScript D$ exists $X\in\EuScript C$ such that $\mathscr F(X)\cong Y$ in $\EuScript D$. 
 \end{definition}
