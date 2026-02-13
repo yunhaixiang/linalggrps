@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.6)  13 FEB 2026 03:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.6)  13 FEB 2026 03:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1208,7 +1208,7 @@ File: ueus.fd 2013/01/14 v3.01 Euler Script
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-eus.cfg
 File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
 ) [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 835.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 836.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1228,18 +1228,18 @@ Package logreq Info: Writing requests to 'linalggrps.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 35813 strings out of 474116
- 681655 string characters out of 5743682
+ 35812 strings out of 474116
+ 681643 string characters out of 5743682
  1951187 words of memory out of 5000000
  57070 multiletter control sequences out of 15000+600000
  591637 words of font info for 268 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  116i,17n,121p,1050b,1803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/euler/eusm7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on linalggrps.pdf (16 pages, 306956 bytes).
+Output written on linalggrps.pdf (16 pages, 305507 bytes).
 PDF statistics:
- 462 PDF objects out of 1000 (max. 8388607)
- 394 compressed objects within 4 object streams
- 176 named destinations out of 1000 (max. 500000)
+ 461 PDF objects out of 1000 (max. 8388607)
+ 393 compressed objects within 4 object streams
+ 175 named destinations out of 1000 (max. 500000)
  32381 words of extra memory for PDF output out of 35830 (max. 10000000)
 

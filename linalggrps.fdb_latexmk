@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber linalggrps"] 1754681427.16357 "linalggrps.bcf" "linalggrps.bbl" "linalggrps" 1770973086.43616 0
-  "linalggrps.bcf" 1770973086.32267 107777 cede6de34d1793b1f6d5c151f18fcdb9 "pdflatex"
+["biber linalggrps"] 1754681427.16357 "linalggrps.bcf" "linalggrps.bbl" "linalggrps" 1770973143.55045 0
+  "linalggrps.bcf" 1770973143.43945 107777 cede6de34d1793b1f6d5c151f18fcdb9 "pdflatex"
   "references.bib" 1754681357.54677 1487 1e74f87fbba786e8d145058b226966fc ""
   (generated)
   "linalggrps.bbl"
   "linalggrps.blg"
   (rewritten before read)
-["pdflatex"] 1770973084.83726 "/Users/yunhai/Home/Repositories/linalggrps/linalggrps.tex" "linalggrps.pdf" "linalggrps" 1770973086.43649 0
-  "/Users/yunhai/Home/Repositories/linalggrps/linalggrps.tex" 1770973084.65673 59987 95129f9ba5a500da0425ab45e923fec2 ""
+["pdflatex"] 1770973142.04353 "/Users/yunhai/Home/Repositories/linalggrps/linalggrps.tex" "linalggrps.pdf" "linalggrps" 1770973143.55072 0
+  "/Users/yunhai/Home/Repositories/linalggrps/linalggrps.tex" 1770973140.09588 59999 de7b9bb3994d3cff0a73fe2e83dc8479 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -253,12 +253,12 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1733484464.28077 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1733484399 8221428 717966c586359d7806438735880c320c ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "linalggrps.aux" 1770973086.32028 3661 155856cac09a9ab990718b1707e966a9 "pdflatex"
+  "linalggrps.aux" 1770973143.43708 3661 e63f1880a710a00a285a9ae8a094d862 "pdflatex"
   "linalggrps.bbl" 1754681429.50895 2016 b44f268a9bcf6ea568bc71375340f6ce "biber linalggrps"
-  "linalggrps.out" 1770973086.32175 2317 6459a3fb2fa3b1ee1894349eb232a759 "pdflatex"
-  "linalggrps.run.xml" 1770973086.32334 2353 c6fecb8fa96e3f749a4e371a81c464a9 "pdflatex"
-  "linalggrps.tex" 1770973084.65673 59987 95129f9ba5a500da0425ab45e923fec2 ""
-  "linalggrps.toc" 1770973086.32341 1167 a6ce932566e28819f0cb26a9c74337d9 "pdflatex"
+  "linalggrps.out" 1770973143.43856 2317 6459a3fb2fa3b1ee1894349eb232a759 "pdflatex"
+  "linalggrps.run.xml" 1770973143.44012 2353 c6fecb8fa96e3f749a4e371a81c464a9 "pdflatex"
+  "linalggrps.tex" 1770973140.09588 59999 de7b9bb3994d3cff0a73fe2e83dc8479 ""
+  "linalggrps.toc" 1770973143.44019 1167 a6ce932566e28819f0cb26a9c74337d9 "pdflatex"
   (generated)
   "linalggrps.aux"
   "linalggrps.bcf"
