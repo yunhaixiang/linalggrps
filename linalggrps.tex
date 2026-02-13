@@ -19,6 +19,7 @@
 \theoremstyle{definition}
   \newtheorem{definition}[theorem]{Definition}
   \newtheorem{example}[theorem]{Example}
+  \newtheorem{exercise}[theorem]{Exercise}
 \theoremstyle{remark}
   \newtheorem{remark}[theorem]{Remark}
   \newtheorem{convention}[theorem]{Convention}
@@ -112,9 +113,7 @@ When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,
 \end{definition}
 \begin{remark}It is an easy exercise to show the identity morphism for an object is unique.
 \end{remark}
-\iffalse
-\begin{remark}We view the domain and codomain of a morphism $f:X\rightarrow Y$ to be part of the data of the morphism. Some authors require that a category have so called \textit{domain and codomain class functions}, but we aviod this as it makes the definition cumbersome. Alternatively, we could simply assume that $\mathrm{Hom}(X,Y)$ are disjoint for distinct pairs of objects $X,Y\in\EuScript C$, but this is unimportant set-theoretic detail that the reader is justified to ignore. 
-\end{remark}\fi
+
 
 \begin{example} In \Cref{tab:cat} we provide a list of common categories. 
 
@@ -296,12 +295,12 @@ for all morphisms $f:X\rightarrow Y$ in $\EuScript C$. In other words, $\mathscr
 Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\varphi$ is a \textit{natural isomorphism}. 
 \end{definition}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and let $\mathscr E,\mathscr F,\mathscr G:\EuScript C\rightarrow\EuScript D$ be functors. Suppose $\varphi:\mathscr E\Rightarrow \mathscr F$ and $\psi:\mathscr F\Rightarrow \mathscr G$  are natural transformations. We define \textit{their composition} $\psi\circ \varphi:\mathscr E\Rightarrow \mathscr G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\EuScript C$. 
+\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and let $\mathscr E,\mathscr F,\mathscr G:\EuScript C\rightarrow\EuScript D$ be functors. Suppose $\varphi:\mathscr E\Rightarrow \mathscr F$ and $\psi:\mathscr F\Rightarrow \mathscr G$  are natural transformations. We define their \textit{(vertical) composition} $\psi\circ \varphi:\mathscr E\Rightarrow \mathscr G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\EuScript C$. 
 \end{definition}
-\iffalse
+
 \begin{definition}Let $\EuScript C,\EuScript D, \EuScript E$ be categories and $\mathscr F_1, G_1:\EuScript C\rightarrow \EuScript D$ and $\mathscr F_2, G_2:\EuScript D\rightarrow \EuScript E$ functors. Let $\varphi:\mathscr F_1\Rightarrow\mathscr G_1$ and $\psi:\mathscr F_2\Rightarrow\mathscr G_2$ be natural transformations, then define their \textit{horizontal composition} $\psi * \varphi:\mathscr F_2\circ \mathscr F_1\Rightarrow\mathscr G_2\circ\mathscr G_1$ as $(\psi *\varphi)_X=\psi_{G_1(X)}\circ \mathscr F_2[\varphi_X]$. 
 \end{definition}
-\fi
+
 \begin{definition}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ a functor, then define the \textit{identity natural transformation} $\mathrm{id}_{\mathscr F}:\mathscr F\Rightarrow\mathscr F$ as  $(\mathrm{id}_{\mathscr{F}})_X=\mathrm{id}_{\mathscr F(X)}$ for each $X\in\EuScript C$. 
 \end{definition}
 
@@ -314,7 +313,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     
 \end{example}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, the \textit{functor category} from $\EuScript C$ to $\EuScript D$, denoted $\mathrm{Fun}(\EuScript C,\EuScript D)$, is the category where objects are functors $\mathscr F:\EuScript C\rightarrow \EuScript D$, morphisms are natural transformations, and composition is given by composition of natural transformations. 
+\begin{definition}Let $\EuScript C,\EuScript D$ be categories, the \textit{functor category} from $\EuScript C$ to $\EuScript D$, denoted $\mathrm{Fun}(\EuScript C,\EuScript D)$, is the category where objects are functors $\mathscr F:\EuScript C\rightarrow \EuScript D$, morphisms are natural transformations, and composition is given by (vertical) composition of natural transformations. 
 \end{definition}
 
 \begin{remark}
@@ -328,12 +327,11 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 
 \begin{example}Here are some examples of equivalent categories
     \begin{enumerate}
-        \item $\mathbf{Ab}\simeq \mathbf{Mod}_{\mathbb Z}$
-        \item The category of complex representations of a finite group $G$ (whose morphisms are equivariant maps) is equivalent to the category of $\mathbb C[G]$-modules, and they are also equivalent to $\mathrm{Fun}(\mathrm BG,\mathbf{Vect}_{\mathbb C})$, where $\mathrm B G$, called the \textit{delooping groupoid} of $G$, is the category with a single object $\bullet$, with the endomorphisms of $\bullet$ being group elements, and with the group operation as its composition. 
-        \item The category of $G$-sets for a group $G$
-        \item The category of topological spaces
+        \item The category $\mathbf{FVect}_K$ of finite dimensional $K$-vector spaces is equivalent to the category where objects are $K^n$ for $n\ge 0$ and morphisms $\mathrm{Hom}(K^n,K^m)$ are the matrices $\mathrm M_{n,m}(K)$. 
+        \item The category of intemediate extensions of a finite Galois extension $L\mid K$ with $L$-embeddings as morphisms, is equivalent to the category of finite transitive $G$-sets where $G=\mathrm{Gal}(L\mid K)$. 
+        \item The category of complex representations of a finite group $G$ (whose morphisms are equivariant maps) is equivalent to the category of $\mathbb C[G]$-modules, and they are also equivalent to $\mathrm{Fun}(\mathrm BG,\mathbf{Vect}_{\mathbb C})$, where $\mathrm B G$ is the category with a single object $\bullet$, with the endomorphisms of $\bullet$ being group elements, and with the group operation as its composition. 
     \end{enumerate}
-    It is an easy exercise for the reader to spot what the equivalences in the cases above are.
+    It is an easy exercise for the reader to spot what the unstated equivalences in the cases above are.
 \end{example}
 
 \begin{definition}Suppose $\EuScript C, \EuScript D$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ is a functor. 
@@ -355,20 +353,21 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 
 \begin{definition}Let $\EuScript C$ be a locally small category. Define 
     \[\widehat{\EuScript C}:=\mathrm{Fun}(\EuScript C^{\mathrm{op}},\mathbf{Set})\qquad\widecheck{\EuScript C}:=\mathrm{Fun}(\EuScript C,\mathbf{Set})\] 
-    as its \textit{categories of presheaves and copresheaves} respectively.
-    The \textit{Yoneda embedding} is the functor
-    \[\begin{aligned}
-        \mathscr H_{\bullet}:\EuScript C&\rightarrow \widehat{\EuScript C}\\
-        X&\mapsto \mathscr H_X=\mathrm{Hom}(-,X)\\
-        (f:Y\rightarrow Z)&\mapsto \left[X\mapsto (f\circ -)\right]
-    \end{aligned}\]
-    where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ is the same as in \Cref{def:hom-functors}. Dually, the \textit{co-Yoneda embedding} is the contravariant functor 
+    as the \textit{category of presheaves} of $\EuScript C$ and \textit{category of copresheaves} of $\EuScript C$ respectively.
+    The \textit{Yoneda embedding} is the contravariant functor 
     \[\begin{aligned}
         \mathscr H^{\bullet}:\EuScript C^{\mathrm{op}}&\rightarrow \widecheck{\EuScript C}\\
         X&\mapsto \mathscr H^X=\mathrm{Hom}(X,-)\\
         (f^{\mathrm{op}}:Z\rightarrow Y)&\mapsto \left[X\mapsto (-\circ f)\right]
     \end{aligned}\]
-    where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ is the same as in \Cref{def:hom-functors}. 
+    where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ is as in \Cref{def:hom-functors}. 
+    Dually, the \textit{co-Yoneda embedding} is
+    \[\begin{aligned}
+        \mathscr H_{\bullet}:\EuScript C&\rightarrow \widehat{\EuScript C}\\
+        X&\mapsto \mathscr H_X=\mathrm{Hom}(-,X)\\
+        (f:Y\rightarrow Z)&\mapsto \left[X\mapsto (f\circ -)\right]
+    \end{aligned}\]
+    where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ is as in \Cref{def:hom-functors}.
     
 \end{definition}
 
@@ -404,35 +403,63 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     One can view $\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},{-})$ as the composition of $\mathscr H_\bullet$ with the first factor of $\mathrm{Hom}_{\widehat{\EuScript C}}(-,-)$, and also view $\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-)$ similarly as the composition of $\mathscr H^\bullet$ with the first factor of $\mathrm{Hom}_{\widecheck{\EuScript C}}(-,-)$. 
 \end{definition}
 \fi
+
 \begin{lemma}[Yoneda]
     \label{thm:yoneda}
-    Let $\EuScript C$ be a locally small category. There are natural isomorphisms
+    Let $\EuScript C$ be a locally small category. Suppose $X\in\EuScript C$ and $\mathscr F:\EuScript C\rightarrow\mathbf{Set}$ is a functor, then there are bijections $\Phi$ and $\Psi$, shown below, 
     \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        {\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},{-})}
-        \arrow[Rightarrow, r, bend left=30, "\Phi"{yshift=2pt}]
-        & {\Gamma(\bullet,-)}
-        \arrow[Rightarrow, l, bend left=30, "\Psi"{yshift=-2pt}]
+        {\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr{F})}
+        \arrow[rightarrow, r, bend left=30, "\Phi"{yshift=2pt}]
+        & {\mathscr F(X)}
+        \arrow[rightarrow, l, bend left=30, "\Psi"{yshift=-2pt}]
     \end{tikzcd}
     \]
     which are inverses of each other.
 
     \begin{proof}
-        Let $X\in\EuScript C$ and let $\mathscr F:\EuScript C\rightarrow\mathbf{Set}$ be a functor. For a natural transformation $\varphi:\mathscr{H}^X\rightarrow\mathscr{F}$ and a morphism $f:X\rightarrow Y$ in $\EuScript C$, the diagram given by
+        For a natural transformation $\varphi:\mathscr{H}^X\Rightarrow\mathscr{F}$ and a morphism $f:X\rightarrow Y$ in $\EuScript C$, the diagram 
         \[
         \begin{tikzcd}[sep = huge]
         \mathrm{Hom}_{\EuScript C}(X,X) \arrow[r, "\varphi_X"] \arrow[d, "(f\circ - )"'] & \mathscr{F}(X) \arrow[d, "\mathscr{F}{[f]}"] \\
         \mathrm{Hom}_{\EuScript C}(X,Y) \arrow[r, "\varphi_Y"]                 & \mathscr{F}(Y)               
         \end{tikzcd}\]
-        commutes. Thus $\varphi_Y\circ (f\circ -)=\mathscr{F}[f]\circ \varphi_X$. Evaluating at $\mathrm{id}_X$ on both sides yields 
+        commutes. Thus $\varphi_Y\circ (f\circ -)=\mathscr{F}[f]\circ \varphi_X$. Evaluating at $\mathrm{id}_X$ on both sides yields the identity
         \[\varphi_Y(f)=\mathscr{F}[f](\varphi_X(\mathrm{id}_X))\]
         therefore the natural transformation $\varphi$ is completely determined by $u=\varphi_X(\mathrm{id}_X)$. Therefore, let
-        \[\Phi:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},{-})\Rightarrow \Gamma(\bullet,-)\qquad \Phi_{(X,\mathscr F)}(\varphi)=\varphi_X(\mathrm{id}_X)\]
+        \[\Phi:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr F)\rightarrow \mathscr F(X)\qquad \Phi(\varphi)=\varphi_X(\mathrm{id}_X)\]
         and, by the same identity, the inverse of $\Phi$ is naturally
-        \[\Psi:\Gamma(\bullet,-)\Rightarrow \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},{-})\qquad \Psi_{(X,\mathscr F)}(u)=\varphi\]
-        where $\varphi_Y:\mathrm{Hom}(X,Y)\rightarrow \mathscr{F}(Y)$ is given by $\varphi_Y(f)=(\mathscr{F}[f])(u)$, for each $Y\in \EuScript C$. It is not hard for the reader to verify that indeed $\Psi\circ \Phi=\mathrm{id}_{\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^\bullet, -)}$ and $\Phi\circ \Psi=\mathrm{id}_{\Gamma(\bullet,-)}$. 
+        \[\Psi:\mathscr F(X)\rightarrow \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr F)\qquad \Psi(u)=\varphi\]
+        where $\varphi_Y:\mathrm{Hom}(X,Y)\rightarrow \mathscr{F}(Y)$ is given by $\varphi_Y(f)=(\mathscr{F}[f])(u)$, for each $Y\in \EuScript C$. It is not hard for the reader to verify that indeed $\Psi$ and $\Phi$ are inverses of each other.
     \end{proof}
 \end{lemma}
+\begin{remark}
+    \label{rmk:yoneda}
+    The preceding \Cref{thm:yoneda} is known as \textit{Yoneda lemma} or the \textit{fundamental theorem of category theory}. 
+    Notice that the definition of $\Phi$ and $\Psi$ does not involve in $X$ and $\mathscr F$, therefore one can upgrade the lemma to say that there is a mutually inverse pair of natural isomorphism 
+    \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
+        {\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-)}
+        \arrow[Rightarrow, r, bend left=30, "\Phi"{yshift=2pt}]
+        & {\mathscr (-)(\bullet)}
+        \arrow[Rightarrow, l, bend left=30, "\Psi"{yshift=-2pt}]
+    \end{tikzcd}
+    \]
+    where the left hand side functor $\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-):\EuScript C\times\widecheck{\EuScript C}\rightarrow\mathbf{Set}$ is given by the composition 
+    \[\EuScript C\times \widecheck{\EuScript C}\xrightarrow{\mathscr H^\bullet\times \mathrm{id}_{\widecheck{\EuScript C}}} \widecheck{\EuScript C}\times \widecheck{\EuScript C}\xrightarrow{\mathrm{Hom}_{\widecheck{\EuScript C}}(-,-)}\mathbf{Set}\]
+    and the right hand side functor, called the \textit{evaluation functor}, is given by 
+    \[(-)(\bullet):\EuScript C\times \widecheck{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
+    and sends a morphism $(f:X\rightarrow Y,\varphi:\mathscr{F}\Rightarrow\mathscr G)$ to the morphism $\varphi_Y\circ \mathscr F[f]=\mathscr{G}[f]\circ \varphi_X$. Same constructions for $\Phi$ and $\Psi$ will work, hence we have shown that the Yoneda lemma is \textit{functorial} or \textit{natural} in the variables $X\in\EuScript C$ and $\mathscr F\in \widecheck{\EuScript C}$. 
+\end{remark}
 
+\begin{exercise}Prove a dual and functorial version of the Yoneda lemma: let $\EuScript C$ be a locally small category. Suppose $X\in\EuScript C$ and $\mathscr F:\EuScript C^{\mathrm{op}}\rightarrow\mathbf{Set}$, then construct natural isomorphisms
+    \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
+        {\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},-)}
+        \arrow[Rightarrow, r, bend left=30, "\Pi"{yshift=2pt}]
+        & {\mathscr (-)(\bullet)}
+        \arrow[Rightarrow, l, bend left=30, "\Theta"{yshift=-2pt}]
+    \end{tikzcd}
+    \]
+    which are inverses of each other, where you should define the functor $\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},-):\EuScript C\times\widehat{\EuScript C}\rightarrow\mathbf{Set}$ and the \textit{coevaluation functor} $(-)(\bullet):\EuScript C\times \widehat{\EuScript C}\rightarrow\mathbf{Set}$ dually to those in \Cref{rmk:yoneda}. 
+\end{exercise}
 \iffalse
 \begin{lemma}[co-Yoneda]
     \label{thm:coyoneda}
@@ -450,34 +477,23 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 \end{lemma}
 \fi
 \begin{theorem}\label{thm:yff}Let $\EuScript C$ be a locally small category, then the Yoneda and co-Yoneda embeddings 
-    \[\mathscr{H}_\bullet: \EuScript{C}\rightarrow \widehat{\EuScript C}\quad\mathrm{and}\quad \mathscr{H}^\bullet: \EuScript{C}^{\mathrm{op}}\rightarrow \widecheck{\EuScript C}\]
+    \[\mathscr{H}^\bullet: \EuScript{C}^{\mathrm{op}}\rightarrow \widecheck{\EuScript C}\quad\mathrm{and}\quad \mathscr{H}_\bullet: \EuScript{C}\rightarrow \widehat{\EuScript C}\]
     are fully faithful. 
     \begin{proof}
-        Let $X,Y\in\EuScript C$, then by \Cref{thm:yoneda}, for any functor $\mathscr{F}:\EuScript C\rightarrow \mathbf{Set}$, there is a map 
-        \[\Phi_{(X,\mathscr{F})}:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr F)\rightarrow \mathscr{F}(X)\]
-        which, by \Cref{rmk:isom}, is a bijection, since $\Phi$ is a natural isomorphism. Let $\mathscr{F}=\mathscr H^Y$, then
-        \[\Phi_{(X,\mathscr{H}_Y)}:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\rightarrow \mathscr{H}^Y(X)=\mathrm{Hom}_{\EuScript C}(Y,X)\]
-        is a bijection. This gives the inverse for the map
-        \[\mathrm{Hom}_{\EuScript C^{\mathrm{op}}}(X,Y)\xrightarrow{\mathscr{H}^\bullet} \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\]
-        Thus $\mathscr{H}^\bullet$ is fully faithful. For the dual $\mathscr H_\bullet$, the proof is completely symmetric. 
-    \end{proof}
+        We will only show $\mathscr{H}^\bullet$ is fully faithful: for the dual $\mathscr H_\bullet$, the proof is completely symmetric. 
+        Let $X,Y\in\EuScript C$. By the Yoneda lemma \Cref{thm:yoneda}, there is a bijection 
+        \[\Phi:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\rightarrow \mathscr{H}^Y(X)=\mathrm{Hom}_{\EuScript C}(Y,X)\]
+        by specifying $\mathscr F=\mathscr H^Y$. One can verify that this gives the inverse for the map
+        \[\mathrm{Hom}_{\EuScript C}(Y,X)=\mathrm{Hom}_{\EuScript C^{\mathrm{op}}}(X,Y)\xrightarrow{f\mapsto \mathscr{H}^\bullet\left[f\right]} \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\]
+        Thus $\mathscr{H}^\bullet$ is fully faithful.\end{proof}
 \end{theorem}
 
-\begin{lemma}\label{lem:funcpres}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow\EuScript D$ a functor. Let $\mathscr{D}:\EuScript I\rightarrow \EuScript C$ be a commutative diagram in $\EuScript C$, then $\mathscr F\circ \mathscr D:\EuScript I\rightarrow \EuScript D$ is a commutative diagram in $\EuScript D$. 
-    \begin{proof}Straightforward by definition. 
-    \end{proof}
-\end{lemma}
+
 \begin{lemma}\label{lem:isom}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow\EuScript D$ a fully faithful functor, then the morphism  $\mathscr F[f]:\mathscr F(X)\rightarrow \mathscr{F}(Y)$ is an isomorphism in $\EuScript D$ if and only if $f:X\rightarrow Y$ is an isomorphism in $\EuScript C$. 
     \begin{proof}
-        Forward direction is an easy consequence of \Cref{lem:funcpres} applied to the diagram
-        \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        X
-        \arrow[rightarrow, r, bend left=30, "f"{yshift=2pt}]
-        & Y
-        \arrow[rightarrow, l, bend left=30, "f^{-1}"{yshift=-2pt}]
-        \end{tikzcd}
-        \]
-    For the backwards direction, by fullness of $\mathscr F$, choose $g:Y\rightarrow X$ with $\mathscr{F}[g]=\mathscr{F}[f]^{-1}$. Then we have $\mathscr{F}[f\circ g]=\mathscr{F}[f]\circ \mathscr{F}[g]=\mathrm{id}_{\mathscr{F}(X)}$ so by faithfulness of $\mathscr F$, we have $f\circ g=\mathrm{id}_X$. By similar arguments, we have $g\circ f=\mathrm{id}_Y$, so $g$ is the inverse of $f$.  
+    Assume $f:X\rightarrow Y$ is an isomorphism in $\EuScript C$, then there exists $g:Y\rightarrow X$ with $g\circ f=\mathrm{id}_X$ and $f\circ g=\mathrm{id}_Y$.
+    Applying functor $\mathscr F$, we get $\mathscr F[g]\circ \mathscr F[f]=\mathrm{id}_{\mathscr F(X)}$ and $\mathscr F[f]\circ \mathscr F[g]=\mathrm{id}_{\mathscr F(Y)}$, hence $\mathscr F[f]$ has inverse $\mathscr F[g]$, which makes it an isomorphism in $\EuScript D$.
+    Conversely, by fullness of $\mathscr F$, choose $g:Y\rightarrow X$ with $\mathscr{F}[g]=\mathscr{F}[f]^{-1}$. Then we have $\mathscr{F}[f\circ g]=\mathscr{F}[f]\circ \mathscr{F}[g]=\mathrm{id}_{\mathscr{F}(X)}$ so by faithfulness of $\mathscr F$, we have $f\circ g=\mathrm{id}_X$. By symmetric arguments, we have $g\circ f=\mathrm{id}_Y$, so $g$ is the inverse of $f$.  
     Therefore $f$ is an isomorphism in $\EuScript C$. 
     \end{proof}
 \end{lemma}
@@ -488,7 +504,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
         \item $\mathscr H^\bullet[f^{\mathrm{op}}]:\mathscr H^Y\rightarrow \mathscr H^X$ is an isomorphism in $\widecheck{\EuScript C}$,
     \end{enumerate}
     \begin{proof}
-        Striaghtforward by \Cref{thm:yff} and \Cref{lem:isom}. 
+        Straightforward by \Cref{thm:yff} and \Cref{lem:isom}. 
     \end{proof}
 \end{theorem}
 
@@ -728,7 +744,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         \item $B(x,y)=[x]_e^{\mathrm{T}} [B]_e[y]_e$ for all $x,y\in V$, iff $B$ is bilinear,
         \item $[B]_{Pe}=[P]^{*}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is $\sigma$-sesquilinear,
         \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is bilinear,
-        \item $B$ is nondegenerate iff its Gram matrix $[B]_e$ is invertible,
+        \item $B$ is nondegenerate iff $[B]_e$ is invertible,
     \end{enumerate}
     where $M^*:=(\sigma(m_{j,i}))\in M_{k\times \ell}(R)$ denotes the $\sigma$-conjugate transpose of $M=(m_{i,j})\in M_{\ell\times k}(R)$.
     \begin{proof}
