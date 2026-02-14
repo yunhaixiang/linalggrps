@@ -728,6 +728,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{example}Here are some examples of quadratic étale algebras
     \begin{enumerate}
         \item $\mathbb C$ as a $\mathbb R$-algebra, with $\sigma:\mathbb C\rightarrow\mathbb C$ given by $\sigma(z)=\overline{z}$
+        \item any quadratic extension $K(\sqrt{d})$ of a field $K$, with $\sigma:K(\sqrt{d})\rightarrow K(\sqrt{d})$ by $\sqrt{d}\mapsto -\sqrt{d}$
         \item $\mathbb F_{q^2}$ as a $\mathbb F_{q}$-algebra, with $\sigma:\mathbb F_{q^2}\rightarrow\mathbb F_{q^2}$ given by $\sigma(x)=x^q$
     \end{enumerate}
 \end{example}
@@ -763,7 +764,17 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \end{proof}
 \end{proposition}
 \fi
-
+\begin{proposition}Let $V=R^n$ be a free $R$-module of rank $n$, let $e$ be an ordered basis of $V$, and let $B:V\times V\rightarrow R$ be an orthogonal form, then
+    \begin{enumerate}
+        \item $B(x,y)=[x]_{e}^T [B]_e [y]_e$,
+        \item $[B]_e^{\mathrm{T}}=[B]_e$,
+        \item  $[B]_e$ is invertible,
+        \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$.
+        
+    \end{enumerate}
+    \begin{proof}Left as exercise.
+    \end{proof}
+\end{proposition}
 
 
 \begin{definition}Let $R$ be an arbitrary ring, suppose $S$ is a $R$-algebra, $V$ is a module over $R$, and $B:V\times V\rightarrow R$ a bilinear form on $V$. 
@@ -776,8 +787,6 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     on $V_S$, extended $\sigma$-sesquilinearly. 
     \fi
 \end{definition}
-\begin{definition}Base change for 
-\end{definition}
 
 
 
@@ -787,9 +796,26 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         \[\mathrm{O}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
         \[\mathrm{O}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V,\,B_S(gv,gw)=B_S(v,w)\}\]
-        where $\displaystyle\widetilde{\mathrm{O}_{V,B}}=\mathrm{Spec}\left(\frac{R[M]}{(M^TBM-B)}\right)$ where $M=(m_{i,j})_{1\le i,j\le n}$ is an indeterminant matrix
+        where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{O}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^T[B]_eX-[B]_e)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm O_{V,B}$ does not depend,
         \item the \textit{special orthogonal group} of the pair $(V,B)$
-        \item the \textit{orthogonal semilitude group}
+        \[\mathrm{SO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        where for each $R$-algebra $S$ 
+        \[\mathrm{SO}_{V,B}(S)=\{g\in \mathrm O_{V,B}(S):\det(g)=1\}\]
+        where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{SO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^T[B]_eX-[B]_e, \det X-1)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm {SO}_{V,B}$ does not depend,
+        
+        \item the \textit{orthogonal semilitude group} of the pair $(V,B)$
+        \[\mathrm{GO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        where for each $R$-algebra $S$ 
+        \[\mathrm{GO}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V,\,B_S(gv,gw)=\lambda B_S(v,w)\}\]
+        where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{GO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][y,\lambda,\nu]}{(X^T[B]_eX-\lambda [B]_e, y\det(X)-1,\lambda\nu-1)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{GO}_{V,B}$ does not depend,
+        
+        
         \item the \textit{special orthogonal semilitude group}
     \end{enumerate}
 \end{example}
