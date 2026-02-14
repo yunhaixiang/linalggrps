@@ -720,13 +720,19 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \end{example}
 
 \begin{definition}
-    A \textit{quadratic étale} algebra $E$ over a ring $R$ is a $R$-algebra such that \[E\cong R[x]/(x^2+bx+c)\]
+    A \textit{quadratic étale algebra} $E$ over a ring $R$ is a $R$-algebra such that \[E\cong R[x]/(x^2+bx+c)\]
     for some $b,c\in R$ where $b^2-4c\in R^\times$. Define its \textit{involution} as the unique nontrivial automorphism 
     \[\sigma:E\rightarrow E\qquad x\mapsto -b-x\]
     which satisfies $\sigma\circ \sigma=\mathrm{id}_E$ and fixes $R$. 
 \end{definition}
+\begin{example}Here are some examples of quadratic étale algebras
+    \begin{enumerate}
+        \item $\mathbb C$ as a $\mathbb R$-algebra, with $\sigma:\mathbb C\rightarrow\mathbb C$ given by $\sigma(z)=\overline{z}$
+        \item $\mathbb F_{q^2}$ as a $\mathbb F_{q}$-algebra, with $\sigma:\mathbb F_{q^2}\rightarrow\mathbb F_{q^2}$ given by $\sigma(x)=x^q$
+    \end{enumerate}
+\end{example}
 \begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{standard $\sigma$-Hermitian form} of signature $(p,q)$ on $V=E^n$, where $p,q\in\mathbb N$ such that $p+q=n$, is 
-    \[h_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{\sigma(x_1)y_1+\cdots+\sigma(x_p)y_p}_p-\underbrace{(\sigma(x_{p+1})y_{p+1}+\cdots+\sigma(x_n)y_n)}_q\]
+    \[h_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{\sigma(x_1)y_1+\cdots+\sigma(x_p)y_p}_p-\overbrace{(\sigma(x_{p+1})y_{p+1}+\cdots+\sigma(x_n)y_n)}^q\]
     where $h_{n,0}$ is just known as the \textit{standard $\sigma$-Hermitian form}. 
 \end{example}
 \begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{hyperbolic $\sigma$-Hermitian form} on $V=E^2$ is the $\sigma$-Hermitian form $h_H:V\times V\rightarrow E$ given by 
@@ -734,37 +740,29 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     for all $(a,b),(c,d)\in V$. 
 \end{example}
 
-
-\iffalse
-\begin{proposition}Let $B:V\times V\rightarrow R$ be a bilinear form. If $B$ is alternating then it is antisymmetric, i.e. $B(x,y)=-B(y,x)$ for $x,y\in V$. 
-    Conversely, if $B$ is antisymmetric and $2\in R^\times$, then $B$ is alternating. 
-    \begin{proof}Suppose $B$ is alternating. For $v,w\in V$, we have 
-        \[0=B(v+w,v+w)=B(v,v)+B(v,w)+B(w,v)+B(w,w)=B(v,w)+B(w,v)\]
-        Thus $B(v,w)=-B(w,v)$ for all $v,w\in V$. Conversely, suppose $2\in R^\times$ and $B$ is antisymmetric then for all $v\in V$ we have $B(v,v)=-B(v,v)$ so $2B(v,v)=0$, thus $B(v,v)=0$. 
-    \end{proof}
-\end{proposition}
-\fi
-
 \begin{definition}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with an ordered basis $e=(e_1,\dots,e_n)$. 
     Let $B:V\times V\rightarrow R$ be a form, then the \textit{Gram matrix} of $B$ with respect to ordered basis $e$, is the matrix $[B]_e:=(B(e_i,e_j))_{1\le i,j\le n}\in \mathrm M_n(R)$. 
 \end{definition}
+\iffalse
 \begin{proposition}\label{prop:gram}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with an ordered basis $e$. Suppose $B:V\times V\rightarrow R$ is a form. Let $\sigma:R\rightarrow R$ be an involution. We have the following. 
     \begin{enumerate}
-        \item $[B]_e^{*}=[B]_e$ iff $B$ is $\sigma$-sesquilinear and $\sigma$-symmetric,
-        \item $[B]_e^{\mathrm{T}}=[B]_e$ iff $B$ is bilinear and symmetric,
-        \item $[B]_e^{\mathrm{T}}=-[B]_e$ iff $B$ is bilinear and alternating,
+        \item $[B]_e^{*}=[B]_e$ iff $B$ is $\sigma$-symmetric, given $B$ is $\sigma$-sesquilinear,
+        \item $[B]_e^{\mathrm{T}}=[B]_e$ iff $B$ is symmetric, given $B$ is bilinear,
+        \item $[B]_e^{\mathrm{T}}=-[B]_e$ iff $B$ is bilinear and alternating, given $\frac{1}{2}\in R$,
         \item $B(x,y)=[x]_e^{*} [B]_e[y]_e$ for all $x,y\in V$, iff $B$ is $\sigma$-sesquilinear,
         \item $B(x,y)=[x]_e^{\mathrm{T}} [B]_e[y]_e$ for all $x,y\in V$, iff $B$ is bilinear,
         \item $[B]_{Pe}=[P]^{*}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is $\sigma$-sesquilinear,
         \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is bilinear,
-        \item $B$ is nondegenerate iff $[B]_e$ is invertible,
+        \item $B$ is nondegenerate iff $[B]_e$ is invertible, given $B$ is bilinear or $\sigma$-sesquilinear,
     \end{enumerate}
     where $M^*:=(\sigma(m_{j,i}))\in M_{k\times \ell}(R)$ denotes the $\sigma$-conjugate transpose of $M=(m_{i,j})\in M_{\ell\times k}(R)$.
-    \begin{proof}
+    \begin{proof}We will only prove
+        \begin{enumerate}
+            \item a
+        \end{enumerate}
     \end{proof}
 \end{proposition}
-\begin{remark}
-\end{remark}
+\fi
 
 
 
