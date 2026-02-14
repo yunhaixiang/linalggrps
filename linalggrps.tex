@@ -725,8 +725,13 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \[\sigma:E\rightarrow E\qquad x\mapsto -b-x\]
     which satisfies $\sigma\circ \sigma=\mathrm{id}_E$ and fixes $R$. 
 \end{definition}
-\begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{standard $\sigma$-Hermitian form} of signature $(p,q)$ on $E^n$, where $p,q\in\mathbb N$ such that $p+q=n$, is 
-    \[h_{p,q}=\]
+\begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{standard $\sigma$-Hermitian form} of signature $(p,q)$ on $V=E^n$, where $p,q\in\mathbb N$ such that $p+q=n$, is 
+    \[h_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{\sigma(x_1)y_1+\cdots+\sigma(x_p)y_p}_p-\underbrace{(\sigma(x_{p+1})y_{p+1}+\cdots+\sigma(x_n)y_n)}_q\]
+    where $h_{n,0}$ is just known as the \textit{standard $\sigma$-Hermitian form}. 
+\end{example}
+\begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{hyperbolic $\sigma$-Hermitian form} on $V=E^2$ is the $\sigma$-Hermitian form $h_H:V\times V\rightarrow E$ given by 
+    \[h_{H}((a,b),(c,d))=\sigma(a)d+\sigma(b)c\]
+    for all $(a,b),(c,d)\in V$. 
 \end{example}
 
 
