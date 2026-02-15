@@ -699,7 +699,11 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{definition}Let $B_1:V\times V\rightarrow R$ and $B_2:V\times V\rightarrow R$ be forms on a module $V$ over an arbitrary ring $R$. We say $B_1$ is \textit{equivalent} (or \textit{isometric}) to $B_2$ if there exists an invertible linear map $P:V\rightarrow V$, which we call an \textit{isometry}, satisfying $B_1(v,w)=B_2(P(v),P(w))$ for all $v,w\in V$. 
 \end{definition}
 
-\begin{example}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with basis $e_1,\dots,e_n$. The standard inner product $\langle\cdot,\cdot\rangle:V\times V\rightarrow R$ given by $\langle v,w\rangle=v_{1}w_{1}+\cdots+v_nw_n$ for each $v,w\in V$, where $v=v_1e_1+\cdots+v_ne_n$ and $w=w_1e_1+\cdots+w_ne_n$, is an orthogonal form on $V$. 
+\begin{example}Let $V=R^n$ be the free module of rank $n$ over a ring $R$. The standard inner product $\langle\cdot,\cdot\rangle:V\times V\rightarrow R$ given by $\langle v,w\rangle=v_{1}w_{1}+\cdots+v_nw_n$ for each $v,w\in V$, is an orthogonal form.
+\end{example}
+\begin{example}Let $V=R^n$ be the free module of rank $n$ over a ring $R$. The \textit{standard orthogonal form} of signature $(p,q)$ on $V$, where $p,q\in\mathbb N$ such that $p+q=n$, is 
+    \[b_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{x_1y_1+\cdots+x_py_p}_p-\overbrace{(x_{p+1}y_{p+1}+\cdots+x_ny_n)}^q\]
+    where $b_{n,0}$ is just the standard inner product. 
 \end{example}
 \begin{example}Let $V=W\oplus W^{\vee}$ over a ring $R$ where $W=R^n$ is the free module of rank $n$, then the \textit{hyperbolic form} $B:V\times V\rightarrow R$ given by $((v,\phi),(w,\psi))\mapsto \phi(w)+\psi(v)$ is an orthogonal form.
 \end{example}
@@ -719,9 +723,10 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \end{example}
 
 \begin{definition}
-    A \textit{quadratic étale algebra} $E$ over a ring $R$ is a $R$-algebra such that \[E\cong R[x]/(x^2+bx+c)\]
+    \label{def:quadetale}
+    A \textit{quadratic étale algebra} $E$ over a ring $R$ is a $R$-algebra such that \[E\cong R[\omega]/(\omega^2+b\omega+c)\]
     for some $b,c\in R$ where $b^2-4c\in R^\times$. Define its \textit{involution} as the unique nontrivial automorphism 
-    \[\sigma:E\rightarrow E\qquad x\mapsto -b-x\]
+    \[\sigma:E\rightarrow E\qquad x\mapsto -b-\omega\]
     which satisfies $\sigma\circ \sigma=\mathrm{id}_E$ and fixes $R$. 
 \end{definition}
 \begin{example}Here are some examples of quadratic étale algebras
@@ -765,7 +770,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \fi
 \begin{proposition}Let $V=R^n$ be a free $R$-module of rank $n$, let $e$ be an ordered basis of $V$, and let $B:V\times V\rightarrow R$ be an orthogonal form, then
     \begin{enumerate}
-        \item $B(x,y)=[x]_{e}^T [B]_e [y]_e$ for all $x,y\in V$,
+        \item $B(x,y)=[x]_{e}^\mathrm{T} [B]_e [y]_e$ for all $x,y\in V$,
         \item $[B]_e^{\mathrm{T}}=[B]_e$,
         \item  $[B]_e$ is invertible,
         \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$.
@@ -790,14 +795,14 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where for each $R$-algebra $S$ 
         \[\mathrm{O}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,B_S(gv,gw)=B_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{O}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^T[B]_eX-[B]_e)}\right)\]
+        \[\widetilde{\mathrm{O}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[B]_eX-[B]_e)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm O_{V,B}$ does not depend,
         \item the \textit{special orthogonal group} of the pair $(V,B)$
         \[\mathrm{SO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
         \[\mathrm{SO}_{V,B}(S)=\{g\in \mathrm O_{V,B}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{SO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^T[B]_eX-[B]_e, \det X-1)}\right)\]
+        \[\widetilde{\mathrm{SO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[B]_eX-[B]_e, \det X-1)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm {SO}_{V,B}$ does not depend,
         
         \item the \textit{orthogonal semilitude group} of the pair $(V,B)$
@@ -805,7 +810,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where for each $R$-algebra $S$ 
         \[\mathrm{GO}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V_S,\,B_S(gv,gw)=\lambda B_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{GO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^T[B]_eX-\lambda [B]_e, \lambda\nu-1)}\right)\]
+        \[\widetilde{\mathrm{GO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[B]_eX-\lambda [B]_e, \lambda\nu-1)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{GO}_{V,B}$ does not depend,
         
         \item the \textit{special orthogonal semilitude group} of the pair $(V,B)$
@@ -813,7 +818,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where for each $R$-algebra $S$ 
         \[\mathrm{GSO}_{V,B}(S)=\{g\in \mathrm{GO}_{V,B}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{GSO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^T[B]_eX-\lambda [B]_e, \det(X)-1,\lambda\nu-1)}\right)\]
+        \[\widetilde{\mathrm{GSO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[B]_eX-\lambda [B]_e, \det(X)-1,\lambda\nu-1)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{GSO}_{V,B}$ does not depend,
     \end{enumerate}
 \end{example}
@@ -841,13 +846,14 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where for each $R$-algebra $S$ 
         \[\mathrm{Sp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,\omega_S(gv,gw)=\omega_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{Sp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X]}{(X^T[\omega]_eX-[\omega]_e)}\right)\] where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
+        \[\widetilde{\mathrm{Sp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[\omega]_eX-[\omega]_e)}\right)\] where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
         \item the \textit{symplectic semilitude group} of the pair $(V,\omega)$
         \[\mathrm{GSp}_{V,\omega}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
         \[\mathrm{GSp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists \lambda\in S^\times,\forall v,w\in V_S,\,\omega_S(gv,gw)=\lambda \omega_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{GSp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^T[\omega]_eX-\lambda[\omega]_e,\lambda\nu-1)}\right)\] where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
+        \[\widetilde{\mathrm{GSp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[\omega]_eX-\lambda[\omega]_e,\lambda\nu-1)}\right)\] 
+        where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
     \end{enumerate}
 \end{example}
 \begin{remark}Let $V=R^{2n}$ be the free $R$-module of rank $2n$ and $\omega$ the standard symplectic form on $V$, then we denote $\mathrm{Sp}_{2n}:=\mathrm{Sp}_{V,\omega}$ and $\mathrm{GSp}_{2n}:=\mathrm{GSp}_{V,\omega}$.
@@ -869,6 +875,11 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \begin{proof}Left as exercise.
     \end{proof}
 \end{proposition}
+\begin{remark}
+    Let $E$ be a quadratic étale $R$-algebra, then we can write each element of $E$ uniquely as $a+b\omega$ where $a,b\in R$ with $\omega$ as in \Cref{def:quadetale}. Let $X\in \mathrm{M}_{n,m}(E[x_1,\dots,x_\ell])$, define $(X)_{E/R}$ as the ideal in $R[x_1,\dots,x_\ell]$, generated by the entries of $A,B\in \mathrm M_n(R[x_1,\dots,x_\ell])$ where $X=A+B\omega$. 
+\end{remark}
+\begin{remark}Let $E$ be a quadratic étale $R$-algebra. Let $X=(x_{i,j})_{1\le i,j\le n}$ be an indeterminant matrix, for $F=(f_{i,j})_{1\le i,j\le n}\in \mathrm{M}_n(E[X])$, denote its $\sigma$-conjugate transpose $F^*=(\sigma(f_{j,i}))_{1\le i,j\le n}$ where we extend $\sigma:E\rightarrow E$ to $\sigma:E[X]\rightarrow E[X]$ by fixing any formal variables. Similarly, we can define $\sigma$-conjugate transpose of $F\in E[X_1,\dots,X_\ell]$ where $X_1,\dots,X_{\ell}$ are indeterminant matrices. 
+\end{remark}
 \begin{example}Let $E$ be a quadratic étale $R$-algebra with involution $\sigma:E\rightarrow E$, $V$ a free $E$-module of rank $n$, and $h:V\times V\rightarrow E$ a $\sigma$-Hermitian form. Here are some more examples of algebraic groups over $R$. 
     \begin{enumerate}
         \item the \textit{unitary group} of the pair $(V,h)$
@@ -876,8 +887,30 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where for each $R$-algebra $S$
         \[\mathrm{U}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathbf{Mod}_S}(V_{E_S}):\forall v,w\in V_{E_S}, h_S(gv,gw)=h_S(v,w)\}\]
         where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{U}_{V,h}}=\mathrm{Spec}\left(\frac{R[X][Y][y]}{(A,B, yd-1)}\right)\]
+        \[\widetilde{\mathrm{U}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y][y]}{((X+Y\omega)^*[h]_e(X+Y\omega)-[h]_e,y\det(X+Y\omega)-1)_{E/R}}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{U}_{V,h}$ does not depend, 
+        \item the \textit{special unitary group} of the pair $(V,h)$
+        \[\mathrm{SU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        where for each $R$-algebra $S$
+        \[\mathrm{SU}_{V,h}(S)=\{g\in\mathrm{U}_{V,h}(S):\det(g)=1\}\]
+        where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{SU}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y]}{((X+Y\omega)^*[h]_e(X+Y\omega)-[h]_e,\det(X+Y\omega)-1)_{E/R}}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{SU}_{V,h}$ does not depend, 
+        \item the \textit{unitary semilitude group} of the pair $(V,h)$
+        \[\mathrm{GU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        where for each $R$-algebra $S$
+        \[\mathrm{GU}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathbf{Mod}_S}(V_{E_S}):\exists\lambda\in S^\times,\forall v,w\in V_{E_S}, h_S(gv,gw)=(1\otimes\lambda) h_S(v,w)\}\]
+        where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{GU}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y][y,\lambda,\nu]}{((X+Y\omega)^*[h]_e(X+Y\omega)-\lambda[h]_e,y\det(X+Y\omega)-1, \lambda\nu-1)_{E/R}}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{GU}_{V,h}$ does not depend, 
+        \item the \textit{special unitary semilitude group} of the pair $(V,h)$
+        \[\mathrm{GSU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        where for each $R$-algebra $S$
+        \[\mathrm{GSU}_{V,h}(S)=\{g\in\mathrm{GU}_{V,h}(S):\det(g)=1\}\]
+        where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
+        \[\widetilde{\mathrm{GSU}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y][\lambda,\nu]}{((X+Y\omega)^*[h]_e(X+Y\omega)-\lambda[h]_e,\det(X+Y\omega)-1, \lambda\nu-1)_{E/R}}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{GSU}_{V,h}$ does not depend, 
+        
     \end{enumerate}
 \end{example}
 \begin{example}Pin group, Spin group, GPin, GSpin
@@ -885,7 +918,11 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 
 \begin{example}Exceptional groups 
 \end{example}
-
+\begin{definition}
+    arithmetic group
+\end{definition}
+\begin{example}modular group 
+\end{example}
 
 \newpage 
 
