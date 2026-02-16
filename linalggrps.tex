@@ -518,7 +518,7 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 
 
 
-\section{Algebraic Groups}
+\section{Definition and Examples of Algebraic Groups}
 
 Throughout the text, unless specified otherwise, fix a ring $R$, which we shall call our \textit{ground ring}. 
 \begin{convention}
@@ -538,12 +538,14 @@ Suppose $A$ is a $R$-algebra, its \textit{spectrum} is the $R$-functor
 \end{definition}
 \begin{remark}
 The notion of affine $R$-schemes generalizes the notion of affine varieties. 
-For readers who have experience in algebraic geometry, you might have been taught that an affine $K$-variety for some algebraically closed field $K$ is a subset of $K^n$ for some $n$ given by the vanishing set of some polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$, that is, the set
+Readers who have experience in algebraic geometry might have been taught that an affine $K$-variety for some algebraically closed field $K$ is a subset of $K^n$ for some $n$ given by the vanishing set of some polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$, that is, the set
 \[\{(x_1,\dots,x_n)\in K^n:f_1(x_1,\dots,x_n)=\cdots=f_m(x_1,\dots,x_n)=0\}\]
 For our purposes, however, we take a \textit{functorial} perspective to varieties. To see what this is about, we first make the important observation that the above set can be naturally identified as the set
 \[X(K)=\mathrm{Hom}_{\mathbf{Alg}_K}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)},K\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
 Namely, each $\phi\in X(K)$ can be identified with $(\phi(x_1),\dots,\phi(x_n))\in K^n$. 
-Similarly, for polynomials $f_1,\dots,f_m\in R[x_1,\dots,x_n]$, the set $X(S)$ for an $R$-algebra $S$ can be identified as the set 
+Similarly, for polynomials $f_1,\dots,f_m\in R[x_1,\dots,x_n]$, the set 
+\[X(S)=\mathrm{Hom}_{\mathbf{Alg}_R}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)},S\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
+for an $R$-algebra $S$ can be identified as the set 
 \[\{(x_1,\dots,x_n)\in S^n:f_1(x_1,\dots,x_n)=\cdots=f_m(x_1,\dots,x_n)=0\}\]
 where $f_1,\dots,f_m$ are identified as their images along the natural map $R[x_1,\dots,x_n]\rightarrow S[x_1,\dots,x_n]$ induced by the structure map $R\rightarrow S$. 
 Thus, what the spectrum of a $R$-algebra encodes is the vanishing sets of a set of polynomials over each $R$-algebra. 
@@ -566,12 +568,7 @@ One huge advantage that affine schemes provide is their treatment of \textit{nil
 with the right hand side being thought of as having an \textit{infinitesimal thickening} or \textit{nilpotent thickening}. 
 
 \end{remark}
-\iffalse
-\begin{remark}Recall that an algebra is \textit{reduced} if it does not have any nonzero nilpotent elements. 
-\end{remark}
-\begin{definition}An \textit{affine $R$-variety} is the spectrum of a finitely generated reduced $R$-algebra. The category $\mathbf{AVar}_R$ of affine $R$-varieties is the full subcategory of affine $R$-varieties of $\mathbf{Aff}_R$. 
-\end{definition}
-\fi
+
 \begin{remark}Let $S$ be a $R$-algebra, then $\mathbb{A}^1_R(S)=\mathrm{Hom}_{\mathbf{Alg}_R}(R[x],S)$ is canonically a $R$-algebra by
     \[\begin{aligned}
         (\phi+\psi)(f)&=\phi(f)+\psi(f)\\
@@ -916,18 +913,16 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{example}Pin group, Spin group, GPin, GSpin
 \end{example}
 
-\begin{example}Exceptional groups 
-\end{example}
-\begin{definition}
-    arithmetic group
-\end{definition}
+
 \begin{example}modular group 
 \end{example}
+\begin{remark}Some other important algebraic groups include a family of algebraic groups called \textit{exceptional groups}: $\mathrm G_2, \mathrm F_4, \mathrm E_6, \mathrm E_7$, and $\mathrm E_8$, which we will not define until later. 
+\end{remark}
 
 \newpage 
 
 
-\section{Basic Properties}
+\section{Basic Properties of Algebraic Groups}
 sheaf of regular functions
 dimension
 connectedness, irreducibility
