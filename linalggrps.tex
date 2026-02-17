@@ -511,16 +511,19 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \end{proof}
 \end{theorem}
 
-
+\begin{remark}What \Cref{thm:yff} and \Cref{thm:yon} tells us is that some presheaves (resp. copresheaves) on a category can be represented as objects in the category, namely these are the ones in the image of the Yoneda (resp. co-Yoneda) embedding. 
+\end{remark}
+\begin{definition}Let $\EuScript C$ be a locally small category, we call a presheaf $\mathscr F\in \widecheck{\EuScript C}$ (resp. copresheaf $\mathscr F\in \widehat{\EuScript C}$) \textit{representable} by an object $X\in\EuScript C$ if $\mathscr H^X\cong \mathscr F$ (resp. $\mathscr H_X\cong \mathscr F$). 
+\end{definition}
 
 
 \newpage
 
 
 
-\section{Definition and Examples of Algebraic Groups}
+\section{Affine Algebraic Groups}
 
-Throughout the text, unless specified otherwise, fix a ring $R$, which we shall call our \textit{ground ring}. 
+Unless specified otherwise, fix a ring $R$, which we shall call our \textit{ground ring}. 
 \begin{convention}
     We assume rings are commutative and unital, and algebras are associative, commutative, and unital. 
     In particular, in our convention an algebra $A$ over a ring $R$ is equivalent to the data of a ring $A$ with a ring map $\varphi:R\rightarrow A$, viewing the scalar multiplication as $r\cdot a=\varphi(r)a$. 
@@ -624,7 +627,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     An \textit{affine $R$-group scheme} is a $R$-group functor $G:\mathbf{Alg}_R\rightarrow\mathbf{Grp}$ such that 
     its composition with the forgetful functor to $\mathbf{Set}$
     \[\widetilde{G}:\mathbf{Alg}_R\xrightarrow{G} \mathbf{Grp}\rightarrow\mathbf{Set}\]
-    is an affine $R$-scheme. Further, we say an affine $R$-group scheme $G$ is an \textit{(affine) algebraic group} over $R$ if $\widetilde{G}$ is \textit{of finite type}, i.e. it is the spectrum of a finitely generated $R$-algebra. Define $\mathbf{GAff}_R$ and $\mathbf{GAlg}_R$, the categories of affine $R$-group schemes and (affine) algebraic groups over $R$, as full subcategories of $\mathbf{GFun}_R$ respectively. 
+    is isomorphic to an affine $R$-scheme. Further, we say an affine $R$-group scheme $G$ is an \textit{(affine) algebraic group} over $R$ if $\widetilde{G}$ is \textit{of finite type}, i.e. it is the spectrum of a finitely generated $R$-algebra. Define $\mathbf{GAff}_R$ and $\mathbf{GAlg}_R$, the categories of affine $R$-group schemes and (affine) algebraic groups over $R$, as full subcategories of $\mathbf{GFun}_R$ respectively. 
 \end{definition}
 \begin{convention}
     In this text, ``algebraic group'' always means affine algebraic group. However, it is important to keep in mind that there are things like abelian varieties which are considered algebraic groups in broader context but are by no means affine.
@@ -648,12 +651,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         \item If $M$ is a $S$-module (resp. $R$-algebra), define its \textit{Weil restriction} (or \textit{restriction of scalars}) from $S$ to $R$ as the $R$-module (resp. $R$-algerba) $M_R=\mathrm{Res}_{S/R} M$ with the same underlying group (resp. ring) as $M$ with scalar multiplication given by $rm=\varphi(r)m$ for $r\in R$ and $m\in M$ where $\varphi:R\rightarrow S$ is the structure map of $S$. Define the \textit{Weil restriction functor} $(-)_R=\mathrm{Res}_{S/R}:\mathbf{Mod}_{S}\rightarrow \mathbf{Mod}_{R}$ (resp. $(-)_R=\mathrm{Res}_{S/R}:\mathbf{Alg}_{S}\rightarrow \mathbf{Alg}_{R}$), which maps the morphisms to themselves forgetfully. 
     \end{enumerate}
 \end{definition}
-\begin{definition}Recall that we say a $R$-algebra $S$ is finite projective if there exists a $R$-module $T$ such that $S\oplus T$ is a free module of finite rank. Let $G$ be an algebraic group over $R$ and $S$ a finite projective $R$-algebra. Define
-    \begin{enumerate}
-        \item \textit{base change functor} $(-)_S:\mathbf{GAlg}_R\rightarrow \mathbf{GAlg}_S$ given by $G_S(T)=G(T)$ for any $S$-algebra $T$, and maps morphisms to themselves forgetfully;
-        \item \textit{Weil restriction functor} $(-)_R:\mathbf{GAlg}_S\rightarrow \mathbf{GAlg}_R$ given by $G_R(T)=G(T\otimes_R S)$ for any $R$-algebra $T$, in other words, $G_R=G\circ (-\otimes_R S)$, and for a morphism $\varphi:G\rightarrow H$ of algebraic groups over $S$, the induced map $\varphi_R:G_R\rightarrow H_R$ is $(\varphi_R)_T=\varphi_{T\otimes_R S}$ for each $R$-algebra $T$. 
-    \end{enumerate}
-\end{definition}
+
 \begin{convention}Let $X=(x_{i,j})_{1\le i,j\le n}$ be a $n$-by-$n$ matrix of indeterminants. For any ring $R$, let
     \[R[X]:=R[x_{1,1},x_{1,2},\dots,x_{n,n}]\]
     Abusing notation, identify $X=(x_{i,j})_{1\le i,j\le n}\in \mathrm M_n(R[X])$. For any $F=(f_{i,j})_{1\le i,j\le n}\in\mathrm M_n(R[X])$, denote $\det F:=\sum_{\sigma\in \mathrm S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n f_{i,\sigma(i)}\in R[X]$ and $\mathrm{tr}(A):=\sum_{i=1}^n f_{i,i}\in R[X]$. 
@@ -702,11 +700,12 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \[b_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{x_1y_1+\cdots+x_py_p}_p-\overbrace{(x_{p+1}y_{p+1}+\cdots+x_ny_n)}^q\]
     where $b_{n,0}$ is just the standard inner product. 
 \end{example}
+\iffalse
 \begin{example}Let $V=W\oplus W^{\vee}$ over a ring $R$ where $W=R^n$ is the free module of rank $n$, then the \textit{hyperbolic form} $B:V\times V\rightarrow R$ given by $((v,\phi),(w,\psi))\mapsto \phi(w)+\psi(v)$ is an orthogonal form.
 \end{example}
 \begin{example}Let $L\mid K$ be a finite separable field extension. The form $\mathrm{Tr}_{L/K}:L\times L\rightarrow K$ given by $(a,b)\mapsto \mathrm{tr}_{L/K}(ab)$, where $\mathrm{tr}_{L/K}$ is the field trace, is an orthogonal form called the \textit{trace form}.
 \end{example}
-
+\fi
 \begin{example}Recall that a quadratic form on a free module $V=R^n$ of rank $n$ over $R$ is a quadratic homogeneous polynomial map $q:V\rightarrow R$ 
     \[q(x_1,\dots,x_n)=\sum_{1\le i,j\le n}a_{i,j}x_ix_j\]
     Recall the polar form $b_q:V\times V\rightarrow R$ of a quadratic form $q:V\rightarrow R$ is the symmetric bilinear form 
@@ -737,10 +736,11 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \[h_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{\sigma(x_1)y_1+\cdots+\sigma(x_p)y_p}_p-\overbrace{(\sigma(x_{p+1})y_{p+1}+\cdots+\sigma(x_n)y_n)}^q\]
     where $h_{n,0}$ is just known as the \textit{standard $\sigma$-Hermitian form}. 
 \end{example}
+\iffalse
 \begin{example}Let $E$ be a quadratic étale algebra over $R$ with involution $\sigma:E\rightarrow E$. The \textit{hyperbolic $\sigma$-Hermitian form} on $V=E^2$ is the $\sigma$-Hermitian form $h_H:V\times V\rightarrow E$ given by 
     \[h_{H}((a,b),(c,d))=\sigma(a)d+\sigma(b)c\]
     for all $(a,b),(c,d)\in V$. 
-\end{example}
+\end{example}\fi
 
 \begin{definition}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with an ordered basis $e=(e_1,\dots,e_n)$. 
     Let $B:V\times V\rightarrow R$ be a form, then the \textit{Gram matrix} of $B$ with respect to ordered basis $e$, is the matrix $[B]_e:=(B(e_i,e_j))_{1\le i,j\le n}\in \mathrm M_n(R)$. 
@@ -918,12 +918,20 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 
 \begin{remark}Another important family of algebraic groups is the \textit{exceptional groups}: $\mathrm G_2, \mathrm F_4, \mathrm E_6, \mathrm E_7$, and $\mathrm E_8$, which we will not define until later. Some other commonly seen algebraic groups which we will not talk about in detail are: $\mathrm{Pin}, \mathrm{Spin}, \mathrm{GPin}$, and $\mathrm{GSpin}$.
 \end{remark}
+\begin{definition}
+    \label{def:base}
+    Recall that we say a $R$-algebra $S$ is finite projective if there exists a $R$-module $T$ such that $S\oplus T$ is a free module of finite rank. Let $G$ be an algebraic group over $R$ and $S$ a finite projective $R$-algebra. Define
+    \begin{enumerate}
+        \item \textit{base change functor} $(-)_S:\mathbf{GAlg}_R\rightarrow \mathbf{GAlg}_S$ given by $G_S(T)=G(T)$ for any $S$-algebra $T$, and maps morphisms to themselves forgetfully;
+        \item \textit{Weil restriction functor} $(-)_R:\mathbf{GAlg}_S\rightarrow \mathbf{GAlg}_R$ given by $G_R(T)=G(T\otimes_R S)$ for any $R$-algebra $T$, in other words, $G_R=G\circ (-\otimes_R S)$, and for a morphism $\varphi:G\rightarrow H$ of algebraic groups over $S$, the induced map $\varphi_R:G_R\rightarrow H_R$ is $(\varphi_R)_T=\varphi_{T\otimes_R S}$ for each $R$-algebra $T$. 
+    \end{enumerate}
+\end{definition}
+\begin{remark}The assumption of finite projectiveness in \Cref{def:base} is to ensure the base changed or restricted $R$-group functors are indeed representable. 
+\end{remark}
 
 \newpage 
 
 
-\section{Basic Properties of Algebraic Groups}
-sheaf of regular functions
 dimension
 connectedness, irreducibility
 products, semidirect product, identity component, open/closed subgroups, actions, kernel, image, generators
