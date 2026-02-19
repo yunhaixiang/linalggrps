@@ -674,31 +674,29 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 
 
 \begin{definition}Let $V$ be a module over an arbitrary ring $R$. Suppose $\sigma:R\rightarrow R$ is a ring map satisfying $\sigma\circ\sigma=\mathrm{id}$, which we call an \textit{involution} map. A function
-    \[B:V\times V\rightarrow R\]
-    is called \textit{form} on $V$, and is said to be
+    \[b:V\times V\rightarrow R\]
+    is called a \textit{form} on $V$, and is said to be
     \begin{enumerate}
-        \item \textit{left linear} if $B(rv+u,w)=rB(v,w)+B(u,w)$ for all $r\in R$ and $u,v,w\in V$,
-        \item \textit{left $\sigma$-linear} if $B(rv+u,w)=\sigma(r)B(v,w)+B(u,w)$ for all $r\in R$ and $u,v,w\in V$,
-        \item \textit{right linear} if $B(v,rw+u)=rB(v,w)+B(v,u)$ for all $r\in R$ and $u,v,w\in V$,
+        \item \textit{left linear} if $b(rv+u,w)=rb(v,w)+b(u,w)$ for all $r\in R$ and $u,v,w\in V$,
+        \item \textit{left $\sigma$-linear} if $b(rv+u,w)=\sigma(r)b(v,w)+b(u,w)$ for all $r\in R$ and $u,v,w\in V$,
+        \item \textit{right linear} if $b(v,rw+u)=rb(v,w)+b(v,u)$ for all $r\in R$ and $u,v,w\in V$,
         \item \textit{bilinear} if it is left linear and right linear,
         \item \textit{$\sigma$-sesquilinear} if it is left $\sigma$-linear and right linear,
-        \item \textit{symmetric} if $B(v, w)=B(w, v)$ for all $v,w\in V$,
-        \item \textit{$\sigma$-symmetric} if $B(v, w)=\sigma(B(w, v))$ for all $v,w\in V$,
-        \item \textit{alternating} if $B(v, v)=0$ for all $v\in V$,
-        \item \textit{nondegenerate} if $B(v, w)=0$ for all $v\in V$ implies $w=0$,
+        \item \textit{symmetric} if $b(v, w)=b(w, v)$ for all $v,w\in V$,
+        \item \textit{$\sigma$-symmetric} if $b(v, w)=\sigma(b(w, v))$ for all $v,w\in V$,
+        \item \textit{alternating} if $b(v, v)=0$ for all $v\in V$,
+        \item \textit{nondegenerate} if $b(v, w)=0$ for all $v\in V$ implies $w=0$,
         \item \textit{orthogonal} if it is a bilinear, symmetric, and nondegenerate,
         \item \textit{symplectic} if it is a bilinear, alternating, and nondegenerate,
         \item \textit{$\sigma$-Hermitian} if it is $\sigma$-sesquilinear, $\sigma$-symmetric, and nondegenerate.
     \end{enumerate}
 \end{definition}
-\begin{definition}Let $B_1:V\times V\rightarrow R$ and $B_2:V\times V\rightarrow R$ be forms on a module $V$ over an arbitrary ring $R$. We say $B_1$ is \textit{equivalent} (or \textit{isometric}) to $B_2$ if there exists an invertible linear map $P:V\rightarrow V$, which we call an \textit{isometry}, satisfying $B_1(v,w)=B_2(P(v),P(w))$ for all $v,w\in V$. 
+\begin{definition}Let $b_1:V\times V\rightarrow R$ and $b_2:V\times V\rightarrow R$ be forms on a module $V$ over an arbitrary ring $R$. We say $b_1$ is \textit{equivalent} (or \textit{isometric}) to $b_2$ if there exists an invertible linear map $P:V\rightarrow V$, which we call an \textit{isometry}, satisfying $b_1(v,w)=b_2(P(v),P(w))$ for all $v,w\in V$. 
 \end{definition}
 
-\begin{example}Let $V=R^n$ be the free module of rank $n$ over a ring $R$. The standard inner product $\langle\cdot,\cdot\rangle:V\times V\rightarrow R$ given by $\langle v,w\rangle=v_{1}w_{1}+\cdots+v_nw_n$ for each $v,w\in V$, is an orthogonal form.
-\end{example}
 \begin{example}Let $V=R^n$ be the free module of rank $n$ over a ring $R$. The \textit{standard orthogonal form} of signature $(p,q)$ on $V$, where $p,q\in\mathbb N$ such that $p+q=n$, is 
     \[b_{p,q}:V\times V\rightarrow E\qquad (x,y)\mapsto \underbrace{x_1y_1+\cdots+x_py_p}_p-\overbrace{(x_{p+1}y_{p+1}+\cdots+x_ny_n)}^q\]
-    where $b_{n,0}$ is just the standard inner product. 
+    where $b_{n,0}=\langle\cdot,\cdot\rangle$ is the \textit{standard inner product}. 
 \end{example}
 \iffalse
 \begin{example}Let $V=W\oplus W^{\vee}$ over a ring $R$ where $W=R^n$ is the free module of rank $n$, then the \textit{hyperbolic form} $B:V\times V\rightarrow R$ given by $((v,\phi),(w,\psi))\mapsto \phi(w)+\psi(v)$ is an orthogonal form.
@@ -710,8 +708,8 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     \[q(x_1,\dots,x_n)=\sum_{1\le i,j\le n}a_{i,j}x_ix_j\]
     Recall the polar form $b_q:V\times V\rightarrow R$ of a quadratic form $q:V\rightarrow R$ is the symmetric bilinear form 
     \[b_q(x,y)=q(x+y)-q(x)-q(y)\]
-    and we say $q$ is nonsingular if $b_q$ is nondegenerate. Suppose $2$ is invertible in $R$, then we can define the polarization $B_q=\frac{1}{2}b_q$ of $q$, which satisfies $q(x)=B_q(x,x)$. 
-    Therefore, when $2$ is invertible in $R$, a quadratic form $q$ corresponds uniquely to a symmetric bilinear form $B_q$. 
+    and we say $q$ is nonsingular if $b_q$ is nondegenerate. Suppose $2$ is invertible in $R$, then we can define the polarization $b=\frac{1}{2}b_q$ of $q$, which satisfies $q(x)=b(x,x)$. 
+    Therefore, when $2$ is invertible in $R$, a quadratic form corresponds uniquely to a symmetric bilinear form. 
 \end{example}
 \begin{example}Let $V=R^{2n}$ be the free module of rank $2n$ over a ring $R$, the form $\omega:V\times V\rightarrow R$ given by $\omega(x,y)=x^{\mathrm T}Jy$, where $J\in \mathrm M_{2n}(R)$ is the \textit{standard symplectic matrix} 
     \[J:=\begin{pmatrix}0&I\\ -I& 0\end{pmatrix}\]
@@ -743,83 +741,64 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \end{example}\fi
 
 \begin{definition}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with an ordered basis $e=(e_1,\dots,e_n)$. 
-    Let $B:V\times V\rightarrow R$ be a form, then the \textit{Gram matrix} of $B$ with respect to ordered basis $e$, is the matrix $[B]_e:=(B(e_i,e_j))_{1\le i,j\le n}\in \mathrm M_n(R)$. 
+    Let $b:V\times V\rightarrow R$ be a form, then the \textit{Gram matrix} of $b$ with respect to ordered basis $e$, is the matrix $[b]_e:=(b(e_i,e_j))_{1\le i,j\le n}\in \mathrm M_n(R)$. 
 \end{definition}
-\iffalse
-\begin{proposition}\label{prop:gram}Let $V=R^n$ be the free module of rank $n$ over a ring $R$ with an ordered basis $e$. Suppose $B:V\times V\rightarrow R$ is a form. Let $\sigma:R\rightarrow R$ be an involution. We have the following. 
+
+\begin{proposition}Let $V=R^n$ be a free $R$-module of rank $n$, let $e$ be an ordered basis of $V$, and let $b:V\times V\rightarrow R$ be an orthogonal form, then
     \begin{enumerate}
-        \item $[B]_e^{*}=[B]_e$ iff $B$ is $\sigma$-symmetric, given $B$ is $\sigma$-sesquilinear,
-        \item $[B]_e^{\mathrm{T}}=[B]_e$ iff $B$ is symmetric, given $B$ is bilinear,
-        \item $[B]_e^{\mathrm{T}}=-[B]_e$ iff $B$ is bilinear and alternating, given $\frac{1}{2}\in R$,
-        \item $B(x,y)=[x]_e^{*} [B]_e[y]_e$ for all $x,y\in V$, iff $B$ is $\sigma$-sesquilinear,
-        \item $B(x,y)=[x]_e^{\mathrm{T}} [B]_e[y]_e$ for all $x,y\in V$, iff $B$ is bilinear,
-        \item $[B]_{Pe}=[P]^{*}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is $\sigma$-sesquilinear,
-        \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$, iff $B$ is bilinear,
-        \item $B$ is nondegenerate iff $[B]_e$ is invertible, given $B$ is bilinear or $\sigma$-sesquilinear,
-    \end{enumerate}
-    where $M^*:=(\sigma(m_{j,i}))\in M_{k\times \ell}(R)$ denotes the $\sigma$-conjugate transpose of $M=(m_{i,j})\in M_{\ell\times k}(R)$.
-    \begin{proof}We will only prove
-        \begin{enumerate}
-            \item a
-        \end{enumerate}
-    \end{proof}
-\end{proposition}
-\fi
-\begin{proposition}Let $V=R^n$ be a free $R$-module of rank $n$, let $e$ be an ordered basis of $V$, and let $B:V\times V\rightarrow R$ be an orthogonal form, then
-    \begin{enumerate}
-        \item $B(x,y)=[x]_{e}^\mathrm{T} [B]_e [y]_e$ for all $x,y\in V$,
-        \item $[B]_e^{\mathrm{T}}=[B]_e$,
-        \item  $[B]_e$ is invertible,
-        \item $[B]_{Pe}=[P]^{\mathrm{T}}_e[B]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$.
+        \item $b(x,y)=[x]_{e}^\mathrm{T} [b]_e [y]_e$ for all $x,y\in V$,
+        \item $[b]_e^{\mathrm{T}}=[b]_e$,
+        \item  $[b]_e$ is invertible,
+        \item $[b]_{Pe}=[P]^{\mathrm{T}}_e[b]_e[P]_e$ for any invertible linear map $P:V\rightarrow V$.
     \end{enumerate}
     \begin{proof}Left as exercise.
     \end{proof}
 \end{proposition}
 
 
-\begin{definition}Let $R$ be an arbitrary ring, suppose $S$ is a $R$-algebra, $V$ is a module over $R$, and $B:V\times V\rightarrow R$ a bilinear form on $V$. 
-    The \textit{base change} of $B$ from $R$ to $S$ is the bilinear form 
-    \[B_S:V_S\times V_S\rightarrow S\qquad (v\otimes r,w\otimes s)\mapsto B(v,w)rs \]
+\begin{definition}Let $R$ be an arbitrary ring, suppose $S$ is a $R$-algebra, $V$ is a module over $R$, and $b:V\times V\rightarrow R$ a bilinear form on $V$. 
+    The \textit{base change} of $b$ from $R$ to $S$ is the bilinear form 
+    \[b_S:V_S\times V_S\rightarrow S\qquad (v\otimes r,w\otimes s)\mapsto b(v,w)rs \]
     on $V_S=V\otimes_RS$, extended bilinearly. 
 \end{definition}
 
 
 
-\begin{example}Let $V$ be a free $R$-module of rank $n$ with an orthogonal form $B:V\times V\rightarrow R$. Here are some more examples of algebraic groups over $R$.
+\begin{example}Let $V$ be a free $R$-module of rank $n$ with an orthogonal form $b:V\times V\rightarrow R$. Here are some more examples of algebraic groups over $R$.
     \begin{enumerate}
-        \item the \textit{orthogonal group} of the pair $(V,B)$
-        \[\mathrm{O}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \item the \textit{orthogonal group} of the pair $(V,b)$
+        \[\mathrm{O}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{O}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,B_S(gv,gw)=B_S(v,w)\}\]
+        \[\mathrm{O}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,b_S(gv,gw)=b_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{O}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[B]_eX-[B]_e)}\right)\]
-        where $e$ is an ordered basis of $V$, on which $\mathrm O_{V,B}$ does not depend,
-        \item the \textit{special orthogonal group} of the pair $(V,B)$
-        \[\mathrm{SO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\widetilde{\mathrm{O}_{V,b}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[b]_eX-[b]_e)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm O_{V,b}$ does not depend,
+        \item the \textit{special orthogonal group} of the pair $(V,b)$
+        \[\mathrm{SO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{SO}_{V,B}(S)=\{g\in \mathrm O_{V,B}(S):\det(g)=1\}\]
+        \[\mathrm{SO}_{V,b}(S)=\{g\in \mathrm O_{V,b}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{SO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[B]_eX-[B]_e, \det X-1)}\right)\]
-        where $e$ is an ordered basis of $V$, on which $\mathrm {SO}_{V,B}$ does not depend,
+        \[\widetilde{\mathrm{SO}_{V,b}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[b]_eX-[b]_e, \det X-1)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm {SO}_{V,b}$ does not depend,
         
-        \item the \textit{orthogonal semilitude group} of the pair $(V,B)$
-        \[\mathrm{GO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \item the \textit{orthogonal semilitude group} of the pair $(V,b)$
+        \[\mathrm{GO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{GO}_{V,B}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V_S,\,B_S(gv,gw)=\lambda B_S(v,w)\}\]
+        \[\mathrm{GO}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V_S,\,b_S(gv,gw)=\lambda b_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{GO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[B]_eX-\lambda [B]_e, \lambda\nu-1)}\right)\]
-        where $e$ is an ordered basis of $V$, on which $\mathrm{GO}_{V,B}$ does not depend,
+        \[\widetilde{\mathrm{GO}_{V,b}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[b]_eX-\lambda [b]_e, \lambda\nu-1)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{GO}_{V,b}$ does not depend,
         
-        \item the \textit{special orthogonal semilitude group} of the pair $(V,B)$
-        \[\mathrm{GSO}_{V,B}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \item the \textit{special orthogonal semilitude group} of the pair $(V,b)$
+        \[\mathrm{GSO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{GSO}_{V,B}(S)=\{g\in \mathrm{GO}_{V,B}(S):\det(g)=1\}\]
+        \[\mathrm{GSO}_{V,b}(S)=\{g\in \mathrm{GO}_{V,b}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
-        \[\widetilde{\mathrm{GSO}_{V,B}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[B]_eX-\lambda [B]_e, \det(X)-1,\lambda\nu-1)}\right)\]
-        where $e$ is an ordered basis of $V$, on which $\mathrm{GSO}_{V,B}$ does not depend,
+        \[\widetilde{\mathrm{GSO}_{V,b}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[b]_eX-\lambda [b]_e, \det(X)-1,\lambda\nu-1)}\right)\]
+        where $e$ is an ordered basis of $V$, on which $\mathrm{GSO}_{V,b}$ does not depend,
     \end{enumerate}
 \end{example}
-\begin{remark}Let $V=R^n$ be the free $R$-module of rank $n$ and $B=\langle\cdot,\cdot \rangle$ the standard inner product, then we denote $\mathrm O_n:=\mathrm O_{V,B}$, $\mathrm{SO}_n:=\mathrm{SO}_{V,B}$, $\mathrm{GO}_n:=\mathrm{GO}_{V,B}$, and $\mathrm{GSO}_n:=\mathrm{GSO}_{V,B}$. 
+\begin{remark}Let $V=R^n$ be the free $R$-module of rank $n$ and $b=\langle\cdot,\cdot \rangle$ the standard inner product, then we denote $\mathrm O_n:=\mathrm O_{V,b}$, $\mathrm{SO}_n:=\mathrm{SO}_{V,b}$, $\mathrm{GO}_n:=\mathrm{GO}_{V,b}$, and $\mathrm{GSO}_n:=\mathrm{GSO}_{V,b}$. 
 \end{remark}
 
 \begin{proposition}Let $V=R^{2n}$ be a free $R$-module of rank $2n$, let $e$ be an ordered basis of $V$, and let $\omega:V\times V\rightarrow R$ be an symplectic form, then
@@ -915,8 +894,13 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{remark}The choice of $\omega$ for a quadratic étale $R$-algebra $E$ is not necessarily unique, but one can show that none of the groups in \Cref{ex:unitary} depend on the choice of $\omega$. 
 \end{remark}
 
+\begin{definition}
+Clifford algebra
 
-\begin{remark}Another important family of algebraic groups is the \textit{exceptional groups}: $\mathrm G_2, \mathrm F_4, \mathrm E_6, \mathrm E_7$, and $\mathrm E_8$, which we will not define until later. Some other commonly seen algebraic groups which we will not talk about in detail are: $\mathrm{Pin}, \mathrm{Spin}, \mathrm{GPin}$, and $\mathrm{GSpin}$.
+\end{definition}
+    Pin, Spin
+
+\begin{remark}Another important family of algebraic groups is the \textit{exceptional groups}: $\mathrm G_2, \mathrm F_4, \mathrm E_6, \mathrm E_7$, and $\mathrm E_8$, which we will not define until later. 
 \end{remark}
 \begin{definition}
     \label{def:base}
