@@ -7,6 +7,7 @@
 \usepackage{tikz-cd}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[nameinlink]{cleveref}
+\usepackage{caption}
 \usepackage{euscript}
 \usepackage{palatino}
 
@@ -45,7 +46,7 @@
 %%% ------------------------------------------------------------
 % --- list & link setup ----------------------------------------
 \usepackage{enumitem}   % nicer list control
-\usepackage{hyperref}   % loads after enumitem
+\captionsetup[table]{position=above,font=normalfont,labelfont=bf}
 
 % 1. How the label LOOKS in the PDF
 \setlist[enumerate,1]{label=(\textit{\roman*}), ref=\roman*}
@@ -119,6 +120,8 @@ When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,
 
 \begin{table}[ht]
 \centering
+\caption{Table of some common categories}
+\label{tab:cat}
 \begin{tabular}[t]{l|c|c|c}
 \textit{name of category} & \textit{notation} & \textit{objects} & \textit{morphisms}\\
 \hline
@@ -131,10 +134,6 @@ category of topological spaces & $\mathbf{Top}$ & topological spaces & continuou
 category of vector spaces over $K$ & $\mathbf{Mod}_K$ & $K$-vector spaces & $K$-linear maps\\
 category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homomorphisms\\
 \end{tabular}
-\vspace{3mm}
-\caption{Table of some common categories}
-\vspace{-7mm}
-\label{tab:cat}
 \end{table}
 \end{example}
 \begin{convention}Unless otherwise specified, by a ring we mean a commutative unital ring, and an $R$-algebra over a ring $R$ will always mean a commutative, unital, and associative $R$-algebra. 
@@ -948,13 +947,13 @@ making the Clifford algebra a $\mathbb Z/2$-graded algebra.
 \end{remark}
 \begin{definition}
     \label{def:base}
-    Recall that we say a $R$-algebra $S$ is finite projective if there exists a $R$-module $T$ such that $S\oplus T$ is a free module of finite rank. Let $G$ be an algebraic group over $R$ and $S$ a finite projective $R$-algebra. Define
+    Let $G$ be an algebraic group over $R$ and $S$ a finite projective $R$-algebra. Define
     \begin{enumerate}
         \item \textit{base change functor} $(-)_S:\mathbf{GAlg}_R\rightarrow \mathbf{GAlg}_S$ given by $G_S(T)=G(T)$ for any $S$-algebra $T$, and maps morphisms to themselves forgetfully;
         \item \textit{Weil restriction functor} $(-)_R:\mathbf{GAlg}_S\rightarrow \mathbf{GAlg}_R$ given by $G_R(T)=G(T\otimes_R S)$ for any $R$-algebra $T$, in other words, $G_R=G\circ (-\otimes_R S)$, and for a morphism $\varphi:G\rightarrow H$ of algebraic groups over $S$, the induced map $\varphi_R:G_R\rightarrow H_R$ is $(\varphi_R)_T=\varphi_{T\otimes_R S}$ for each $R$-algebra $T$. 
     \end{enumerate}
 \end{definition}
-\begin{remark}The assumption of finite projectiveness in \Cref{def:base} is to ensure the base changed or restricted group functors are indeed algebraic groups. 
+\begin{remark}Recall that we say a $R$-algebra $S$ is finite projective if there exists a $R$-module $T$ such that $S\oplus T$ is a free module of finite rank. The assumption of finite projectiveness in \Cref{def:base} is to ensure the base changed or restricted group functors are indeed algebraic groups. 
 \end{remark}
 \begin{example}
 \end{example}

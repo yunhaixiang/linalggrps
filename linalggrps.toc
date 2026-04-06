@@ -11,4 +11,4 @@
 \contentsline {section}{\tocsection {}{10}{Toric Varieties}}{19}{section.10}%
 \contentsline {section}{\tocsection {}{11}{Flag Varieties}}{19}{section.11}%
 \contentsline {section}{\tocsection {}{12}{Spherical Varieties}}{19}{section.12}%
-\contentsline {section}{\tocsection {}{}{References}}{20}{section*.2}%
+\contentsline {section}{\tocsection {}{}{References}}{20}{section*.3}%
