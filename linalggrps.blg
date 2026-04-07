@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'linalggrps.blg'
-[32] biber-darwin:340> INFO - === Mon Apr  6, 2026, 19:26:54
-[41] Biber.pm:419> INFO - Reading 'linalggrps.bcf'
-[79] Biber.pm:979> INFO - Found 1 citekeys in bib section 0
-[86] Biber.pm:4419> INFO - Processing section 0
-[91] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
-[92] bibtex.pm:1713> INFO - LaTeX decoding ...
-[96] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[123] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[124] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[124] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[124] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[124] bbl.pm:660> INFO - Writing 'linalggrps.bbl' with encoding 'UTF-8'
-[125] bbl.pm:763> INFO - Output to linalggrps.bbl
+[38] biber-darwin:340> INFO - === Tue Apr  7, 2026, 12:59:31
+[48] Biber.pm:419> INFO - Reading 'linalggrps.bcf'
+[90] Biber.pm:979> INFO - Found 1 citekeys in bib section 0
+[99] Biber.pm:4419> INFO - Processing section 0
+[105] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[106] bibtex.pm:1713> INFO - LaTeX decoding ...
+[110] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[154] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[155] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[155] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[155] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[156] bbl.pm:660> INFO - Writing 'linalggrps.bbl' with encoding 'UTF-8'
+[156] bbl.pm:763> INFO - Output to linalggrps.bbl

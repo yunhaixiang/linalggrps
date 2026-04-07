@@ -1,7 +1,9 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt,oneside]{book}
 
 % ---------- basic packages ----------
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=1.2in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb,mathrsfs}
 \usepackage{mathabx}
 \usepackage{tikz-cd}
@@ -9,7 +11,7 @@
 \usepackage[nameinlink]{cleveref}
 \usepackage{caption}
 \usepackage{euscript}
-\usepackage{palatino}
+\usepackage[sc]{mathpazo}
 
 % ---------- theorem environments ----------
 \theoremstyle{plain}
@@ -24,6 +26,10 @@
 \theoremstyle{remark}
   \newtheorem{remark}[theorem]{Remark}
   \newtheorem{convention}[theorem]{Convention}
+  \newenvironment{mathremark}[1][]%
+    {\refstepcounter{theorem}\par\medskip\noindent
+     \textbf{\if\relax\detokenize{#1}\relax\else#1 \fi\thetheorem. }\ignorespaces}%
+    {\par\medskip}
 
 % ---------- custom macros ----------
 \newcommand{\Gal}{\mathrm{Gal}}
@@ -80,18 +86,50 @@
 
 % --- Micro-typography to avoid ugly gaps without widening spaces ---
 \usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{xcolor}
 
 % ---------- metadata ----------
-\title{Linear Algebraic Groups and Representation Theory}
+\newcommand{\booktitle}{Linear Algebraic Groups}
+\title{\booktitle}
 \author{Yunhai Xiang}
 \date{\today}
 
+\definecolor{coverink}{RGB}{24, 44, 76}
+
+\newcommand{\makebookcover}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \newgeometry{top=1.2in,bottom=1.2in,left=1.1in,right=1.1in}
+    \color{coverink}
+    \centering
+    \vspace*{0.18\textheight}
+    {\fontsize{24}{30}\selectfont\bfseries
+    \booktitle\par}
+
+    \vspace{2.2cm}
+    {\Large Yunhai Xiang\par}
+
+    \vfill
+    \restoregeometry
+  \end{titlepage}
+}
+
 
 \begin{document}
-\maketitle
+
+\frontmatter
+\makebookcover
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+\chapter*{Notation}
+\addcontentsline{toc}{chapter}{Notation}
+
 \tableofcontents
 
-\newpage
+\mainmatter
+
+\chapter{Linear Algebraic Groups}
 \section{Categories and Functors}
 We start with a crash course in category theory. By a \textit{class} we mean a collection of sets, which is not necessarily a set itself, such as the class of all sets. The notion of a category generalizes the idea of a class of structures with structure perserving maps between them. 
 
@@ -114,6 +152,10 @@ When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,
 \end{definition}
 \begin{remark}It is an easy exercise to show the identity morphism for an object is unique.
 \end{remark}
+
+\begin{mathremark}[Localization of Modules]
+    Here is the content.
+\end{mathremark}
 
 
 \begin{example} In \Cref{tab:cat} we provide a list of common categories. 
@@ -514,7 +556,6 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 \end{remark}
 \begin{definition}Let $\EuScript C$ be a locally small category, we call a presheaf $\mathscr F\in \widecheck{\EuScript C}$ (resp. copresheaf $\mathscr F\in \widehat{\EuScript C}$) \textit{representable} by an object $X\in\EuScript C$ if $\mathscr H^X\cong \mathscr F$ (resp. $\mathscr H_X\cong \mathscr F$). 
 \end{definition}
-
 
 \newpage
 
@@ -985,5 +1026,15 @@ products, semidirect product, identity component, open/closed subgroups, actions
 \section{Spherical Varieties}
 
 \newpage
-\printbibliography
+
+\chapter{Lie Algebras}
+\chapter{Homogeneous Spaces}
+
+\chapter{Invariant Theory}
+
+\appendix
+\chapter{Appendix}
+
+\backmatter
+\printbibliography[heading=bibintoc,title={Bibliography}]
 \end{document}
