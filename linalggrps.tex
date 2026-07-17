@@ -1,35 +1,236 @@
-\documentclass[11pt,oneside]{book}
+\documentclass[10pt]{book}
 
 % ---------- basic packages ----------
-\usepackage[margin=1.2in]{geometry}
+\usepackage[
+  paperwidth=6in,
+  paperheight=9in,
+  inner=0.78in,
+  outer=0.68in,
+  top=0.82in,
+  bottom=0.72in,
+  headheight=13pt,
+  headsep=18pt,
+  footskip=24pt
+]{geometry}
+\raggedbottom
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amsthm,amssymb,mathrsfs}
 \usepackage{mathabx}
 \usepackage{tikz-cd}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage{xparse}
+\definecolor{linkblue}{RGB}{0, 70, 150}
+\definecolor{citegreen}{RGB}{0, 110, 70}
+\definecolor{urlmagenta}{RGB}{150, 35, 105}
+\usepackage[
+  colorlinks=true,
+  linkcolor=linkblue,
+  citecolor=citegreen,
+  urlcolor=urlmagenta
+]{hyperref}
 \usepackage[nameinlink]{cleveref}
 \usepackage{caption}
 \usepackage{euscript}
-\usepackage[sc]{mathpazo}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% ---------- book style ----------
+\linespread{1.03}
+\setlength{\parindent}{1.5em}
+\newlength{\blocksep}
+\setlength{\blocksep}{0.65\baselineskip}
+\setlength{\parskip}{\blocksep}
+\newcommand{\blockmathspacing}{%
+  \setlength{\abovedisplayskip}{\blocksep}%
+  \setlength{\belowdisplayskip}{\blocksep}%
+  \setlength{\abovedisplayshortskip}{\blocksep}%
+  \setlength{\belowdisplayshortskip}{\blocksep}%
+}
+\blockmathspacing
+\setlength{\floatsep}{\blocksep}
+\setlength{\textfloatsep}{\blocksep}
+\setlength{\intextsep}{\blocksep}
+\setlength{\abovecaptionskip}{\blocksep}
+\setlength{\belowcaptionskip}{\blocksep}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\thepage\hfill\MakeUppercase{\leftmark}}
+\fancyhead[RO]{\small\MakeUppercase{\rightmark}\hfill\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}
+  {\chaptername\ \thechapter}
+  {20pt}
+  {\Huge}
+\titlespacing*{\chapter}{0pt}{84pt}{36pt}
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\huge\bfseries}
+  {}
+  {0pt}
+  {\Huge}
+\titlespacing*{name=\chapter,numberless}{0pt}{84pt}{36pt}
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\S\thesection}
+  {0.7em}
+  {}
+\titlespacing*{\section}{0pt}{3.0ex plus 0.8ex minus 0.2ex}{1.4ex plus 0.2ex}
+\makeatletter
+\let\book@contentsline\contentsline
+\def\book@addsectionsymbol#1{%
+  \book@addsectionsymbol@i#1\@nil
+}
+\def\book@addsectionsymbol@i\numberline#1#2\@nil{%
+  \numberline{\S#1}#2%
+}
+\renewcommand*\contentsline[4]{%
+  \def\book@toclevel{#1}%
+  \def\book@sectionlevel{section}%
+  \def\book@subsectionlevel{subsection}%
+  \ifx\book@toclevel\book@sectionlevel
+    \book@contentsline{#1}{\book@addsectionsymbol{#2}}{#3}{#4}%
+  \else\ifx\book@toclevel\book@subsectionlevel
+    \book@contentsline{#1}{\book@addsectionsymbol{#2}}{#3}{#4}%
+  \else
+    \book@contentsline{#1}{#2}{#3}{#4}%
+  \fi\fi
+}
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.2em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.8em}}
+\patchcmd{\l@chapter}{\vskip 1.0em \@plus\p@}{\vskip 0.35em \@plus\p@}{}{}
+\makeatother
+
+\crefname{chapter}{Chapter}{Chapters}
+\Crefname{chapter}{Chapter}{Chapters}
+\crefname{section}{\S}{\S\S}
+\Crefname{section}{\S}{\S\S}
+\crefname{subsection}{\S}{\S\S}
+\Crefname{subsection}{\S}{\S\S}
 
 % ---------- theorem environments ----------
-\theoremstyle{plain}
+\newcommand{\theoremheadgap}{\hspace{0.5em}}
+\newtheoremstyle{bookplain}
+  {\blocksep}
+  {\blocksep}
+  {\itshape}
+  {}
+  {\bfseries}
+  {.}
+  {0.5em}
+  {\thmnumber{#2}\thmname{\theoremheadgap #1}\thmnote{ (#3)}}
+\newtheoremstyle{bookdefinition}
+  {\blocksep}
+  {\blocksep}
+  {\normalfont}
+  {}
+  {\bfseries}
+  {.}
+  {0.5em}
+  {\thmnumber{#2}\thmname{\theoremheadgap #1}\thmnote{ (#3)}}
+\newtheoremstyle{bookremark}
+  {\blocksep}
+  {\blocksep}
+  {\normalfont}
+  {}
+  {\itshape}
+  {.}
+  {0.5em}
+  {\thmnumber{#2}\thmname{\theoremheadgap #1}\thmnote{ (#3)}}
+\theoremstyle{bookplain}
   \newtheorem{theorem}{Theorem}[section]
   \newtheorem{lemma}[theorem]{Lemma}
   \newtheorem{proposition}[theorem]{Proposition}
   \newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{definition}
+\theoremstyle{bookdefinition}
   \newtheorem{definition}[theorem]{Definition}
   \newtheorem{example}[theorem]{Example}
   \newtheorem{exercise}[theorem]{Exercise}
-\theoremstyle{remark}
+\theoremstyle{bookremark}
   \newtheorem{remark}[theorem]{Remark}
   \newtheorem{convention}[theorem]{Convention}
   \newenvironment{mathremark}[1][]%
-    {\refstepcounter{theorem}\par\medskip\noindent
-     \textbf{\if\relax\detokenize{#1}\relax\else#1 \fi\thetheorem. }\ignorespaces}%
-    {\par\medskip}
+    {\refstepcounter{theorem}%
+     \begin{trivlist}%
+     \setlength{\topsep}{\blocksep}%
+     \setlength{\partopsep}{0pt}%
+     \setlength{\parsep}{0pt}%
+     \item[\hskip\labelsep\bfseries
+       \thetheorem\if\relax\detokenize{#1}\relax\else\theoremheadgap #1\fi.]%
+     \ignorespaces}%
+    {\end{trivlist}}
+\ExplSyntaxOn
+\bool_new:N \l__custom_numbered_bool
+\tl_new:N \l__custom_title_tl
+\tl_new:N \l__custom_headfont_tl
+\tl_new:N \l__custom_bodyfont_tl
+\keys_define:nn { custom }
+  {
+    title .tl_set:N = \l__custom_title_tl,
+    title .initial:n = {},
+    headfont .tl_set:N = \l__custom_headfont_tl,
+    headfont .initial:n = \bfseries,
+    bodyfont .tl_set:N = \l__custom_bodyfont_tl,
+    bodyfont .initial:n = \normalfont,
+    numbered .bool_set:N = \l__custom_numbered_bool,
+    numbered .initial:n = true,
+  }
+% Usage:
+% \begin{custom}[title=Localization of Modules,headfont=\bfseries,bodyfont=\normalfont,numbered=true]
+% \begin{custom}[title=Aside,headfont=\itshape,bodyfont=\normalfont,numbered=false]
+\NewDocumentEnvironment{custom}{ O{} }
+  {
+    \group_begin:
+    \keys_set:nn { custom } { #1 }
+    \bool_if:NT \l__custom_numbered_bool { \refstepcounter{theorem} }
+    \par\addvspace{\blocksep}
+    \noindent
+    {
+      \tl_use:N \l__custom_headfont_tl
+      \bool_if:NT \l__custom_numbered_bool { \thetheorem }
+      \tl_if_empty:NF \l__custom_title_tl
+        {
+          \bool_if:NT \l__custom_numbered_bool { \theoremheadgap }
+          \tl_use:N \l__custom_title_tl
+        }
+      .
+    }
+    \hspace{0.5em}
+    \tl_use:N \l__custom_bodyfont_tl
+    \ignorespaces
+  }
+  {
+    \par\addvspace{\blocksep}
+    \group_end:
+  }
+\ExplSyntaxOff
+\newcommand{\insideblockspacing}{\setlength{\parskip}{0pt}\blockmathspacing}
+\AtBeginEnvironment{theorem}{\insideblockspacing}
+\AtBeginEnvironment{lemma}{\insideblockspacing}
+\AtBeginEnvironment{proposition}{\insideblockspacing}
+\AtBeginEnvironment{corollary}{\insideblockspacing}
+\AtBeginEnvironment{definition}{\insideblockspacing}
+\AtBeginEnvironment{example}{\insideblockspacing}
+\AtBeginEnvironment{exercise}{\insideblockspacing}
+\AtBeginEnvironment{remark}{\insideblockspacing}
+\AtBeginEnvironment{convention}{\insideblockspacing}
+\AtBeginEnvironment{mathremark}{\insideblockspacing}
+\AtBeginEnvironment{custom}{\insideblockspacing}
+\AtBeginEnvironment{proof}{\insideblockspacing\setlength{\topsep}{\blocksep}}
+\AtBeginEnvironment{enumerate}{\insideblockspacing}
+\AtBeginEnvironment{itemize}{\insideblockspacing}
+\AtBeginEnvironment{description}{\insideblockspacing}
+\AtBeginEnvironment{axioms}{\insideblockspacing}
+\AtBeginEnvironment{tabular}{\insideblockspacing}
+\AtBeginEnvironment{table}{\insideblockspacing}
 
 % ---------- custom macros ----------
 \newcommand{\Gal}{\mathrm{Gal}}
@@ -46,21 +247,37 @@
   style=alphabetic,  % e.g. [Bor91]
   sorting=nyt        % name–year–title ordering in the bibliography
 ]{biblatex}
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
 
 % Your .bib file — change the file name if you like
 \addbibresource{references.bib}
 %%% ------------------------------------------------------------
 % --- list & link setup ----------------------------------------
 \usepackage{enumitem}   % nicer list control
-\captionsetup[table]{position=above,font=normalfont,labelfont=bf}
+\captionsetup[table]{position=above,font=normalfont,labelfont=bf,skip=\blocksep}
 
 % 1. How the label LOOKS in the PDF
+\setlist{topsep=\blocksep,itemsep=\blocksep,parsep=0pt,partopsep=0pt}
 \setlist[enumerate,1]{label=(\textit{\roman*}), ref=\roman*}
+\newlist{axioms}{enumerate}{1}
+\setlist[axioms]{
+  label=(C\arabic*),
+  ref=C\arabic*,
+  topsep=\blocksep,
+  itemsep=\blocksep,
+  parsep=0pt,
+  partopsep=0pt
+}
+\crefname{axiomsi}{axiom}{axioms}
+\Crefname{axiomsi}{Axiom}{Axioms}
 
 % 2. How the label is STORED in the .aux (must be unique)
 \makeatletter
 %   printed        hyperlink anchor (section#.item#)
 \renewcommand*{\theHenumi}{\thesection.\arabic{enumi}}
+\renewcommand*{\theHaxiomsi}{\thesection.\arabic{theorem}.\arabic{axiomsi}}
 \makeatother
 % --------------------------------------------------------------
 % --- Language & hyphenation patterns ---
@@ -69,13 +286,25 @@
 % Let TeX consider hyphenation immediately (skip the no-hyphen pass)
 \pretolerance=-1
 % Reasonable tolerance for line badness (tweak if you see overfulls)
-\tolerance=100
+\tolerance=1800
+\emergencystretch=1.5em
 
 % Encourage hyphenation a bit more
-\hyphenpenalty=10        % default is 50 (lower = more hyphenation)
-\exhyphenpenalty=10      % after explicit hyphens
+\hyphenpenalty=0         % default is 50 (lower = more hyphenation)
+\exhyphenpenalty=0       % after explicit hyphens
 \lefthyphenmin=2
 \righthyphenmin=2
+\doublehyphendemerits=1000
+\finalhyphendemerits=500
+
+% Allow breaks in inline math at binary operators and relations.
+\binoppenalty=50
+\relpenalty=50
+\allowdisplaybreaks[3]
+
+% Allow URLs and citation-related strings to break more freely.
+\Urlmuskip=0mu plus 2mu
+\def\UrlBreaks{\do\/\do-\do.\do:\do;\do,\do?\do\&\do=\do\_\do\~\do\#\do\%}
 
 % --- Make spaces less rubbery (reduce stretch/shrink) ---
 % Works across font changes (LaTeX 2020+):
@@ -86,7 +315,6 @@
 
 % --- Micro-typography to avoid ugly gaps without widening spaces ---
 \usepackage[protrusion=true,expansion=true]{microtype}
-\usepackage{xcolor}
 
 % ---------- metadata ----------
 \newcommand{\booktitle}{Linear Algebraic Groups}
@@ -125,131 +353,147 @@
 \chapter*{Notation}
 \addcontentsline{toc}{chapter}{Notation}
 
+\cleardoublepage
+\begingroup
+\setlength{\parskip}{0pt}
+\makeatletter
+\let\standardcontentsline\book@contentsline
+\makeatother
 \tableofcontents
+\let\contentsline\standardcontentsline
+\endgroup
 
 \mainmatter
 
-\chapter{Linear Algebraic Groups}
-\section{Categories and Functors}
-We start with a crash course in category theory. By a \textit{class} we mean a collection of sets, which is not necessarily a set itself, such as the class of all sets. The notion of a category generalizes the idea of a class of structures with structure perserving maps between them. 
+\chapter{Basic Theory}
 
-\begin{definition}A \textit{category} $\EuScript C$ is the data of
+\section{Motivation}
+
+Pell's Equation
+
+\section{Categories and Functors}
+We start with a crash course in category theory. 
+
+\begin{definition}A \textit{category} $\mathscr{C}$ consists of the data of
 \begin{enumerate}
-	\item a class of \textit{objects}, also denoted as $\EuScript C$ by abuse of notation
-	\item for each pair of objects $X,Y\in \EuScript C$, a class $\mathrm{Hom}_{\EuScript C}(X,Y)$ of \textit{morphisms} from $X$ to $Y$, where by a morphism from $X$ to $Y$, denoted $f:X\rightarrow Y$, we mean a triple $(X,Y,f)$ where $X$ is called its \textit{domain}, $Y$ its \textit{codomain}, and $f$ its \textit{mapping}, abusing notation. 
-	\item for each triple of object $X,Y,Z\in\EuScript C$, a \textit{composition} function 
+	\item A class\footnote{A collection of sets, which is not necessarily a set itself, such as the class of all sets.} of \textit{objects} $\mathscr{C}$, abusing of notation;
+	\item For each pair of objects $X,Y\in \mathscr{C}$, a class $\mathrm{Hom}_{\mathscr{C}}(X,Y)$ of \textit{morphisms} from \textit{domain} $X$ to \textit{codomain} $Y$, denoted $f:X\rightarrow Y$, by which we mean triples\footnote{Morally the domain and codomain should be part of the data of a morphism, so that two morphisms are not equal if they do not share their domains and codomains.} $(X,Y,g)$ where $g$ is any set, called the \textit{graph} of $f$;
+	\item For each triple of object $X,Y,Z\in\mathscr{C}$, a \textit{composition} function 
 	\[\begin{aligned}
-        \mathrm{Hom}_{\EuScript C}(Y,Z)\times\mathrm{Hom}_{\EuScript C}(X,Y)&\rightarrow \mathrm{Hom}_{\EuScript C}(X,Z)\\
+        \mathrm{Hom}_{\mathscr{C}}(Y,Z)\times\mathrm{Hom}_{\mathscr{C}}(X,Y)&\rightarrow \mathrm{Hom}_{\mathscr{C}}(X,Z)\\
         (f,g)&\mapsto f\circ g
     \end{aligned}\]
-	such that the following axioms are satisfied
-	\begin{itemize}
-		\item \textit{identity axiom}: for each $X\in\EuScript{C}$, there exists an \textit{identity morphism} $\mathrm{id}_X\in\mathrm{Hom}_{\EuScript C}(X,X)$ such that for all $Y,Z\in\EuScript C$ and for all $f\in\mathrm{Hom}_{\EuScript C}(X,Y)$ and $g\in \mathrm{Hom}_{\EuScript C}(Z,X)$ we have \[f\circ \mathrm{id}_X=f\quad\mathrm{and}\quad\mathrm{id}_X\circ g=g\]
-		\item \textit{associativity axiom}: for each quadruple of objects $X,Y,Z,W\in \EuScript C$ and $f\in \mathrm{Hom}_{\EuScript C}(X,Y)$, $g\in \mathrm{Hom}_{\EuScript C}(Y,Z)$, and $h\in\mathrm{Hom}_{\EuScript C}(Z,W)$, we have \[(h\circ g)\circ f=h\circ (g\circ f)\]
-	\end{itemize}
 \end{enumerate}
-When the category $\EuScript C$ is clear from context, we write $\mathrm{Hom}(X,Y)$ for $\mathrm{Hom}_{\EuScript C}(X,Y)$
+such that the following axioms are satisfied
+\begin{axioms}
+	\item\label{cat:identity} \textit{Identity}: for each $X\in\mathscr{C}$, there exists an \textit{identity morphism} $$\mathrm{id}_X:X\rightarrow X$$ such that for any morphisms  $f:X\rightarrow Y$ and $g:Y\rightarrow X$, \[f\circ \mathrm{id}_X=f\quad\mathrm{and}\quad\mathrm{id}_X\circ g=g\]
+	\item\label{cat:associativity} \textit{Associativity}: for each triple of morphisms $f:X\rightarrow Y$, $g:Y\rightarrow Z$, and $h:Z\rightarrow W$, we have \[(h\circ g)\circ f=h\circ (g\circ f)\]
+\end{axioms}
 \end{definition}
-\begin{remark}It is an easy exercise to show the identity morphism for an object is unique.
-\end{remark}
+\begin{convention}
+    Write $\mathrm{Hom}(X,Y)$ for $\mathrm{Hom}_{\mathscr{C}}(X,Y)$ when clear. 
+\end{convention}
+\begin{exercise}Show that the identity morphism for an object is unique.
+\end{exercise}
 
-\begin{mathremark}[Localization of Modules]
-    Here is the content.
-\end{mathremark}
 
-
-\begin{example} In \Cref{tab:cat} we provide a list of common categories. 
+\begin{example} In \Cref{tab:cat} we provide a list of common categories which we will often reference in the future
 
 \begin{table}[ht]
 \centering
 \caption{Table of some common categories}
 \label{tab:cat}
-\begin{tabular}[t]{l|c|c|c}
-\textit{name of category} & \textit{notation} & \textit{objects} & \textit{morphisms}\\
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}[t]{c|p{0.38\textwidth}|p{0.32\textwidth}}
+\textit{Category} & \textit{Objects} & \textit{Morphisms}\\
 \hline
-category of sets &$\mathbf{Set}$ & sets & functions\\
-category of groups & $\mathbf{Grp}$ & groups & group homomorphisms\\
-category of abelian groups & $\mathbf{Ab}$ & abelian groups & group homomorphisms \\
-category of rings & $\mathbf{Ring}$ & rings & ring homomorphisms\\
-category of algebras over $R$ & $\mathbf{Alg}_R$ & $R$-algebras & $R$-algebra homomorphisms\\
-category of topological spaces & $\mathbf{Top}$ & topological spaces & continuous functions\\
-category of vector spaces over $K$ & $\mathbf{Mod}_K$ & $K$-vector spaces & $K$-linear maps\\
-category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homomorphisms\\
+$\mathsf{Set}$ & sets & functions\\
+$\mathsf{Grp}$ & groups & group maps\\
+$\mathsf{Ab}$ & abelian groups & group maps \\
+$\mathsf{Ring}$ & commutative rings & ring maps\\
+$\mathsf{Alg}_R$ & commutative associative $R$-algebras & $R$-algebra maps\\
+$\mathsf{Mod}_R$ & $R$-modules & $R$-module maps\\
+$\mathsf{Mod}_K$ & $K$-vector spaces & $K$-linear maps\\
+$\mathsf{Vect}_K$ & finite dimensional $K$-vector spaces & $K$-linear maps\\
+$\mathsf{Rep}_K(G)$ & $G$-representations over $K$ & $G$-equivariant maps\\
+$\mathsf{Top}$ & topological spaces & continuous functions\\
+$\mathsf{PCTop}$ & path-connected topological spaces & continuous functions\\
 \end{tabular}
 \end{table}
+\noindent where $R$ is a ring, $K$ is a field, and $G$ a finite group. 
 \end{example}
-\begin{convention}Unless otherwise specified, by a ring we mean a commutative unital ring, and an $R$-algebra over a ring $R$ will always mean a commutative, unital, and associative $R$-algebra. 
-\end{convention}
-\begin{definition}A \textit{subcategory} of a category $\EuScript C$ is a category $\EuScript D$ such that its objects $\EuScript D\subseteq \EuScript C$ and its morphisms $\mathrm{Hom}_{\EuScript D}(X,Y)\subseteq \mathrm{Hom}_{\EuScript C}(X,Y)$ for any $X,Y\in\EuScript D$, with the same composition function. We say $\EuScript D$ is a \textit{full subcategory} if further that  $\mathrm{Hom}_{\EuScript D}(X,Y)= \mathrm{Hom}_{\EuScript C}(X,Y)$ for any $X,Y\in\EuScript D$. 
+
+\begin{definition}Let $f:X\rightarrow Y$ be a morphism in a category, then $f$ is a 
+    \begin{enumerate}
+	\item \textit{monomorphism} if $f\circ g=f\circ h$ implies $g=h$ for any $g,h:Z\rightarrow X$,
+	\item \textit{epimorphism} if $g\circ f=h\circ f$ implies $g=h$ for any $g,h:Y\rightarrow Z$ 
+	\item \textit{split monomorphism} if there exists $g:Y\rightarrow X$ such that $g\circ f=\mathrm{id}_X$,
+	\item \textit{split epimorphism} if there exists $g:Y\rightarrow X$ such that $f\circ g=\mathrm{id}_Y$,
+	\item \textit{isomorphism} if it is a split monomorphism and a split epimorphism,
+	\item \textit{endomorphism} if $X=Y$,
+    \item \textit{automorphism} if it is an isomorphism and an endomorphism. 
+\end{enumerate}
 \end{definition}
-\begin{definition}Suppose $\EuScript C,\EuScript D$ are categories, their product category $\EuScript C\times \EuScript D$ is the category where objects are pairs $(X,Y)$ where $X\in \EuScript C$ and $Y\in \EuScript D$, and morphisms are 
+
+\begin{convention}For an object $X$ in a category $\mathscr{C}$, we will denote by $\mathrm{End}(X)=\mathrm{Hom}(X,X)$ the endomorphisms of $X$, and we will denote by $\mathrm{Aut}(X)$ the group of automorphisms of $X$. If there is an isomorphism $f:X\rightarrow Y$ in $\mathscr{C}$, we say $X$ and $Y$ are isomorphic and write $X\cong Y$. 
+\end{convention}
+\begin{remark}It's an easy exercise to show split monos (resp. split epis) are monos (resp. epis).
+    Moreover, suppose $\mathscr{C}$ is a category where one can talk about injective and surjective morphisms, in general, split mono (resp. split epi) is a strictly stronger condition than injective (resp. surjective), and injective (resp. surjective) is a strictly stronger condition than mono (resp. epi). 
+\end{remark}
+
+
+\begin{definition}
+    Let $\mathscr{C}, \mathscr{D}$ be categories, a \textit{covariant functor} (or just simply a \textit{functor}) from $\mathscr{C}$ to $\mathscr{D}$, denoted $F:\mathscr{C}\rightarrow \mathscr{D}$, is the collection of the following data
+    \begin{enumerate}
+        \item for each object $X\in\mathscr{C}$, an object $F(X)\in \mathscr{D}$
+        \item for each morphism $f:X\rightarrow Y$ in $\mathscr{C}$, a morphism $F[f]:F(X)\rightarrow F(Y)$, such that 
+        \begin{itemize}
+            \item $F[\mathrm{id}_X]=\mathrm{id}_{F(X)}$ for each $X\in\mathscr{C}$,
+            \item $F[f\circ g]=F[f]\circ F[g]$ for each $f:X\rightarrow Y$ and $g:Y\rightarrow Z$ in $\mathscr{C}$.
+        \end{itemize}
+    \end{enumerate}
+     A \textit{contravariant functor} from $\mathscr{C}$ to $\mathscr{D}$ is a covariant functor $F:\mathscr{C}^{\mathrm{op}}\rightarrow\mathscr{D}$. 
+\end{definition}
+\begin{definition}Suppose $\mathscr{C}, \mathscr{D}, \mathscr{E}$ are categories and $F:\mathscr{C}\rightarrow \mathscr{D}$ and $G:\mathscr{D}\rightarrow \mathscr{E}$ are functors, we define their \textit{composite functor} $G\circ F:\mathscr{C}\rightarrow\mathscr{E}$ as the functor that maps $X\mapsto G(F(X))$ for objects and maps the morphisms by $(G\circ F)[f]=G[F[f]]$ for each $f:X\rightarrow Y$. 
+\end{definition}
+\begin{definition}Let $\mathscr{C}$ be a category, then the \textit{identity functor} $\mathrm{id}_{\mathscr{C}}:\mathscr{C}\rightarrow \mathscr{C}$ for $\mathscr{C}$ is the functor that maps each object $X\in\mathscr{C}$ by $\mathrm{id}_{\mathscr{C}}(X)=X$ and each morphism $f:X\rightarrow Y$ by $\mathrm{id}_{\mathscr{C}}[f]=f$. 
+\end{definition}
+
+\begin{example}Here are some examples of functors in nature \label{eg:func}
+    \begin{enumerate}
+        \item the functor $\mathsf{Grp}\rightarrow \mathsf{Set}$ that maps a group to its underlying set and sends morphisms to themselves (functor that ``forget'' data such as this are called \textit{forgetful functors})
+        \item the functor $(-)^\times:\mathsf{Ring}\rightarrow\mathsf{Grp}$ which sends a ring $R$ to its multiplicative group of units, and sends a morphism of rings to its restriction on the groups of units,
+        \item the functor $\mathrm{GL}_n(-):\mathsf{Ring}\rightarrow\mathsf{Grp}$ which sends a ring $R$ to $\mathrm{GL}_n(R)$ the group of invertible matrices in $R$, and send a morphism to the obvious entry-wise group homomorphism. 
+        \item the functor $(-\otimes_R M):\mathsf{Mod}_R\rightarrow \mathsf{Mod}_R$ for an $R$-module $M$, which sends a $R$-module $N$ to $N\otimes_R M$ and a morphism $f:N\rightarrow P$ to $f\otimes \mathrm{id}_M$,
+        \item the contravariant functor $(-)^*:\mathsf{Mod}_R^{\mathrm{op}}\rightarrow \mathsf{Mod}_R$ for a ring $R$ which sends an $R$-module $M$ to its dual module $M^*$, and a morphism $f^{\mathrm{op}}:M\rightarrow N$ to $f^*:N^*\rightarrow M^*$ by $g\mapsto g\circ f$, 
+        \item the functor $\pi_1(-):\mathsf{PCTop}\rightarrow\mathsf{Grp}$ where $\mathsf{PCTop}$ is the full subcategory of $\mathsf{Top}$ of path connected spaces, which sends a space $X$ to its fundamental group $\pi_1(X)$ and a continuous map $f:X\rightarrow Y$ to its induced map on fundamental groups $f_*:\pi_1(X)\rightarrow \pi_1(Y)$. 
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Define the \textit{opposite category} $\mathscr{C}^{\mathrm{op}}$ of a category $\mathscr{C}$ to be the category with the same objects as $\mathscr{C}$ but with its morphisms $\mathrm{Hom}_{\mathscr{C}^{\mathrm{op}}}(X,Y)=\mathrm{Hom}_{\mathscr{C}}(Y,X)$ for $X,Y\in \mathscr{C}^{\mathrm{op}}$.
+    For each $f:X\rightarrow Y$ in $\mathscr{C}$, we denote by $f^{\mathrm{op}}:Y\rightarrow X$ the corresponding \textit{opposite morphism} in $\mathscr{C}^{\mathrm op}$, that is, it has the same mapping as $f$, but has its domain and codomain swapped. 
+\end{definition}
+
+\begin{definition}A \textit{subcategory} of a category $\mathscr{C}$ is a category $\mathscr{D}$ such that its objects $\mathscr{D}\subseteq \mathscr{C}$ is a subcollection, its morphisms $\mathrm{Hom}_{\mathscr{D}}(X,Y)\subseteq \mathrm{Hom}_{\mathscr{C}}(X,Y)$ for any $X,Y\in\mathscr{D}$, and the composition function of $\mathscr{D}$ is the restriction of that of $\mathscr{C}$. We say $\mathscr{D}$ is a \textit{full subcategory} if further that  $\mathrm{Hom}_{\mathscr{D}}(X,Y)= \mathrm{Hom}_{\mathscr{C}}(X,Y)$ for any $X,Y\in\mathscr{D}$. 
+\end{definition}
+\begin{definition}Suppose $\mathscr{C},\mathscr{D}$ are categories, their product category $\mathscr{C}\times \mathscr{D}$ is the category where objects are pairs $(X,Y)$ where $X\in \mathscr{C}$ and $Y\in \mathscr{D}$, and morphisms are 
     \[\mathrm{Hom}((X_1,Y_1),(X_2,Y_2))=\mathrm{Hom}(X_1,X_2)\times \mathrm{Hom}(Y_1,Y_2)\]
     with element-wise composition. 
 \end{definition}
 
 
-\begin{definition}Let $f:X\rightarrow Y$ be a morphism in a category then we say $f$ is a 
-    \begin{enumerate}
-	\item \textit{monomorphism} or \textit{mono} if $f\circ g=f\circ h$ implies $g=h$ for any $g,h:Z\rightarrow X$,
-	\item \textit{epimorphism} or \textit{epi} if $g\circ f=h\circ f$ implies $g=h$ for any $g,h:Y\rightarrow Z$ 
-	\item \textit{split monomorphism} or \textit{split mono} if there exists $g:Y\rightarrow X$ such that $g\circ f=\mathrm{id}_X$,
-	\item \textit{split epimorphism} or \textit{split epi} if there exists $g:Y\rightarrow X$ such that $f\circ g=\mathrm{id}_Y$,
-	\item \textit{bimorphism} if it's both a monomorphism and an epimorphism,
-	\item \textit{isomorphism} if it's both a split monomorphism and a split epimorphism,
-	\item \textit{endomorphism} if $X=Y$,
-    \item \textit{automorphism} if it's both an isomorphism and an endomorphism. 
-\end{enumerate}
-\end{definition}
-
-\begin{convention}For an object $X$ in a category $\EuScript C$, we will denote by $\mathrm{End}(X)=\mathrm{Hom}(X,X)$ the endomorphisms of $X$, and we will denote by $\mathrm{Aut}(X)$ the group of automorphisms of $X$. If there is an isomorphism $f:X\rightarrow Y$ in $\EuScript C$, we say $X$ and $Y$ are isomorphic and write $X\cong Y$. 
-\end{convention}
-\begin{remark}It's an easy exercise to show split monos (resp. split epis) are monos (resp. epis).
-    Moreover, suppose $\EuScript C$ is a category where one can talk about injective and surjective morphisms, in general, split mono (resp. split epi) is a strictly stronger condition than injective (resp. surjective), and injective (resp. surjective) is a strictly stronger condition than mono (resp. epi). 
-\end{remark}
 
 \begin{definition}
-    Define the \textit{opposite category} $\EuScript C^{\mathrm{op}}$ of a category $\EuScript C$ to be the category with the same objects as $\EuScript C$ but with its morphisms $\mathrm{Hom}_{\EuScript C^{\mathrm{op}}}(X,Y)=\mathrm{Hom}_{\EuScript C}(Y,X)$ for $X,Y\in \EuScript C^{\mathrm{op}}$.
-    For each $f:X\rightarrow Y$ in $\EuScript C$, we denote by $f^{\mathrm{op}}:Y\rightarrow X$ the corresponding \textit{opposite morphism} in $\EuScript C^{\mathrm op}$, that is, it has the same mapping as $f$, but has its domain and codomain swapped. 
-\end{definition}
-\begin{definition}
-    Let $\EuScript C, \EuScript D$ be categories, a \textit{covariant functor} (or just simply a \textit{functor}) from $\EuScript C$ to $\EuScript D$, denoted $\mathscr{F}:\EuScript C\rightarrow \EuScript D$, is the collection of the following data
-    \begin{enumerate}
-        \item for each object $X\in\EuScript C$, an object $\mathscr F(X)\in \EuScript D$
-        \item for each morphism $f:X\rightarrow Y$ in $\EuScript C$, a morphism $\mathscr F[f]:\mathscr F(X)\rightarrow \mathscr F(Y)$, such that 
-        \begin{itemize}
-            \item $\mathscr F[\mathrm{id}_X]=\mathrm{id}_{\mathscr F(X)}$ for each $X\in\EuScript C$,
-            \item $\mathscr F[f\circ g]=\mathscr F[f]\circ \mathscr F[g]$ for each $f:X\rightarrow Y$ and $g:Y\rightarrow Z$ in $\EuScript C$.
-        \end{itemize}
-    \end{enumerate}
-     A \textit{contravariant functor} from $\EuScript C$ to $\EuScript D$ is a covariant functor $\mathscr F:\EuScript C^{\mathrm{op}}\rightarrow\EuScript D$. 
-\end{definition}
-\begin{definition}Suppose $\EuScript C, \EuScript D, \EuScript E$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ and $\mathscr G:\EuScript D\rightarrow \EuScript E$ are functors, we define their \textit{composite functor} $\mathscr G\circ \mathscr F:\EuScript C\rightarrow\EuScript E$ as the functor that maps $X\mapsto \mathscr G(\mathscr F(X))$ for objects and maps the morphisms by $(\mathscr G\circ \mathscr F)[f]=\mathscr G[\mathscr F[f]]$ for each $f:X\rightarrow Y$. 
-\end{definition}
-\begin{definition}Let $\EuScript C$ be a category, then the \textit{identity functor} $\mathrm{id}_{\EuScript C}:\EuScript C\rightarrow \EuScript C$ for $\EuScript C$ is the functor that maps each object $X\in\EuScript C$ by $\mathrm{id}_{\EuScript C}(X)=X$ and each morphism $f:X\rightarrow Y$ by $\mathrm{id}_{\EuScript C}[f]=f$. 
-\end{definition}
-
-\begin{example}Here are some examples of functors in nature \label{eg:func}
-    \begin{enumerate}
-        \item the functor $\mathbf{Grp}\rightarrow \mathbf{Set}$ that maps a group to its underlying set and sends morphisms to themselves (functor that ``forget'' data such as this are called \textit{forgetful functors})
-        \item the functor $(-)^\times:\mathbf{Ring}\rightarrow\mathbf{Grp}$ which sends a ring $R$ to its multiplicative group of units, and sends a morphism of rings to its restriction on the groups of units,
-        \item the functor $\mathrm{GL}_n(-):\mathbf{Ring}\rightarrow\mathbf{Grp}$ which sends a ring $R$ to $\mathrm{GL}_n(R)$ the group of invertible matrices in $R$, and send a morphism to the obvious entry-wise group homomorphism. 
-        \item the functor $(-\otimes_R M):\mathbf{Mod}_R\rightarrow \mathbf{Mod}_R$ for an $R$-module $M$, which sends a $R$-module $N$ to $N\otimes_R M$ and a morphism $f:N\rightarrow P$ to $f\otimes \mathrm{id}_M$,
-        \item the contravariant functor $(-)^*:\mathbf{Mod}_R^{\mathrm{op}}\rightarrow \mathbf{Mod}_R$ for a ring $R$ which sends an $R$-module $M$ to its dual module $M^*$, and a morphism $f^{\mathrm{op}}:M\rightarrow N$ to $f^*:N^*\rightarrow M^*$ by $g\mapsto g\circ f$, 
-        \item the functor $\pi_1(-):\mathbf{PCTop}\rightarrow\mathbf{Grp}$ where $\mathbf{PCTop}$ is the full subcategory of $\mathbf{Top}$ of path connected spaces, which sends a space $X$ to its fundamental group $\pi_1(X)$ and a continuous map $f:X\rightarrow Y$ to its induced map on fundamental groups $f_*:\pi_1(X)\rightarrow \pi_1(Y)$. 
-    \end{enumerate}
-\end{example}
-
-
-
-\begin{definition}
-    We say that the category $\EuScript C$ is \textit{locally small} if $\mathrm{Hom}(X,Y)$ is a set for all $X$ and $Y$, and \textit{small} if it is locally small and the class of objects of $\EuScript C$ is also a set. 
+    We say that the category $\mathscr{C}$ is \textit{locally small} if $\mathrm{Hom}(X,Y)$ is a set for all $X$ and $Y$, and \textit{small} if it is locally small and the class of objects of $\mathscr{C}$ is also a set. 
 \end{definition}
 
 \begin{definition}
     \label{def:hom-functors}
-    Suppose $\EuScript C$ is locally small and $X\in\EuScript C$. Define the \textit{(covariant) hom-functor} of $X$
+    Suppose $\mathscr{C}$ is locally small and $X\in\mathscr{C}$. Define the \textit{(covariant) hom-functor} of $X$
     \[\begin{aligned}
-    \mathrm{Hom}(X,-):\EuScript C&\rightarrow \mathbf{Set}\\
+    \mathrm{Hom}(X,-):\mathscr{C}&\rightarrow \mathsf{Set}\\
         Y&\mapsto \mathrm{Hom}(X,Y)\\
         (f:Y\rightarrow Z)&\mapsto (f\circ -)
     \end{aligned}
@@ -257,14 +501,14 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
     where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ maps $g\mapsto f\circ g$. The \textit{contravariant hom-functor} of $X$ is 
     \[
     \begin{aligned}
-    \mathrm{Hom}(-,X):\EuScript C^{\mathrm{op}}&\rightarrow \mathbf{Set}\\
+    \mathrm{Hom}(-,X):\mathscr{C}^{\mathrm{op}}&\rightarrow \mathsf{Set}\\
         Y&\mapsto \mathrm{Hom}(Y,X)\\
         (f^{\mathrm{op}}:Z\rightarrow Y)&\mapsto (-\circ f)
     \end{aligned}
     \] 
     where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ maps $g\mapsto g\circ f$. The \textit{bivariate hom-functor} of $X$ is 
     \[\begin{aligned}
-        \mathrm{Hom}(-,-):\EuScript C^{\mathrm{op}}\times \EuScript C&\rightarrow \EuScript D\\
+        \mathrm{Hom}(-,-):\mathscr{C}^{\mathrm{op}}\times \mathscr{C}&\rightarrow \mathscr{D}\\
          (X,Y)&\mapsto \mathrm{Hom}(X,Y)\\
          (f^{\mathrm{op}},g):(X_1,Y_1)\rightarrow (X_2,Y_2)&\mapsto (g\circ -\circ f)
     \end{aligned}\]
@@ -272,16 +516,16 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
     $(g\circ -\circ f):\mathrm{Hom}(X_1,Y_1)\rightarrow \mathrm{Hom}(X_2,Y_2)$ maps $h\mapsto g\circ h\circ f$
 \end{definition}
 
-\begin{remark}Suppose $\EuScript C$ is locally small and $X\in\EuScript C$. We also use the notations
-    \[\mathscr H^X:=\mathrm{Hom}(X,-)\qquad \mathscr H_X:=\mathrm{Hom}(-,X)\qquad \mathscr H:=\mathrm{Hom}(-,-)\]
+\begin{remark}Suppose $\mathscr{C}$ is locally small and $X\in\mathscr{C}$. We also use the notations
+    \[h^X:=\mathrm{Hom}(X,-)\qquad h_X:=\mathrm{Hom}(-,X)\qquad h:=\mathrm{Hom}(-,-)\]
     for the covariant, contravariant, and bivariate hom-functors. 
 \end{remark}
 
-\begin{definition}Let $\EuScript I,\EuScript C$ be categories, a \textit{diagram} indexed by $\EuScript I$ in $\EuScript C$ is simply a functor $\mathscr F:\EuScript I\rightarrow \EuScript C$. We say that the diagram $\mathscr F$ \textit{commutes} if for each $X,Y\in\EuScript I$, if $f,g\in\mathrm{Hom}(X,Y)$ then $\mathscr F[f]=\mathscr F[g]$. 
+\begin{definition}Let $\mathscr{I},\mathscr{C}$ be categories, a \textit{diagram} indexed by $\mathscr{I}$ in $\mathscr{C}$ is simply a functor $F:\mathscr{I}\rightarrow \mathscr{C}$. We say that the diagram $F$ \textit{commutes} if for each $X,Y\in\mathscr{I}$, if $f,g\in\mathrm{Hom}(X,Y)$ then $F[f]=F[g]$. 
 \end{definition}
 
 
-\begin{example}We represent a diagram $\mathscr F:\EuScript I\rightarrow \EuScript C$ as a directed multigraph in the same shape as the index category $\EuScript I$, and label the vertices and edges with their images of $\mathscr F$ in $\EuScript C$. For example,
+\begin{example}We represent a diagram $F:\mathscr{I}\rightarrow \mathscr{C}$ as a directed multigraph in the same shape as the index category $\mathscr{I}$, and label the vertices and edges with their images of $F$ in $\mathscr{C}$. For example,
     \[\begin{tikzcd}[sep=large]
 	A & B \\
 	C & D
@@ -292,7 +536,7 @@ category of modules over $R$ & $\mathbf{Mod}_R$ & $R$-modules & $R$-module homom
 \end{tikzcd}\]
 and this square commutes if and only if $g\circ f=e\circ h$. 
 \end{example}
-\begin{remark}Functors preserve commutative diagrams. More precisely, let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow\EuScript D$ a functor. Let $\mathscr{D}:\EuScript I\rightarrow \EuScript C$ be a commutative diagram in $\EuScript C$, then $\mathscr F\circ \mathscr D:\EuScript I\rightarrow \EuScript D$ is a commutative diagram in $\EuScript D$. 
+\begin{remark}Functors preserve commutative diagrams. More precisely, let $\mathscr{C},\mathscr{D}$ be categories and $F:\mathscr{C}\rightarrow\mathscr{D}$ a functor. Let $D:\mathscr{I}\rightarrow \mathscr{C}$ be a commutative diagram in $\mathscr{C}$, then $F\circ D:\mathscr{I}\rightarrow \mathscr{D}$ is a commutative diagram in $\mathscr{D}$. 
     This is straightforward from the definition of commutative diagrams.
 \end{remark}
 \iffalse
@@ -323,39 +567,39 @@ D \arrow[r, "k"',color=red]                & E \arrow[r, "l"',color=red]        
 This general technique is called \textit{diagram chasing}.
 \end{example}
 \fi 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and $\mathscr F,\mathscr G:\EuScript C\rightarrow \EuScript D$ be functors, a \textit{natural transformation} from $\mathscr F$ to $\mathscr G$, denoted $\varphi:\mathscr F\Rightarrow\mathscr G$, is the data of a morphism $\varphi_X:\mathscr F(X)\rightarrow\mathscr G(X)$ for each $X\in \EuScript C$ such that the following diagram commutes
+\begin{definition}Let $\mathscr{C},\mathscr{D}$ be categories, and $F,G:\mathscr{C}\rightarrow \mathscr{D}$ be functors, a \textit{natural transformation} from $F$ to $G$, denoted $\varphi:F\Rightarrow G$, is the data of a morphism $\varphi_X:F(X)\rightarrow G(X)$ for each $X\in \mathscr{C}$ such that the following diagram commutes
 \[\begin{tikzcd}[sep=large]
-	\mathscr F(X) & \mathscr G(X) \\
-	\mathscr F(Y) & \mathscr G(Y)
+	F(X) & G(X) \\
+	F(Y) & G(Y)
 	\arrow["\varphi_X", from=1-1, to=1-2]
-	\arrow["\mathscr F {[ f ]} "', from=1-1, to=2-1]
-	\arrow["\mathscr G {[ f ]}", from=1-2, to=2-2]
+	\arrow["F {[ f ]} "', from=1-1, to=2-1]
+	\arrow["G {[ f ]}", from=1-2, to=2-2]
 	\arrow["\varphi_Y"', from=2-1, to=2-2]
 \end{tikzcd}\]
-for all morphisms $f:X\rightarrow Y$ in $\EuScript C$. In other words, $\mathscr G[f]\circ \varphi_X=\varphi_Y\circ \mathscr F[f]$ for all $f:X\rightarrow Y$ in $\EuScript C$. 
-Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\varphi$ is a \textit{natural isomorphism}. 
+for all morphisms $f:X\rightarrow Y$ in $\mathscr{C}$. In other words, $G[f]\circ \varphi_X=\varphi_Y\circ F[f]$ for all $f:X\rightarrow Y$ in $\mathscr{C}$. 
+Moreover, if $\varphi_X$ is an isomorphism for each $X\in\mathscr{C}$, we say $\varphi$ is a \textit{natural isomorphism}. 
 \end{definition}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, and let $\mathscr E,\mathscr F,\mathscr G:\EuScript C\rightarrow\EuScript D$ be functors. Suppose $\varphi:\mathscr E\Rightarrow \mathscr F$ and $\psi:\mathscr F\Rightarrow \mathscr G$  are natural transformations. We define their \textit{(vertical) composition} $\psi\circ \varphi:\mathscr E\Rightarrow \mathscr G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\EuScript C$. 
+\begin{definition}Let $\mathscr{C},\mathscr{D}$ be categories, and let $E,F,G:\mathscr{C}\rightarrow\mathscr{D}$ be functors. Suppose $\varphi:E\Rightarrow F$ and $\psi:F\Rightarrow G$  are natural transformations. We define their \textit{(vertical) composition} $\psi\circ \varphi:E\Rightarrow G$ as the natural transformation $(\psi\circ \varphi)_X=\psi_X\circ \varphi_X$ for every $X\in\mathscr{C}$. 
 \end{definition}
 
 \iffalse
-\begin{definition}Let $\EuScript C,\EuScript D, \EuScript E$ be categories and $\mathscr F_1, G_1:\EuScript C\rightarrow \EuScript D$ and $\mathscr F_2, G_2:\EuScript D\rightarrow \EuScript E$ functors. Let $\varphi:\mathscr F_1\Rightarrow\mathscr G_1$ and $\psi:\mathscr F_2\Rightarrow\mathscr G_2$ be natural transformations, then define their \textit{horizontal composition} $\psi * \varphi:\mathscr F_2\circ \mathscr F_1\Rightarrow\mathscr G_2\circ\mathscr G_1$ as $(\psi *\varphi)_X=\psi_{G_1(X)}\circ \mathscr F_2[\varphi_X]$. 
+\begin{definition}Let $\mathscr{C},\mathscr{D}, \mathscr{E}$ be categories and $F_1, G_1:\mathscr{C}\rightarrow \mathscr{D}$ and $F_2, G_2:\mathscr{D}\rightarrow \mathscr{E}$ functors. Let $\varphi:F_1\Rightarrow G_1$ and $\psi:F_2\Rightarrow G_2$ be natural transformations, then define their \textit{horizontal composition} $\psi * \varphi:F_2\circ F_1\Rightarrow G_2\circ G_1$ as $(\psi *\varphi)_X=\psi_{G_1(X)}\circ F_2[\varphi_X]$. 
 \end{definition}\fi
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ a functor, then define the \textit{identity natural transformation} $\mathrm{id}_{\mathscr F}:\mathscr F\Rightarrow\mathscr F$ as  $(\mathrm{id}_{\mathscr{F}})_X=\mathrm{id}_{\mathscr F(X)}$ for each $X\in\EuScript C$. 
+\begin{definition}Let $\mathscr{C},\mathscr{D}$ be categories and $F:\mathscr{C}\rightarrow \mathscr{D}$ a functor, then define the \textit{identity natural transformation} $\mathrm{id}_{F}:F\Rightarrow F$ as  $(\mathrm{id}_{F})_X=\mathrm{id}_{F(X)}$ for each $X\in\mathscr{C}$. 
 \end{definition}
 
 \begin{example}Here are some examples of natural transformations
     \begin{enumerate}
-        \item let $(-)^{\times},\mathrm{GL}_n:\mathbf{Ring}\rightarrow \mathbf{Grp}$ be functors defined in \Cref{eg:func}, then we have the natural transformation $\mathrm{det}:\mathrm{GL}_n(-)\Rightarrow (-)^\times$ where $\det_R:\mathrm{GL}_n(R)\rightarrow R^\times$ is the determinant,
-        \item let $(-)^{**}=((-)^*)^*:\mathbf{Mod}_K\rightarrow \mathbf{Mod}_K$ be the composition of the dual space functor with itself, then there is natural transformation $\mathrm{eval}:\mathrm{id}_{\mathbf{Mod}_K}\Rightarrow (-)^{**}$ given by $\mathrm{eval}_V: V\rightarrow V^{**}$ where $\mathrm{eval}_V(v)(f)=f(v)$ is the evaluation map; it is a natural isomorphism if we replace $\mathbf{Mod}_K$ with $\mathbf{FVect}_K$, its full subcategory of finite dimensional vector spaces,
-        \item let $(-)^*\otimes_R M:\mathbf{Mod}_R^{\mathrm{op}}\rightarrow \mathbf{Mod}_R$ be the composition of $(-)^*$ with $(-)\otimes_R M$ defined in \Cref{eg:func}, for a ring $R$ and an $R$-module $M$; let $\mathrm{Hom}(-,M):\mathbf{Mod}_R^{\mathrm{op}}\rightarrow \mathbf{Mod}_R$ be the contravariant hom-functor valued in $\mathbf{Mod}_R$ (with the natural module structure inherited from $M$), there is a natural isomorphism $\varphi:(-)^*\otimes_R M\Rightarrow \mathrm{Hom}(-,M)$ where for $R$-module $N$, the map $\varphi_N:N^*\otimes_RM\rightarrow \mathrm{Hom}(N,M)$ is given by $\varphi_N(f\otimes m)(n)=f(n)m$,
+        \item let $(-)^{\times},\mathrm{GL}_n:\mathsf{Ring}\rightarrow \mathsf{Grp}$ be functors defined in \Cref{eg:func}, then we have the natural transformation $\mathrm{det}:\mathrm{GL}_n(-)\Rightarrow (-)^\times$ where $\det_R:\mathrm{GL}_n(R)\rightarrow R^\times$ is the determinant,
+        \item let $(-)^{**}=((-)^*)^*:\mathsf{Mod}_K\rightarrow \mathsf{Mod}_K$ be the composition of the dual space functor with itself, then there is natural transformation $\mathrm{eval}:\mathrm{id}_{\mathsf{Mod}_K}\Rightarrow (-)^{**}$ given by $\mathrm{eval}_V: V\rightarrow V^{**}$ where $\mathrm{eval}_V(v)(f)=f(v)$ is the evaluation map; it is a natural isomorphism if we replace $\mathsf{Mod}_K$ with $\mathsf{Vect}_K$, its full subcategory of finite dimensional vector spaces,
+        \item let $(-)^*\otimes_R M:\mathsf{Mod}_R^{\mathrm{op}}\rightarrow \mathsf{Mod}_R$ be the composition of $(-)^*$ with $(-)\otimes_R M$ defined in \Cref{eg:func}, for a ring $R$ and an $R$-module $M$; let $\mathrm{Hom}(-,M):\mathsf{Mod}_R^{\mathrm{op}}\rightarrow \mathsf{Mod}_R$ be the contravariant hom-functor valued in $\mathsf{Mod}_R$ (with the natural module structure inherited from $M$), there is a natural isomorphism $\varphi:(-)^*\otimes_R M\Rightarrow \mathrm{Hom}(-,M)$ where for $R$-module $N$, the map $\varphi_N:N^*\otimes_RM\rightarrow \mathrm{Hom}(N,M)$ is given by $\varphi_N(f\otimes m)(n)=f(n)m$,
     \end{enumerate}
     
 \end{example}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, the \textit{functor category} from $\EuScript C$ to $\EuScript D$, denoted $\mathrm{Fun}(\EuScript C,\EuScript D)$, is the category where objects are functors $\mathscr F:\EuScript C\rightarrow \EuScript D$, morphisms are natural transformations, and composition is given by (vertical) composition of natural transformations. 
+\begin{definition}Let $\mathscr{C},\mathscr{D}$ be categories, the \textit{functor category} from $\mathscr{C}$ to $\mathscr{D}$, denoted $\mathrm{Fun}(\mathscr{C},\mathscr{D})$, is the category where objects are functors $F:\mathscr{C}\rightarrow \mathscr{D}$, morphisms are natural transformations, and composition is given by (vertical) composition of natural transformations. 
 \end{definition}
 
 \begin{remark}
@@ -363,29 +607,30 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     Natural isomorphisms are precisely the isomorphisms in the functor category. 
 \end{remark}
 
-\begin{definition}Let $\EuScript C,\EuScript D$ be categories, a functor $\mathscr F:\EuScript C\rightarrow \EuScript D$ is called an \textit{equivalence} if there is a functor $\mathscr G:\EuScript D\rightarrow\EuScript C$ such that there are natural isomorphisms $\eta:\mathrm{id}_{\EuScript C}\Rightarrow \mathscr G\circ F$ and $\varepsilon:\mathscr F\circ G\Rightarrow\mathrm{id}_{\EuScript D}$. 
-    If there is an equivalence between $\EuScript C$ and $\EuScript D$, we say they are \textit{equivalent} and write $\EuScript C \simeq \EuScript D$. Moreover, we call $\mathscr G$ the \textit{quasi-inverses} of $\mathscr F$ and call the pair of functors an \textit{equivalence of categories}. 
+\begin{definition}Let $\mathscr{C},\mathscr{D}$ be categories, a functor $F:\mathscr{C}\rightarrow \mathscr{D}$ is called an \textit{equivalence} if there is a functor $G:\mathscr{D}\rightarrow\mathscr{C}$ such that there are natural isomorphisms $\eta:\mathrm{id}_{\mathscr{C}}\Rightarrow G\circ F$ and $\varepsilon:F\circ G\Rightarrow\mathrm{id}_{\mathscr{D}}$. 
+    If there is an equivalence between $\mathscr{C}$ and $\mathscr{D}$, we say they are \textit{equivalent} and write $\mathscr{C} \simeq \mathscr{D}$. Moreover, we call $G$ the \textit{quasi-inverses} of $F$ and call the pair of functors an \textit{equivalence of categories}. 
 \end{definition}
 
 \begin{example}Here are some examples of equivalent categories
     \begin{enumerate}
-        \item The category $\mathbf{FVect}_K$ of finite dimensional $K$-vector spaces is equivalent to the category where objects are $K^n$ for $n\ge 0$ and morphisms $\mathrm{Hom}(K^n,K^m)$ are the matrices $\mathrm M_{n,m}(K)$. 
-        \item The category of intemediate extensions of a finite Galois extension $L\mid K$ with $L$-embeddings as morphisms, is equivalent to the category of finite transitive $G$-sets where $G=\mathrm{Gal}(L\mid K)$. 
-        \item The category of complex representations of a finite group $G$ (whose morphisms are equivariant maps) is equivalent to the category of $\mathbb C[G]$-modules, and they are also equivalent to $\mathrm{Fun}(\mathrm BG,\mathbf{Vect}_{\mathbb C})$, where $\mathrm B G$ is the category with a single object $\bullet$, with the endomorphisms of $\bullet$ being group elements, and with the group operation as its composition. 
+        \item The category $\mathsf{Vect}_K$ of finite dimensional $K$-vector spaces is equivalent to the category where objects are $K^n$ for $n\ge 0$ and morphisms $\mathrm{Hom}(K^n,K^m)$ are the matrices $\mathrm M_{n,m}(K)$. 
+        \item The category of intemediate extensions of a finite Galois extension $L/K$ with $L$-embeddings as morphisms, is equivalent to the category of finite transitive $G$-sets where $G=\mathrm{Gal}(L/K)$. 
+        \item The category of complex representations of a finite group $G$ (whose morphisms are equivariant maps) is equivalent to the category of $\mathbb C[G]$-modules, and they are also equivalent to $\mathrm{Fun}(\mathrm BG,\mathsf{Vect}_{\mathbb C})$, where $\mathrm B G$ is the category with a single object $\bullet$, with the endomorphisms of $\bullet$ being group elements, and with the group operation as its composition. 
+        \item R-algebras and ring maps
     \end{enumerate}
     It is an easy exercise for the reader to spot what the unstated equivalences in the cases above are.
 \end{example}
 
-\begin{definition}Suppose $\EuScript C, \EuScript D$ are categories and $\mathscr F:\EuScript C\rightarrow \EuScript D$ is a functor. 
-    For each $X,Y\in\EuScript C$, then
-    \[\mathrm{Hom}(X,Y)\xrightarrow{f\mapsto \mathscr{F}[f]} \mathrm{Hom}(\mathscr F(X),\mathscr F(Y))\]
-    is a map of sets. We say that $\mathscr F$ is 
+\begin{definition}Suppose $\mathscr{C}, \mathscr{D}$ are categories and $F:\mathscr{C}\rightarrow \mathscr{D}$ is a functor. 
+    For each $X,Y\in\mathscr{C}$, then
+    \[\mathrm{Hom}(X,Y)\xrightarrow{f\mapsto F[f]} \mathrm{Hom}(F(X),F(Y))\]
+    is a map of sets. We say that $F$ is 
     \begin{enumerate}
-        \item \textit{faithful} if the above map is injective for all $X,Y\in\EuScript C$,
-        \item \textit{full} if the above map is surjective for all $X,Y\in\EuScript C$,
-        \item \textit{fully faithful} if the above map is bijective for all $X,Y\in\EuScript C$,
+        \item \textit{faithful} if the above map is injective for all $X,Y\in\mathscr{C}$,
+        \item \textit{full} if the above map is surjective for all $X,Y\in\mathscr{C}$,
+        \item \textit{fully faithful} if the above map is bijective for all $X,Y\in\mathscr{C}$,
     \end{enumerate}
-    Moreover, call $\mathscr F$ \textit{essentially surjective} if for all $Y\in \EuScript D$ exists $X\in\EuScript C$ such that $\mathscr F(X)\cong Y$ in $\EuScript D$. 
+    Moreover, call $F$ \textit{essentially surjective} if for all $Y\in \mathscr{D}$ exists $X\in\mathscr{C}$ such that $F(X)\cong Y$ in $\mathscr{D}$. 
 \end{definition}
 \begin{theorem}A functor is an equivalence iff it is fully faithful and essentially surjective. 
     \begin{proof}
@@ -393,20 +638,20 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
     \end{proof}
 \end{theorem}
 
-\begin{definition}Let $\EuScript C$ be a locally small category. Define 
-    \[\widehat{\EuScript C}:=\mathrm{Fun}(\EuScript C^{\mathrm{op}},\mathbf{Set})\qquad\widecheck{\EuScript C}:=\mathrm{Fun}(\EuScript C,\mathbf{Set})\] 
-    as the \textit{category of presheaves} of $\EuScript C$ and \textit{category of copresheaves} of $\EuScript C$ respectively.
+\begin{definition}Let $\mathscr{C}$ be a locally small category. Define 
+    \[\widehat{\mathscr{C}}:=\mathrm{Fun}(\mathscr{C}^{\mathrm{op}},\mathsf{Set})\qquad\widecheck{\mathscr{C}}:=\mathrm{Fun}(\mathscr{C},\mathsf{Set})\] 
+    as the \textit{category of presheaves} of $\mathscr{C}$ and \textit{category of copresheaves} of $\mathscr{C}$ respectively.
     The \textit{Yoneda embedding} is the contravariant functor 
     \[\begin{aligned}
-        \mathscr H^{\bullet}:\EuScript C^{\mathrm{op}}&\rightarrow \widecheck{\EuScript C}\\
-        X&\mapsto \mathscr H^X=\mathrm{Hom}(X,-)\\
+        h^{\bullet}:\mathscr{C}^{\mathrm{op}}&\rightarrow \widecheck{\mathscr{C}}\\
+        X&\mapsto h^X=\mathrm{Hom}(X,-)\\
         (f^{\mathrm{op}}:Z\rightarrow Y)&\mapsto \left[X\mapsto (-\circ f)\right]
     \end{aligned}\]
     where $(-\circ f):\mathrm{Hom}(Z,X)\rightarrow \mathrm{Hom}(Y,X)$ is as in \Cref{def:hom-functors}. 
     Dually, the \textit{co-Yoneda embedding} is
     \[\begin{aligned}
-        \mathscr H_{\bullet}:\EuScript C&\rightarrow \widehat{\EuScript C}\\
-        X&\mapsto \mathscr H_X=\mathrm{Hom}(-,X)\\
+        h_{\bullet}:\mathscr{C}&\rightarrow \widehat{\mathscr{C}}\\
+        X&\mapsto h_X=\mathrm{Hom}(-,X)\\
         (f:Y\rightarrow Z)&\mapsto \left[X\mapsto (f\circ -)\right]
     \end{aligned}\]
     where $(f\circ -):\mathrm{Hom}(X,Y)\rightarrow \mathrm{Hom}(X,Z)$ is as in \Cref{def:hom-functors}.
@@ -414,138 +659,90 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 \end{definition}
 
 
-\iffalse
-\begin{definition}
-    Let $\EuScript C$ be a locally small category. Define the \textit{evaluation functor} as
-    \[\Gamma(\bullet,-):\EuScript C^{\mathrm{op}}\times \widehat{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
-    and sending a morphism $(f^{\mathrm{op}}:Y\rightarrow X,\varphi:\mathscr F\Rightarrow\mathscr{G})$ to the morphism $\varphi_X\circ \mathscr F[f^{\mathrm{op}}]=\mathscr{G}[f^{\mathrm{op}}]\circ \varphi_Y$. Dually, 
-    we define the \textit{coevaluation functor}, abusing notation, as
-    \[\Gamma(\bullet,-):\EuScript C\times \widecheck{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
-    and sending a morphism $(f:X\rightarrow Y,\varphi:\mathscr{F}\Rightarrow\mathscr G)$ to the morphism $\varphi_Y\circ \mathscr F[f]=\mathscr{G}[f]\circ \varphi_X$.
-\end{definition}
-\begin{definition}
-    Let $\EuScript C$ be a locally small category. Define the functor 
-    \[
-    \mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},{-}):\EuScript C^{\mathrm{op}}\times \widehat{\EuScript C}\rightarrow\mathbf{Set}
-    \quad\quad  
-    (X,\mathscr F)\mapsto \mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{X},\mathscr{F})
-    \]
-    and sending a morphism $(f^{\mathrm{op}}:Y\rightarrow X,\varphi:\mathscr F\Rightarrow\mathscr{G})$ to
-    \[
-    (\varphi\circ -\circ \mathscr H_{\bullet}[f]):\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_Y,\mathscr F)\rightarrow \mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_X,\mathscr G)\qquad\psi \mapsto \varphi\circ \psi\circ \mathscr H_{\bullet}[f]
-    \]
-    Dually, define the functor
-    \[
-    \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-):\EuScript C\times \widecheck{\EuScript C}\rightarrow\mathbf{Set}
-    \quad\quad  
-    (X,\mathscr F)\mapsto \mathrm{Hom}_{\widecheck{\EuScript C}}\left(\mathscr H^{X},\mathscr{F}\right)
-    \]
-    and sending the morphism $(f:X\rightarrow Y, \varphi:\mathscr F\Rightarrow\mathscr G)$ to
-    \[(\varphi\circ -\circ \mathscr H^{\bullet}[f^{\mathrm{op}}]):\mathrm{Hom}_{\widecheck{\EuScript C}}\left(\mathscr H^{X},\mathscr{F}\right)\rightarrow \mathrm{Hom}_{\widecheck{\EuScript C}}\left(\mathscr H^{Y},\mathscr{G}\right)\qquad \psi\mapsto \varphi\circ\psi\circ \mathscr H^\bullet [f^\mathrm{op}]\]
-    One can view $\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},{-})$ as the composition of $\mathscr H_\bullet$ with the first factor of $\mathrm{Hom}_{\widehat{\EuScript C}}(-,-)$, and also view $\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-)$ similarly as the composition of $\mathscr H^\bullet$ with the first factor of $\mathrm{Hom}_{\widecheck{\EuScript C}}(-,-)$. 
-\end{definition}
-\fi
-
 \begin{lemma}[Yoneda]
     \label{thm:yoneda}
-    Let $\EuScript C$ be a locally small category. Suppose $X\in\EuScript C$ and $\mathscr F:\EuScript C\rightarrow\mathbf{Set}$ is a functor, then there are bijections $\Phi$ and $\Psi$, shown below, 
+    Let $\mathscr{C}$ be a locally small category. Suppose $X\in\mathscr{C}$ and $F:\mathscr{C}\rightarrow\mathsf{Set}$ is a functor, then there are bijections $\Phi$ and $\Psi$, shown below, 
     \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        {\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr{F})}
+        {\mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^{X},F)}
         \arrow[rightarrow, r, bend left=30, "\Phi"{yshift=2pt}]
-        & {\mathscr F(X)}
+        & {F(X)}
         \arrow[rightarrow, l, bend left=30, "\Psi"{yshift=-2pt}]
     \end{tikzcd}
     \]
     which are inverses of each other.
 
     \begin{proof}
-        For a natural transformation $\varphi:\mathscr{H}^X\Rightarrow\mathscr{F}$ and a morphism $f:X\rightarrow Y$ in $\EuScript C$, the diagram 
+        For a natural transformation $\varphi:h^X\Rightarrow F$ and a morphism $f:X\rightarrow Y$ in $\mathscr{C}$, the diagram 
         \[
         \begin{tikzcd}[sep = huge]
-        \mathrm{Hom}_{\EuScript C}(X,X) \arrow[r, "\varphi_X"] \arrow[d, "(f\circ - )"'] & \mathscr{F}(X) \arrow[d, "\mathscr{F}{[f]}"] \\
-        \mathrm{Hom}_{\EuScript C}(X,Y) \arrow[r, "\varphi_Y"]                 & \mathscr{F}(Y)               
+        \mathrm{Hom}_{\mathscr{C}}(X,X) \arrow[r, "\varphi_X"] \arrow[d, "(f\circ - )"'] & F(X) \arrow[d, "F{[f]}"] \\
+        \mathrm{Hom}_{\mathscr{C}}(X,Y) \arrow[r, "\varphi_Y"]                 & F(Y)               
         \end{tikzcd}\]
-        commutes. Thus $\varphi_Y\circ (f\circ -)=\mathscr{F}[f]\circ \varphi_X$. Evaluating at $\mathrm{id}_X$ on both sides yields the identity
-        \[\varphi_Y(f)=\mathscr{F}[f](\varphi_X(\mathrm{id}_X))\]
+        commutes. Thus $\varphi_Y\circ (f\circ -)=F[f]\circ \varphi_X$. Evaluating at $\mathrm{id}_X$ on both sides yields the identity
+        \[\varphi_Y(f)=F[f](\varphi_X(\mathrm{id}_X))\]
         therefore the natural transformation $\varphi$ is completely determined by $u=\varphi_X(\mathrm{id}_X)$. Therefore, let
-        \[\Phi:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr F)\rightarrow \mathscr F(X)\qquad \Phi(\varphi)=\varphi_X(\mathrm{id}_X)\]
+        \[\Phi:\mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^{X},F)\rightarrow F(X)\qquad \Phi(\varphi)=\varphi_X(\mathrm{id}_X)\]
         and, by the same identity, the inverse of $\Phi$ is naturally
-        \[\Psi:\mathscr F(X)\rightarrow \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{X},\mathscr F)\qquad \Psi(u)=\varphi\]
-        where $\varphi_Y:\mathrm{Hom}(X,Y)\rightarrow \mathscr{F}(Y)$ is given by $\varphi_Y(f)=(\mathscr{F}[f])(u)$, for each $Y\in \EuScript C$. It is not hard for the reader to verify that indeed $\Psi$ and $\Phi$ are inverses of each other.
+        \[\Psi:F(X)\rightarrow \mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^{X},F)\qquad \Psi(u)=\varphi\]
+        where $\varphi_Y:\mathrm{Hom}(X,Y)\rightarrow F(Y)$ is given by $\varphi_Y(f)=(F[f])(u)$, for each $Y\in \mathscr{C}$. It is not hard for the reader to verify that indeed $\Psi$ and $\Phi$ are inverses of each other.
     \end{proof}
 \end{lemma}
 \begin{remark}
     \label{rmk:yoneda}
     The preceding \Cref{thm:yoneda} is known as \textit{Yoneda lemma} or the \textit{fundamental theorem of category theory}. 
-    Notice that the definition of $\Phi$ and $\Psi$ does not involve in $X$ and $\mathscr F$, therefore one can upgrade the lemma to say that there is a mutually inverse pair of natural isomorphism 
+    Notice that the definition of $\Phi$ and $\Psi$ does not involve in $X$ and $F$, therefore one can upgrade the lemma to say that there is a mutually inverse pair of natural isomorphism 
     \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        {\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-)}
+        {\mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^{\bullet},-)}
         \arrow[Rightarrow, r, bend left=30, "\Phi"{yshift=2pt}]
-        & {\mathscr (-)(\bullet)}
+        & {(-)(\bullet)}
         \arrow[Rightarrow, l, bend left=30, "\Psi"{yshift=-2pt}]
     \end{tikzcd}
     \]
-    where the left hand side functor $\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^{\bullet},-):\EuScript C\times\widecheck{\EuScript C}\rightarrow\mathbf{Set}$ is given by the composition 
-    \[\EuScript C\times \widecheck{\EuScript C}\xrightarrow{\mathscr H^\bullet\times \mathrm{id}_{\widecheck{\EuScript C}}} \widecheck{\EuScript C}\times \widecheck{\EuScript C}\xrightarrow{\mathrm{Hom}_{\widecheck{\EuScript C}}(-,-)}\mathbf{Set}\]
+    where the left hand side functor $\mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^{\bullet},-):\mathscr{C}\times\widecheck{\mathscr{C}}\rightarrow\mathsf{Set}$ is given by the composition 
+    \[\mathscr{C}\times \widecheck{\mathscr{C}}\xrightarrow{h^\bullet\times \mathrm{id}_{\widecheck{\mathscr{C}}}} \widecheck{\mathscr{C}}\times \widecheck{\mathscr{C}}\xrightarrow{\mathrm{Hom}_{\widecheck{\mathscr{C}}}(-,-)}\mathsf{Set}\]
     and the right hand side functor, called the \textit{evaluation functor}, is given by 
-    \[(-)(\bullet):\EuScript C\times \widecheck{\EuScript C}\rightarrow\mathbf{Set}\qquad (X,\mathscr{F})\mapsto \mathscr{F}(X) \]
-    and sends a morphism $(f:X\rightarrow Y,\varphi:\mathscr{F}\Rightarrow\mathscr G)$ to the morphism $\varphi_Y\circ \mathscr F[f]=\mathscr{G}[f]\circ \varphi_X$. Same constructions for $\Phi$ and $\Psi$ will work, hence we have shown that the Yoneda lemma is \textit{functorial} or \textit{natural} in the variables $X\in\EuScript C$ and $\mathscr F\in \widecheck{\EuScript C}$. 
+    \[(-)(\bullet):\mathscr{C}\times \widecheck{\mathscr{C}}\rightarrow\mathsf{Set}\qquad (X,F)\mapsto F(X) \]
+    and sends a morphism $(f:X\rightarrow Y,\varphi:F\Rightarrow G)$ to the morphism $\varphi_Y\circ F[f]=G[f]\circ \varphi_X$. Same constructions for $\Phi$ and $\Psi$ will work, hence we have shown that the Yoneda lemma is \textit{functorial} or \textit{natural} in the variables $X\in\mathscr{C}$ and $F\in \widecheck{\mathscr{C}}$. 
 \end{remark}
 
-\begin{exercise}Prove a dual and functorial version of the Yoneda lemma: let $\EuScript C$ be a locally small category. Suppose $X\in\EuScript C$ and $\mathscr F:\EuScript C^{\mathrm{op}}\rightarrow\mathbf{Set}$, then construct natural isomorphisms
+\begin{exercise}Prove a dual and functorial version of the Yoneda lemma: let $\mathscr{C}$ be a locally small category. Suppose $X\in\mathscr{C}$ and $F:\mathscr{C}^{\mathrm{op}}\rightarrow\mathsf{Set}$, then construct natural isomorphisms
     \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        {\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},-)}
+        {\mathrm{Hom}_{\widehat{\mathscr{C}}}(h_{\bullet},-)}
         \arrow[Rightarrow, r, bend left=30, "\Pi"{yshift=2pt}]
-        & {\mathscr (-)(\bullet)}
+        & {(-)(\bullet)}
         \arrow[Rightarrow, l, bend left=30, "\Theta"{yshift=-2pt}]
     \end{tikzcd}
     \]
-    which are inverses of each other, where you should define the functor $\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},-):\EuScript C\times\widehat{\EuScript C}\rightarrow\mathbf{Set}$ and the \textit{coevaluation functor} $(-)(\bullet):\EuScript C\times \widehat{\EuScript C}\rightarrow\mathbf{Set}$ dually to those in \Cref{rmk:yoneda}. 
+    which are inverses of each other, where you should define the functor $\mathrm{Hom}_{\widehat{\mathscr{C}}}(h_{\bullet},-):\mathscr{C}\times\widehat{\mathscr{C}}\rightarrow\mathsf{Set}$ and the \textit{coevaluation functor} $(-)(\bullet):\mathscr{C}\times \widehat{\mathscr{C}}\rightarrow\mathsf{Set}$ dually to those in \Cref{rmk:yoneda}. 
 \end{exercise}
-\iffalse
-\begin{lemma}[co-Yoneda]
-    \label{thm:coyoneda}
-    Let $\EuScript C$ be a locally small category. There are natural isomorphisms
-    \[\begin{tikzcd}[column sep=3em] % try 6em, 8em, 12em, or even 3cm
-        {\mathrm{Hom}_{\widehat{\EuScript C}}(\mathscr H_{\bullet},-)}
-        \arrow[Rightarrow, r, bend left=30, "\Theta"{yshift=2pt}]
-        & {\Gamma(\bullet,-)}
-        \arrow[Rightarrow, l, bend left=30, "\Pi"{yshift=-2pt}]
-    \end{tikzcd}
-    \]
-    which are inverses of each other.
-    \begin{proof}Completely symmetric to \Cref{thm:yoneda}. 
-    \end{proof}
-\end{lemma}
-\fi
-\begin{theorem}\label{thm:yff}Let $\EuScript C$ be a locally small category, then the Yoneda and co-Yoneda embeddings 
-    \[\mathscr{H}^\bullet: \EuScript{C}^{\mathrm{op}}\rightarrow \widecheck{\EuScript C}\quad\mathrm{and}\quad \mathscr{H}_\bullet: \EuScript{C}\rightarrow \widehat{\EuScript C}\]
+\begin{theorem}\label{thm:yff}Let $\mathscr{C}$ be a locally small category, then the Yoneda and co-Yoneda embeddings 
+    \[h^\bullet: \mathscr{C}^{\mathrm{op}}\rightarrow \widecheck{\mathscr{C}}\quad\mathrm{and}\quad h_\bullet: \mathscr{C}\rightarrow \widehat{\mathscr{C}}\]
     are fully faithful. 
     \begin{proof}
-        We will only show $\mathscr{H}^\bullet$ is fully faithful: for the dual $\mathscr H_\bullet$, the proof is completely symmetric. 
-        Let $X,Y\in\EuScript C$. By the Yoneda lemma \Cref{thm:yoneda}, there is a bijection 
-        \[\Phi:\mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\rightarrow \mathscr{H}^Y(X)=\mathrm{Hom}_{\EuScript C}(Y,X)\]
-        by specifying $\mathscr F=\mathscr H^Y$. One can verify that this gives the inverse for the map
-        \[\mathrm{Hom}_{\EuScript C}(Y,X)=\mathrm{Hom}_{\EuScript C^{\mathrm{op}}}(X,Y)\xrightarrow{f\mapsto \mathscr{H}^\bullet\left[f\right]} \mathrm{Hom}_{\widecheck{\EuScript C}}(\mathscr H^X, \mathscr H^Y)\]
-        Thus $\mathscr{H}^\bullet$ is fully faithful.\end{proof}
+        We will only show $h^\bullet$ is fully faithful: for the dual $h_\bullet$, the proof is completely symmetric. 
+        Let $X,Y\in\mathscr{C}$. By the Yoneda lemma \Cref{thm:yoneda}, there is a bijection 
+        \[\Phi:\mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^X, h^Y)\rightarrow h^Y(X)=\mathrm{Hom}_{\mathscr{C}}(Y,X)\]
+        by specifying $F=h^Y$. One can verify that this gives the inverse for the map
+        \[\mathrm{Hom}_{\mathscr{C}}(Y,X)=\mathrm{Hom}_{\mathscr{C}^{\mathrm{op}}}(X,Y)\xrightarrow{f\mapsto h^\bullet\left[f\right]} \mathrm{Hom}_{\widecheck{\mathscr{C}}}(h^X, h^Y)\]
+        Thus $h^\bullet$ is fully faithful.\end{proof}
 \end{theorem}
 
 
-\begin{lemma}\label{lem:isom}Let $\EuScript C,\EuScript D$ be categories and $\mathscr F:\EuScript C\rightarrow\EuScript D$ a fully faithful functor, then the morphism  $\mathscr F[f]:\mathscr F(X)\rightarrow \mathscr{F}(Y)$ is an isomorphism in $\EuScript D$ if and only if $f:X\rightarrow Y$ is an isomorphism in $\EuScript C$. 
+\begin{lemma}\label{lem:isom}Let $\mathscr{C},\mathscr{D}$ be categories and $F:\mathscr{C}\rightarrow\mathscr{D}$ a fully faithful functor, then the morphism  $F[f]:F(X)\rightarrow F(Y)$ is an isomorphism in $\mathscr{D}$ if and only if $f:X\rightarrow Y$ is an isomorphism in $\mathscr{C}$. 
     \begin{proof}
-    Assume $f:X\rightarrow Y$ is an isomorphism in $\EuScript C$, then there exists $g:Y\rightarrow X$ with $g\circ f=\mathrm{id}_X$ and $f\circ g=\mathrm{id}_Y$.
-    Applying functor $\mathscr F$, we get $\mathscr F[g]\circ \mathscr F[f]=\mathrm{id}_{\mathscr F(X)}$ and $\mathscr F[f]\circ \mathscr F[g]=\mathrm{id}_{\mathscr F(Y)}$, hence $\mathscr F[f]$ has inverse $\mathscr F[g]$, which makes it an isomorphism in $\EuScript D$.
-    Conversely, by fullness of $\mathscr F$, choose $g:Y\rightarrow X$ with $\mathscr{F}[g]=\mathscr{F}[f]^{-1}$. Then we have $\mathscr{F}[f\circ g]=\mathscr{F}[f]\circ \mathscr{F}[g]=\mathrm{id}_{\mathscr{F}(X)}$ so by faithfulness of $\mathscr F$, we have $f\circ g=\mathrm{id}_X$. By symmetric arguments, we have $g\circ f=\mathrm{id}_Y$, so $g$ is the inverse of $f$.  
-    Therefore $f$ is an isomorphism in $\EuScript C$. 
+    Assume $f:X\rightarrow Y$ is an isomorphism in $\mathscr{C}$, then there exists $g:Y\rightarrow X$ with $g\circ f=\mathrm{id}_X$ and $f\circ g=\mathrm{id}_Y$.
+    Applying functor $F$, we get $F[g]\circ F[f]=\mathrm{id}_{F(X)}$ and $F[f]\circ F[g]=\mathrm{id}_{F(Y)}$, hence $F[f]$ has inverse $F[g]$, which makes it an isomorphism in $\mathscr{D}$.
+    Conversely, by fullness of $F$, choose $g:Y\rightarrow X$ with $F[g]=F[f]^{-1}$. Then we have $F[f\circ g]=F[f]\circ F[g]=\mathrm{id}_{F(X)}$ so by faithfulness of $F$, we have $f\circ g=\mathrm{id}_X$. By symmetric arguments, we have $g\circ f=\mathrm{id}_Y$, so $g$ is the inverse of $f$.  
+    Therefore $f$ is an isomorphism in $\mathscr{C}$. 
     \end{proof}
 \end{lemma}
 \begin{theorem}
     \label{thm:yon}
-    Let $\EuScript C$ be a locally small category, then for a morphism $f:X\rightarrow Y$ in $\EuScript C$, TFAE
+    Let $\mathscr{C}$ be a locally small category, then for a morphism $f:X\rightarrow Y$ in $\mathscr{C}$, TFAE
     \begin{enumerate}
-        \item $f:X\rightarrow Y$ is an isomorphism in $\EuScript C$,
-        \item $\mathscr H_\bullet[f]:\mathscr H_X\rightarrow \mathscr H_Y$ is an isomorphism in $\widehat{\EuScript C}$,
-        \item $\mathscr H^\bullet[f^{\mathrm{op}}]:\mathscr H^Y\rightarrow \mathscr H^X$ is an isomorphism in $\widecheck{\EuScript C}$,
+        \item $f:X\rightarrow Y$ is an isomorphism in $\mathscr{C}$,
+        \item $h_\bullet[f]:h_X\rightarrow h_Y$ is an isomorphism in $\widehat{\mathscr{C}}$,
+        \item $h^\bullet[f^{\mathrm{op}}]:h^Y\rightarrow h^X$ is an isomorphism in $\widecheck{\mathscr{C}}$,
     \end{enumerate}
     \begin{proof}
         Straightforward by \Cref{thm:yff} and \Cref{lem:isom}. 
@@ -554,14 +751,11 @@ Moreover, if $\varphi_X$ is an isomorphism for each $X\in\EuScript C$, we say $\
 
 \begin{remark}What \Cref{thm:yff} and \Cref{thm:yon} tells us is that some presheaves (resp. copresheaves) on a category can be represented as objects in the category, namely these are the ones in the image of the Yoneda (resp. co-Yoneda) embedding. 
 \end{remark}
-\begin{definition}Let $\EuScript C$ be a locally small category, we call a presheaf $\mathscr F\in \widecheck{\EuScript C}$ (resp. copresheaf $\mathscr F\in \widehat{\EuScript C}$) \textit{representable} by an object $X\in\EuScript C$ if $\mathscr H^X\cong \mathscr F$ (resp. $\mathscr H_X\cong \mathscr F$). 
+\begin{definition}Let $\mathscr{C}$ be a locally small category, we call a presheaf $F\in \widecheck{\mathscr{C}}$ (resp. copresheaf $F\in \widehat{\mathscr{C}}$) \textit{representable} by an object $X\in\mathscr{C}$ if $h^X\cong F$ (resp. $h_X\cong F$). 
 \end{definition}
 
-\newpage
 
-
-
-\section{Affine Algebraic Groups}
+\section{Schemes and Group Schemes}
 
 Unless specified otherwise, fix a ring $R$, which we shall call our \textit{ground ring}. 
 \begin{convention}
@@ -570,24 +764,24 @@ Unless specified otherwise, fix a ring $R$, which we shall call our \textit{grou
     We will use this equivalence frequently and often implicitly. 
 \end{convention}
 
-\begin{definition}A \textit{$R$-functor} is a functor \[X:\mathbf{Alg}_R\rightarrow \mathbf{Set}\]
-    and the \textit{category of $R$-functors} is the functor category $\mathbf{Fun}_R:=\mathrm{Fun}(\mathbf{Alg}_R,\mathbf{Set})$.
+\begin{definition}A \textit{$R$-functor} is a functor \[X:\mathsf{Alg}_R\rightarrow \mathsf{Set}\]
+    and the \textit{category of $R$-functors} is the functor category $\mathsf{Fun}_R:=\mathrm{Fun}(\mathsf{Alg}_R,\mathsf{Set})$.
 \end{definition}
 \begin{definition}
 Suppose $A$ is a $R$-algebra, its \textit{spectrum} is the $R$-functor 
-    \[\mathrm{Spec}(A):=\mathrm{Hom}_{\mathbf{Alg}_R}(A,-):\mathbf{Alg}_R\rightarrow \mathbf{Set}\]
+    \[\mathrm{Spec}(A):=\mathrm{Hom}_{\mathsf{Alg}_R}(A,-):\mathsf{Alg}_R\rightarrow \mathsf{Set}\]
     An \textit{affine $R$-scheme} is the spectrum of a $R$-algebra. The \textit{affine $n$-space} is the affine $R$-scheme \[\mathbb{A}^n_R:=\mathrm{Spec}(R[x_1,\dots,x_n])\]
-    The category $\mathbf{Aff}_R$ of affine $R$-schemes is the full subcategory of all affine $R$-schemes of $\mathbf{Fun}_R$. 
+    The category $\mathsf{Aff}_R$ of affine $R$-schemes is the full subcategory of all affine $R$-schemes of $\mathsf{Fun}_R$. 
 \end{definition}
 \begin{remark}
 The notion of affine $R$-schemes generalizes the notion of affine varieties. 
 Readers who have experience in algebraic geometry might have been taught that an affine $K$-variety for some algebraically closed field $K$ is a subset of $K^n$ for some $n$ given by the vanishing set of some polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$, that is, the set
 \[\{(x_1,\dots,x_n)\in K^n:f_1(x_1,\dots,x_n)=\cdots=f_m(x_1,\dots,x_n)=0\}\]
 For our purposes, however, we take a \textit{functorial} perspective to varieties. To see what this is about, we first make the important observation that the above set can be naturally identified as the set
-\[X(K)=\mathrm{Hom}_{\mathbf{Alg}_K}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)},K\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
+\[X(K)=\mathrm{Hom}_{\mathsf{Alg}_K}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)},K\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{K[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
 Namely, each $\phi\in X(K)$ can be identified with $(\phi(x_1),\dots,\phi(x_n))\in K^n$. 
 Similarly, for polynomials $f_1,\dots,f_m\in R[x_1,\dots,x_n]$, the set 
-\[X(S)=\mathrm{Hom}_{\mathbf{Alg}_R}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)},S\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
+\[X(S)=\mathrm{Hom}_{\mathsf{Alg}_R}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)},S\right)\quad\mathrm{where}\quad X=\mathrm{Spec}\left(\frac{R[x_1,\dots,x_n]}{(f_1,\dots,f_m)}\right)\]
 for an $R$-algebra $S$ can be identified as the set 
 \[\{(x_1,\dots,x_n)\in S^n:f_1(x_1,\dots,x_n)=\cdots=f_m(x_1,\dots,x_n)=0\}\]
 where $f_1,\dots,f_m$ are identified as their images along the natural map $R[x_1,\dots,x_n]\rightarrow S[x_1,\dots,x_n]$ induced by the structure map $R\rightarrow S$. 
@@ -595,7 +789,7 @@ Thus, what the spectrum of a $R$-algebra encodes is the vanishing sets of a set 
 
 \end{remark}
 \begin{definition}Suppose that $X=\mathrm{Spec}(A)$ is an affine $R$-scheme where $A$ is a $R$-algebra. Let $S$ be another $R$-algebra then we call the set 
-    \[X(S)=\mathrm{Hom}_{\mathbf{Alg}_R}(A,S)\]
+    \[X(S)=\mathrm{Hom}_{\mathsf{Alg}_R}(A,S)\]
     the \textit{$S$-points} of $X$. When $S$ is a field, it is also called the \textit{$S$-rational points} of $X$. 
 \end{definition}
 
@@ -612,7 +806,7 @@ with the right hand side being thought of as having an \textit{infinitesimal thi
 
 \end{remark}
 
-\begin{remark}Let $S$ be a $R$-algebra, then $\mathbb{A}^1_R(S)=\mathrm{Hom}_{\mathbf{Alg}_R}(R[x],S)$ is canonically a $R$-algebra by
+\begin{remark}Let $S$ be a $R$-algebra, then $\mathbb{A}^1_R(S)=\mathrm{Hom}_{\mathsf{Alg}_R}(R[x],S)$ is canonically a $R$-algebra by
     \[\begin{aligned}
         (\phi+\psi)(f)&=\phi(f)+\psi(f)\\
         (\phi \psi)(f)&=\phi(f)\psi(f)\\
@@ -622,9 +816,9 @@ with the right hand side being thought of as having an \textit{infinitesimal thi
     for each $\phi,\psi\in \mathbb A_R^1(S)$ and $r\in R$, where $f\in R[x]$. Note that naturally $\mathbb A_R^1(S)\cong S$ as $R$-algebras. 
 \end{remark}
 \begin{definition}
-    For an affine $R$-scheme $X:\mathbf{Alg}_R\rightarrow\mathbf{Set}$, its \textit{coordinate ring} (resp. \textit{coordinate algebra}) is the ring (resp. $R$-algebra)
-    \[\mathcal O(X):=\mathrm{Hom}_{\mathbf{Aff}_R}(X,\mathbb A_R^1)\]
-    with the algebraic operations given as follows: given $f,g\in \mathcal O(X)$ and $r\in R$
+    For an affine $R$-scheme $X:\mathsf{Alg}_R\rightarrow\mathsf{Set}$, its \textit{coordinate ring} (resp. \textit{coordinate algebra}) is the ring (resp. $R$-algebra)
+    \[O(X):=\mathrm{Hom}_{\mathsf{Aff}_R}(X,\mathbb A_R^1)\]
+    with the algebraic operations given as follows: given $f,g\in O(X)$ and $r\in R$
     \[\begin{aligned}
         (f+g)_S(\phi)&=f_S(\phi)+g_S(\phi)\\
         (fg)_S(\phi)&=f_S(\phi)f_S(\phi)\\
@@ -632,42 +826,42 @@ with the right hand side being thought of as having an \textit{infinitesimal thi
     \end{aligned}
     \]
     where $\phi\in X(S)$, for each $R$-algebra $S$. Moreover, define the contravariant functor 
-    \[\mathcal O:\mathbf{Aff}_R^{\mathrm{op}}\rightarrow \mathbf{Alg}_R\qquad \mathcal O=\mathrm{Hom}_{\mathbf{Aff}_R}(-,\mathbb A_R^1)\]
+    \[O:\mathsf{Aff}_R^{\mathrm{op}}\rightarrow \mathsf{Alg}_R\qquad O=\mathrm{Hom}_{\mathsf{Aff}_R}(-,\mathbb A_R^1)\]
     where for a morphism $\varphi:X\rightarrow Y$ of affine $R$-schemes, the induced map
-    \[\mathcal O[\varphi^{\mathrm{op}}]=\varphi^{\#}:\mathcal O(Y)\rightarrow\mathcal O(X)\qquad \psi\mapsto \psi\circ \varphi \]
+    \[O[\varphi^{\mathrm{op}}]=\varphi^{\#}:O(Y)\rightarrow O(X)\qquad \psi\mapsto \psi\circ \varphi \]
     is called the \textit{induced regular map} of $\varphi$. 
 \end{definition}
 
 \begin{definition}
-Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\rightarrow \mathbf{Aff}_R\qquad A\mapsto \mathrm{Spec}(A)\]
+Define the contravariant functor \[\mathrm{Spec}:\mathsf{Alg}_R^{\mathrm{op}}\rightarrow \mathsf{Aff}_R\qquad A\mapsto \mathrm{Spec}(A)\]
     where for each morphism $\varphi:A\rightarrow B$ of $R$-algebras, there is the induced natural transformation \[\varphi^*:\mathrm{Spec}(B)\rightarrow\mathrm{Spec}(A)\] called the \textit{pullback} given by 
     \[\varphi^*_S:\mathrm{Spec}(B)(S)\rightarrow \mathrm{Spec}(A)(S)\qquad \psi\mapsto \psi\circ\varphi\]
     for each $R$-algebras $S$. 
 \end{definition}
 
-\begin{theorem}The pair of functors $\mathrm{Spec}$ and $\mathcal O$ is an equivalence of categories
+\begin{theorem}The pair of functors $\mathrm{Spec}$ and $O$ is an equivalence of categories
 \[\begin{tikzcd}
-	{\mathbf{Alg}_R^{\mathrm{op}}} && {\mathbf{Aff}_R}
+	{\mathsf{Alg}_R^{\mathrm{op}}} && {\mathsf{Aff}_R}
 	\arrow["{\mathrm{Spec}}", bend left = 25, from=1-1, to=1-3]
-	\arrow["{\mathcal O}", shift left=1, bend left = 25, from=1-3, to=1-1]
+	\arrow["{O}", shift left=1, bend left = 25, from=1-3, to=1-1]
 \end{tikzcd}\]
 \begin{proof}Suppose $A$ is a $R$-algebra, then applying \Cref{thm:yoneda}, namely, the Yoneda lemma
-    \[\mathcal O(\mathrm{Spec}(A))=\mathrm{Hom}_{\mathbf{Aff}_R}(\mathscr{H}^{A},\mathbb{A}^1_R)\cong \mathbb{A}^1_R(A)\cong A\]
+    \[O(\mathrm{Spec}(A))=\mathrm{Hom}_{\mathsf{Aff}_R}(h^{A},\mathbb{A}^1_R)\cong \mathbb{A}^1_R(A)\cong A\]
     where we leave it to the reader to check that the relevant bijection is an isomorphism of $K$-algebras. Conversely, let $X=\mathrm{Spec}(A)$, then there is an induced natural isomorphism of hom-functors
-    \[\mathrm{Spec}(\mathcal O(X))=\mathrm{Hom}_{\mathbf{Alg}_R}(\mathcal O(\mathrm{Spec}(A)),-)\cong \mathrm{Hom}_{\mathbf{Alg}_R}(A,-)=X\]
-    by \Cref{thm:yon}. Therefore $\mathrm{Spec}$ and $\mathcal O$ are quasi-inverses of each other. 
+    \[\mathrm{Spec}(O(X))=\mathrm{Hom}_{\mathsf{Alg}_R}(O(\mathrm{Spec}(A)),-)\cong \mathrm{Hom}_{\mathsf{Alg}_R}(A,-)=X\]
+    by \Cref{thm:yon}. Therefore $\mathrm{Spec}$ and $O$ are quasi-inverses of each other. 
 \end{proof}
 \end{theorem}
-\begin{definition}A \textit{$R$-group functor} is a functor \[G:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\] 
-    The \textit{category of $R$-group functors} is the functor category $\mathbf{GFun}_R=\mathrm{Fun}(\mathbf{Alg}_R,\mathbf{Grp})$.
+\begin{definition}A \textit{$R$-group functor} is a functor \[G:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\] 
+    The \textit{category of $R$-group functors} is the functor category $\mathsf{GFun}_R=\mathrm{Fun}(\mathsf{Alg}_R,\mathsf{Grp})$.
 \end{definition}
 
 
 \begin{definition}
-    An \textit{affine $R$-group scheme} is a $R$-group functor $G:\mathbf{Alg}_R\rightarrow\mathbf{Grp}$ such that 
-    its composition with the forgetful functor to $\mathbf{Set}$
-    \[\widetilde{G}:\mathbf{Alg}_R\xrightarrow{G} \mathbf{Grp}\rightarrow\mathbf{Set}\]
-    is isomorphic to an affine $R$-scheme. Further, we say an affine $R$-group scheme $G$ is an \textit{(affine) algebraic group} over $R$ if $\widetilde{G}$ is \textit{of finite type}, i.e. it is the spectrum of a finitely generated $R$-algebra. Define $\mathbf{GAff}_R$ and $\mathbf{GAlg}_R$, the categories of affine $R$-group schemes and (affine) algebraic groups over $R$, as full subcategories of $\mathbf{GFun}_R$ respectively. 
+    An \textit{affine $R$-group scheme} is a $R$-group functor $G:\mathsf{Alg}_R\rightarrow\mathsf{Grp}$ such that 
+    its composition with the forgetful functor to $\mathsf{Set}$
+    \[\widetilde{G}:\mathsf{Alg}_R\xrightarrow{G} \mathsf{Grp}\rightarrow\mathsf{Set}\]
+    is isomorphic to an affine $R$-scheme. Further, we say an affine $R$-group scheme $G$ is an \textit{(affine) algebraic group} over $R$ if $\widetilde{G}$ is \textit{of finite type}, i.e. it is the spectrum of a finitely generated $R$-algebra. Define $\mathsf{GAff}_R$ and $\mathsf{GAlg}_R$, the categories of affine $R$-group schemes and (affine) algebraic groups over $R$, as full subcategories of $\mathsf{GFun}_R$ respectively. 
 \end{definition}
 \begin{convention}
     In this text, ``algebraic group'' always means affine algebraic group. However, it is important to keep in mind that there are things like abelian varieties which are considered algebraic groups in broader context but are by no means affine.
@@ -675,23 +869,25 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{example}Here are some examples of algebraic groups over $R$,
     \begin{enumerate}
         \item the \textit{additive group}
-        \[\mathbb G_a:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto (S,+)\]
+        \[\mathbb G_a:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\qquad S\mapsto (S,+)\]
         where $\widetilde{\mathbb G_a}\cong \mathbb A^1_R$,
         \item the \textit{multiplicative group}, also known as the \textit{$1$-torus},
-        \[\mathbb G_m:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto S^\times\]
+        \[\mathbb G_m:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\qquad S\mapsto S^\times\]
         where $\widetilde{\mathbb G_m}\cong \mathrm{Spec}(R[x,y]/(xy-1))$,
         \item the \textit{multiplicative group of $n$-th roots of unity},
-        \[\mu_n:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \{a\in S^\times:a^n=1\}\]
+        \[\mu_n:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\qquad S\mapsto \{a\in S^\times:a^n=1\}\]
         where $\widetilde{\mu_n}\cong \mathrm{Spec}(R[x]/(x^n-1))$,
     \end{enumerate}
 \end{example}
 \begin{definition}Let $S$ be an $R$-algebra. 
     \begin{enumerate}
-        \item If $M$ is an $R$-module (resp. $R$-algebra), define the \textit{base change} (or \textit{extension of scalars}) of $M$ from $R$ to $S$ as the $S$-module (resp. $S$-algebra) $M_S=M\otimes_R S$. Define the \textit{base change functor} $(-)_S=(-)\otimes_{R}S:\mathbf{Mod}_{R}\rightarrow \mathbf{Mod}_{S}$ (resp. $(-)_S=(-)\otimes_{R}S:\mathbf{Alg}_{R}\rightarrow \mathbf{Alg}_{S}$).
-        \item If $M$ is a $S$-module (resp. $R$-algebra), define its \textit{Weil restriction} (or \textit{restriction of scalars}) from $S$ to $R$ as the $R$-module (resp. $R$-algerba) $M_R=\mathrm{Res}_{S/R} M$ with the same underlying group (resp. ring) as $M$ with scalar multiplication given by $rm=\varphi(r)m$ for $r\in R$ and $m\in M$ where $\varphi:R\rightarrow S$ is the structure map of $S$. Define the \textit{Weil restriction functor} $(-)_R=\mathrm{Res}_{S/R}:\mathbf{Mod}_{S}\rightarrow \mathbf{Mod}_{R}$ (resp. $(-)_R=\mathrm{Res}_{S/R}:\mathbf{Alg}_{S}\rightarrow \mathbf{Alg}_{R}$), which maps the morphisms to themselves forgetfully. 
+        \item If $M$ is an $R$-module (resp. $R$-algebra), define the \textit{base change} (or \textit{extension of scalars}) of $M$ from $R$ to $S$ as the $S$-module (resp. $S$-algebra) $M_S=M\otimes_R S$. Define the \textit{base change functor} $(-)_S=(-)\otimes_{R}S:\mathsf{Mod}_{R}\rightarrow \mathsf{Mod}_{S}$ (resp. $(-)_S=(-)\otimes_{R}S:\mathsf{Alg}_{R}\rightarrow \mathsf{Alg}_{S}$).
+        \item If $M$ is a $S$-module (resp. $R$-algebra), define its \textit{Weil restriction} (or \textit{restriction of scalars}) from $S$ to $R$ as the $R$-module (resp. $R$-algerba) $M_R=\mathrm{Res}_{S/R} M$ with the same underlying group (resp. ring) as $M$ with scalar multiplication given by $rm=\varphi(r)m$ for $r\in R$ and $m\in M$ where $\varphi:R\rightarrow S$ is the structure map of $S$. Define the \textit{Weil restriction functor} $(-)_R=\mathrm{Res}_{S/R}:\mathsf{Mod}_{S}\rightarrow \mathsf{Mod}_{R}$ (resp. $(-)_R=\mathrm{Res}_{S/R}:\mathsf{Alg}_{S}\rightarrow \mathsf{Alg}_{R}$), which maps the morphisms to themselves forgetfully. 
     \end{enumerate}
 \end{definition}
 
+
+\section{Classical Groups}
 \begin{convention}Let $X=(x_{i,j})_{1\le i,j\le n}$ be a $n$-by-$n$ matrix of indeterminants. For any ring $R$, let
     \[R[X]:=R[x_{1,1},x_{1,2},\dots,x_{n,n}]\]
     Abusing notation, identify $X=(x_{i,j})_{1\le i,j\le n}\in \mathrm M_n(R[X])$. For any $F=(f_{i,j})_{1\le i,j\le n}\in\mathrm M_n(R[X])$, denote $\det F:=\sum_{\sigma\in \mathrm S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n f_{i,\sigma(i)}\in R[X]$ and $\mathrm{tr}(A):=\sum_{i=1}^n f_{i,i}\in R[X]$. 
@@ -701,10 +897,10 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     Here are some more examples of algebraic groups over $R$,
 \begin{enumerate}
     \item the \textit{general linear group} of a free module $V$ over $R$ of rank $n$,
-    \[\mathrm{GL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Aut}_{\mathbf{Mod}_S}(V_S)=\mathrm{Aut}_{\mathbf{Mod}_S}(V\otimes_{R}S)\]
+    \[\mathrm{GL}_V:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\qquad S\mapsto \mathrm{Aut}_{\mathsf{Mod}_S}(V_S)=\mathrm{Aut}_{\mathsf{Mod}_S}(V\otimes_{R}S)\]
     where $\displaystyle\widetilde{\mathrm{GL}_V}\cong \mathrm{Spec}\left(\frac{R[X][y]}{(y\,\mathrm{det}(X)-1)}\right)$ where $X=(x_{i,j})_{1\le i,j\le n}$ is an indeterminant matrix,
     \item the \textit{special linear group} of a free module $V$ over $R$ of rank $n$,
-    \[\mathrm{SL}_V:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\qquad S\mapsto \mathrm{Ker}\left(\mathrm{GL}_V(S)\xrightarrow{\mathrm{det}_S}S^\times\right)\]
+    \[\mathrm{SL}_V:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\qquad S\mapsto \mathrm{Ker}\left(\mathrm{GL}_V(S)\xrightarrow{\mathrm{det}_S}S^\times\right)\]
     where $\displaystyle\widetilde{\mathrm{SL}_V}\cong \mathrm{Spec}\left(\frac{R[X]}{(\mathrm{det}(X)-1)}\right)$ where $X=(x_{i,j})_{1\le i,j\le n}$ is an indeterminant matrix.
     \end{enumerate}
 \end{example}
@@ -741,7 +937,7 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \iffalse
 \begin{example}Let $V=W\oplus W^{\vee}$ over a ring $R$ where $W=R^n$ is the free module of rank $n$, then the \textit{hyperbolic form} $B:V\times V\rightarrow R$ given by $((v,\phi),(w,\psi))\mapsto \phi(w)+\psi(v)$ is an orthogonal form.
 \end{example}
-\begin{example}Let $L\mid K$ be a finite separable field extension. The form $\mathrm{Tr}_{L/K}:L\times L\rightarrow K$ given by $(a,b)\mapsto \mathrm{tr}_{L/K}(ab)$, where $\mathrm{tr}_{L/K}$ is the field trace, is an orthogonal form called the \textit{trace form}.
+\begin{example}Let $L/K$ be a finite separable field extension. The form $\mathrm{Tr}_{L/K}:L\times L\rightarrow K$ given by $(a,b)\mapsto \mathrm{tr}_{L/K}(ab)$, where $\mathrm{tr}_{L/K}$ is the field trace, is an orthogonal form called the \textit{trace form}.
 \end{example}
 \fi
 \begin{example}Recall that a quadratic form on a free module $V=R^n$ of rank $n$ over $R$ is a quadratic homogeneous polynomial map $q:V\rightarrow R$ 
@@ -807,14 +1003,14 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{example}Let $V$ be a free $R$-module of rank $n$ with an orthogonal form $b:V\times V\rightarrow R$. Here are some more examples of algebraic groups over $R$.
     \begin{enumerate}
         \item the \textit{orthogonal group} of the pair $(V,b)$
-        \[\mathrm{O}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{O}_{V,b}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{O}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,b_S(gv,gw)=b_S(v,w)\}\]
+        \[\mathrm{O}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathsf{Mod}_S}(V_S):\forall v,w\in V_S,\,b_S(gv,gw)=b_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{O}_{V,b}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[b]_eX-[b]_e)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm O_{V,b}$ does not depend,
         \item the \textit{special orthogonal group} of the pair $(V,b)$
-        \[\mathrm{SO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{SO}_{V,b}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
         \[\mathrm{SO}_{V,b}(S)=\{g\in \mathrm O_{V,b}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
@@ -822,15 +1018,15 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
         where $e$ is an ordered basis of $V$, on which $\mathrm {SO}_{V,b}$ does not depend,
         
         \item the \textit{orthogonal semilitude group} of the pair $(V,b)$
-        \[\mathrm{GO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{GO}_{V,b}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{GO}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V_S,\,b_S(gv,gw)=\lambda b_S(v,w)\}\]
+        \[\mathrm{GO}_{V,b}(S)=\{g\in \mathrm{Aut}_{\mathsf{Mod}_S}(V_S):\exists\lambda\in S^\times,\forall v,w\in V_S,\,b_S(gv,gw)=\lambda b_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{GO}_{V,b}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[b]_eX-\lambda [b]_e, \lambda\nu-1)}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{GO}_{V,b}$ does not depend,
         
         \item the \textit{special orthogonal semilitude group} of the pair $(V,b)$
-        \[\mathrm{GSO}_{V,b}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{GSO}_{V,b}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
         \[\mathrm{GSO}_{V,b}(S)=\{g\in \mathrm{GO}_{V,b}(S):\det(g)=1\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
@@ -858,15 +1054,15 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
 \begin{example}Let $V$ be a free $R$-module of rank $2n$ with an symplectic form $\omega:V\times V\rightarrow R$. Here are some more examples of algebraic groups over $R$.
     \begin{enumerate}
         \item the \textit{symplectic group} of the pair $(V,\omega)$
-        \[\mathrm{Sp}_{V,\omega}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{Sp}_{V,\omega}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{Sp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\forall v,w\in V_S,\,\omega_S(gv,gw)=\omega_S(v,w)\}\]
+        \[\mathrm{Sp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathsf{Mod}_S}(V_S):\forall v,w\in V_S,\,\omega_S(gv,gw)=\omega_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{Sp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X]}{(X^\mathrm{T}[\omega]_eX-[\omega]_e)}\right)\] where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
         \item the \textit{symplectic semilitude group} of the pair $(V,\omega)$
-        \[\mathrm{GSp}_{V,\omega}:\mathbf{Alg}_R\rightarrow \mathbf{Grp} \]
+        \[\mathrm{GSp}_{V,\omega}:\mathsf{Alg}_R\rightarrow \mathsf{Grp} \]
         where for each $R$-algebra $S$ 
-        \[\mathrm{GSp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathbf{Mod}_S}(V_S):\exists \lambda\in S^\times,\forall v,w\in V_S,\,\omega_S(gv,gw)=\lambda \omega_S(v,w)\}\]
+        \[\mathrm{GSp}_{V,\omega}(S)=\{g\in \mathrm{Aut}_{\mathsf{Mod}_S}(V_S):\exists \lambda\in S^\times,\forall v,w\in V_S,\,\omega_S(gv,gw)=\lambda \omega_S(v,w)\}\]
         where for an indeterminant matrix $X=(x_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{GSp}_{V,\omega}}=\mathrm{Spec}\left(\frac{R[X][\lambda,\nu]}{(X^\mathrm{T}[\omega]_eX-\lambda[\omega]_e,\lambda\nu-1)}\right)\] 
         where $e$ is an ordered basis for $V$, on which $\mathrm{Sp}_{V,\omega}$ does not depend. 
@@ -901,28 +1097,28 @@ Define the contravariant functor \[\mathrm{Spec}:\mathbf{Alg}_R^{\mathrm{op}}\ri
     Let $E$ be a quadratic étale $R$-algebra with involution $\sigma:E\rightarrow E$, $V$ a free $E$-module of rank $n$, and $h:V\times V\rightarrow E$ a $\sigma$-Hermitian form. Here are some more examples of algebraic groups over $R$. 
     \begin{enumerate}
         \item the \textit{unitary group} of the pair $(V,h)$
-        \[\mathrm{U}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        \[\mathrm{U}_{V,h}:\mathsf{Alg}_R\rightarrow \mathsf{Grp}\]
         where for each $R$-algebra $S$
-        \[\mathrm{U}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathbf{Mod}_S}(V_{E_S}):\forall v,w\in V_{E_S}, h_S(gv,gw)=h_S(v,w)\}\]
+        \[\mathrm{U}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathsf{Mod}_S}(V_{E_S}):\forall v,w\in V_{E_S}, h_S(gv,gw)=h_S(v,w)\}\]
         where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{U}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y][y]}{((X+Y\omega)^*[h]_e(X+Y\omega)-[h]_e,y\det(X+Y\omega)-1)_{1,\omega}}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{U}_{V,h}$ does not depend, 
         \item the \textit{special unitary group} of the pair $(V,h)$
-        \[\mathrm{SU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        \[\mathrm{SU}_{V,h}:\mathsf{Alg}_R\rightarrow \mathsf{Grp}\]
         where for each $R$-algebra $S$
         \[\mathrm{SU}_{V,h}(S)=\{g\in\mathrm{U}_{V,h}(S):\det(g)=1\}\]
         where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{SU}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y]}{((X+Y\omega)^*[h]_e(X+Y\omega)-[h]_e,\det(X+Y\omega)-1)_{1,\omega}}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{SU}_{V,h}$ does not depend, 
         \item the \textit{unitary semilitude group} of the pair $(V,h)$
-        \[\mathrm{GU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        \[\mathrm{GU}_{V,h}:\mathsf{Alg}_R\rightarrow \mathsf{Grp}\]
         where for each $R$-algebra $S$
-        \[\mathrm{GU}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathbf{Mod}_S}(V_{E_S}):\exists\lambda\in S^\times,\forall v,w\in V_{E_S}, h_S(gv,gw)=(1\otimes\lambda) h_S(v,w)\}\]
+        \[\mathrm{GU}_{V,h}(S)=\{g\in\mathrm{Aut}_{\mathsf{Mod}_S}(V_{E_S}):\exists\lambda\in S^\times,\forall v,w\in V_{E_S}, h_S(gv,gw)=(1\otimes\lambda) h_S(v,w)\}\]
         where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
         \[\widetilde{\mathrm{GU}_{V,h}}=\mathrm{Spec}\left(\frac{R[X,Y][y,\lambda,\nu]}{((X+Y\omega)^*[h]_e(X+Y\omega)-\lambda[h]_e,y\det(X+Y\omega)-1, \lambda\nu-1)_{1,\omega}}\right)\]
         where $e$ is an ordered basis of $V$, on which $\mathrm{GU}_{V,h}$ does not depend, 
         \item the \textit{special unitary semilitude group} of the pair $(V,h)$
-        \[\mathrm{GSU}_{V,h}:\mathbf{Alg}_R\rightarrow \mathbf{Grp}\]
+        \[\mathrm{GSU}_{V,h}:\mathsf{Alg}_R\rightarrow \mathsf{Grp}\]
         where for each $R$-algebra $S$
         \[\mathrm{GSU}_{V,h}(S)=\{g\in\mathrm{GU}_{V,h}(S):\det(g)=1\}\]
         where for indeterminant matrices $X=(x_{i,j})_{1\le i,j\le n}$ and $Y=(y_{i,j})_{1\le i,j\le n}$ 
@@ -959,24 +1155,24 @@ making the Clifford algebra a $\mathbb Z/2$-graded algebra.
 \begin{example}Let $V$ be a free module over $R$ and $q:V\rightarrow R$ a quadratic form. Here are some more examples of algebraic groups over $R$. 
     \begin{enumerate}
         \item the \textit{Clifford group} or \textit{similitude pin group} of the pair $(V,q)$
-        \[\mathrm{GPin}_{V,q}:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\]
+        \[\mathrm{GPin}_{V,q}:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\]
         where 
         \[\mathrm{GPin}_{V,q}(S)=\{x\in \mathrm{Cl}_R(V,q)^\times:xV_Sx^{-1}\subseteq V_S\}\]
         for each $R$-algebra $S$,
         \item the \textit{pin group} of the pair $(V,q)$
-        \[\mathrm{Pin}_{V,q}:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\]
+        \[\mathrm{Pin}_{V,q}:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\]
         where 
         \[\mathrm{Pin}_{V,q}(S)=\{x\in\mathrm{GPin}_{V,q}(S):x\overline{x}=1\}\]
         for each $R$-algebra $S$,
 
         \item the \textit{similitude spin group} of the pair $(V,q)$
-        \[\mathrm{GSpin}_{V,q}:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\]
+        \[\mathrm{GSpin}_{V,q}:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\]
         where 
         \[\mathrm{GSpin}_{V,q}(S)=\mathrm{GPin}_{V,q}(S)\cap \mathrm{Cl}^0(V,q)\]
         for each $R$-algebra $S$,
 
         \item the \textit{spin group} of the pair $(V,q)$
-        \[\mathrm{Spin}_{V,q}:\mathbf{Alg}_R\rightarrow\mathbf{Grp}\]
+        \[\mathrm{Spin}_{V,q}:\mathsf{Alg}_R\rightarrow\mathsf{Grp}\]
         where 
         \[\mathrm{Spin}_{V,q}(S)=\{x\in \mathrm{GSpin}_{V,q}(S):x\overline{x}=1\}\]
         for each $R$-algebra $S$.
@@ -990,8 +1186,8 @@ making the Clifford algebra a $\mathbb Z/2$-graded algebra.
     \label{def:base}
     Let $G$ be an algebraic group over $R$ and $S$ a finite projective $R$-algebra. Define
     \begin{enumerate}
-        \item \textit{base change functor} $(-)_S:\mathbf{GAlg}_R\rightarrow \mathbf{GAlg}_S$ given by $G_S(T)=G(T)$ for any $S$-algebra $T$, and maps morphisms to themselves forgetfully;
-        \item \textit{Weil restriction functor} $(-)_R:\mathbf{GAlg}_S\rightarrow \mathbf{GAlg}_R$ given by $G_R(T)=G(T\otimes_R S)$ for any $R$-algebra $T$, in other words, $G_R=G\circ (-\otimes_R S)$, and for a morphism $\varphi:G\rightarrow H$ of algebraic groups over $S$, the induced map $\varphi_R:G_R\rightarrow H_R$ is $(\varphi_R)_T=\varphi_{T\otimes_R S}$ for each $R$-algebra $T$. 
+        \item \textit{base change functor} $(-)_S:\mathsf{GAlg}_R\rightarrow \mathsf{GAlg}_S$ given by $G_S(T)=G(T)$ for any $S$-algebra $T$, and maps morphisms to themselves forgetfully;
+        \item \textit{Weil restriction functor} $(-)_R:\mathsf{GAlg}_S\rightarrow \mathsf{GAlg}_R$ given by $G_R(T)=G(T\otimes_R S)$ for any $R$-algebra $T$, in other words, $G_R=G\circ (-\otimes_R S)$, and for a morphism $\varphi:G\rightarrow H$ of algebraic groups over $S$, the induced map $\varphi_R:G_R\rightarrow H_R$ is $(\varphi_R)_T=\varphi_{T\otimes_R S}$ for each $R$-algebra $T$. 
     \end{enumerate}
 \end{definition}
 \begin{remark}Recall that we say a $R$-algebra $S$ is finite projective if there exists a $R$-module $T$ such that $S\oplus T$ is a free module of finite rank. The assumption of finite projectiveness in \Cref{def:base} is to ensure the base changed or restricted group functors are indeed algebraic groups. 
@@ -1011,24 +1207,25 @@ products, semidirect product, identity component, open/closed subgroups, actions
 
 \section{Jordan Decomposition}
 
-\section{Lie Algebras}
+\section{Lie Algebra of an Algebraic Group}
 
 \section{Root Systems and Root Datum}
 
 \section{Isomorphism and Existance Theorems}
 
+\chapter{Representations of Linear Algebraic Group}
 \section{Representations of Split Reductive Groups}
 \section{Tannakian Duality}
 
 
+\newpage
+
+\chapter{More on Lie Algebras}
+\chapter{Homogeneous Spaces}
+
 \section{Toric Varieties}
 \section{Flag Varieties}
 \section{Spherical Varieties}
-
-\newpage
-
-\chapter{Lie Algebras}
-\chapter{Homogeneous Spaces}
 
 \chapter{Invariant Theory}
 
